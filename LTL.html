@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Life Time Line</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<style>
+:root{
+  --ink:#20242b;
+  --ink-soft:#4b515c;
+  --paper:#eae3d1;
+  --paper-deep:#ded5bd;
+  --card:#faf7ee;
+  --line:#cfc4a6;
+  --teal:#33625b;
+  --teal-deep:#254842;
+  --gold:#b1813a;
+  --rose:#8f4356;
+  --green:#3d6b3f;
+  --grey:#75726a;
+  --danger:#a3402f;
+  --radius:3px;
+  --shadow:0 1px 0 rgba(32,36,43,0.08);
+  font-size:16px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;height:100%;}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'IBM Plex Sans',-apple-system,'Segoe UI',sans-serif;
+  line-height:1.5;
+}
+h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif;}
+button,input,select,textarea{font-family:inherit;font-size:1rem;}
+::selection{background:var(--gold);color:#fff;}
+
+/* ---------- shell ---------- */
+.app{display:grid;grid-template-columns:260px 1fr;grid-template-rows:auto 1fr;height:100vh;height:100dvh;}
+.topbar{
+  grid-column:1/3;
+  display:flex;align-items:center;gap:16px;
+  padding:8px 20px;
+  background:var(--ink);
+  color:var(--paper);
+  border-bottom:2px solid var(--gold);
+}
+.topbar .brand{display:flex;flex-direction:column;gap:1px;flex-shrink:0;}
+.topbar h1{font-size:1.25rem;font-weight:600;margin:0;letter-spacing:.2px;line-height:1.15;}
+.topbar .age{
+  font-size:.78rem;color:var(--paper-deep);
+}
+.topbar .spacer{flex:1;}
+.iconbtn{
+  background:transparent;border:1px solid rgba(255,255,255,.25);color:var(--paper);
+  width:34px;height:34px;border-radius:var(--radius);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+}
+.iconbtn:hover{background:rgba(255,255,255,.12);}
+.hamburger{display:none;}
+.sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(20,22,26,.4);z-index:890;}
+.sidebar-close{display:none;}
+
+.sidebar{
+  position:relative;
+  background:var(--paper-deep);
+  border-right:1px solid var(--line);
+  padding:16px 14px;overflow-y:auto;
+}
+.sidebar h2{font-size:.75rem;text-transform:none;letter-spacing:.03em;color:var(--ink-soft);
+  margin:18px 0 8px;font-family:'IBM Plex Sans';font-weight:600;}
+.sidebar h2:first-child{margin-top:0;}
+.cat-row{
+  display:flex;align-items:center;gap:8px;padding:5px 4px;border-radius:var(--radius);cursor:pointer;
+  font-size:.92rem;
+}
+.cat-row:hover{background:rgba(255,255,255,.4);}
+.cat-swatch{width:11px;height:11px;border-radius:2px;flex-shrink:0;}
+.cat-row .lbl{flex:1;}
+.cat-row .lock{opacity:.6;font-size:.8rem;}
+.cat-row.disabled{opacity:.5;}
+.filter-actions{display:flex;gap:6px;margin:8px 0 4px;}
+.linklike{
+  background:none;border:none;color:var(--teal-deep);text-decoration:underline;cursor:pointer;
+  font-size:.8rem;padding:2px 0;
+}
+.privacy-box{
+  margin-top:6px;padding:10px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  font-size:.85rem;
+}
+.privacy-box p{margin:0 0 8px;color:var(--ink-soft);}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  padding:9px 14px;border-radius:var(--radius);border:1px solid var(--ink);
+  background:var(--ink);color:var(--paper);cursor:pointer;font-size:.9rem;font-weight:500;
+}
+.btn:hover{background:#343b45;}
+.btn.secondary{background:transparent;color:var(--ink);border-color:var(--line);}
+.btn.secondary:hover{background:rgba(0,0,0,.05);}
+.btn.danger{background:var(--danger);border-color:var(--danger);color:#fff;}
+.btn.small{padding:5px 10px;font-size:.8rem;}
+.btn.block{width:100%;margin-top:10px;}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+
+.main{overflow:hidden;display:flex;flex-direction:column;}
+.tabs{display:flex;gap:2px;background:var(--paper-deep);padding:8px 20px 0;border-bottom:1px solid var(--line);}
+.tab{
+  padding:10px 18px;background:transparent;border:none;cursor:pointer;
+  font-size:.92rem;color:var(--ink-soft);border-bottom:2px solid transparent;font-weight:500;
+}
+.tab.active{color:var(--ink);border-bottom-color:var(--gold);background:var(--paper);border-radius:3px 3px 0 0;}
+.view{flex:1;overflow:auto;position:relative;}
+.view-inner{padding:24px 28px;max-width:900px;}
+
+/* ---------- timeline ---------- */
+.tl-year{display:flex;align-items:baseline;gap:14px;margin:26px 0 10px;}
+.tl-year:first-child{margin-top:4px;}
+.tl-year .yr{font-family:'Fraunces';font-size:1.6rem;font-weight:600;color:var(--teal-deep);}
+.tl-year .yr-age{font-size:.78rem;color:var(--ink-soft);}
+.tl-year hr{flex:1;border:none;border-top:1px solid var(--line);}
+
+.event-card{
+  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--grey);
+  border-radius:var(--radius);padding:12px 14px;margin-bottom:10px;
+  position:relative;
+}
+.event-card .ev-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;}
+.event-card h3{margin:0 0 3px;font-size:1.05rem;font-weight:600;}
+.event-card .dates{font-size:.78rem;color:var(--ink-soft);}
+.event-card .desc{margin:8px 0 0;font-size:.9rem;color:var(--ink);white-space:pre-wrap;}
+.event-card .loc{font-size:.8rem;color:var(--teal-deep);margin-top:6px;}
+.tag-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+.tag{font-size:.7rem;padding:2px 7px;border-radius:10px;color:#fff;}
+.ev-actions{display:flex;gap:14px;flex-shrink:0;}
+.ev-actions button{
+  background:none;border:none;cursor:pointer;color:var(--ink-soft);font-size:1rem;padding:6px 8px;min-width:32px;min-height:32px;
+}
+.ev-actions button:hover{color:var(--ink);}
+.empty-state{padding:40px 10px;text-align:center;color:var(--ink-soft);}
+.empty-state .big{font-family:'Fraunces';font-size:1.3rem;color:var(--ink);margin-bottom:6px;}
+
+/* ---------- diagram (visual timeline) ---------- */
+.gantt-outer{position:absolute;inset:0;overflow:auto;}
+.gantt-inner{position:relative;}
+.gantt-header{position:sticky;top:0;z-index:5;height:30px;background:var(--paper-deep);border-bottom:1px solid var(--line);}
+.gantt-header-label{position:sticky;left:0;top:0;width:150px;height:30px;background:var(--paper-deep);z-index:6;
+  display:flex;align-items:center;padding-left:12px;font-size:.72rem;color:var(--ink-soft);font-weight:600;border-right:1px solid var(--line);}
+.gantt-yeartick{position:absolute;top:0;height:30px;border-left:1px solid var(--line);padding-left:5px;font-size:.72rem;color:var(--ink-soft);display:flex;align-items:center;white-space:nowrap;}
+.gantt-todayline{position:absolute;top:0;bottom:0;border-left:2px solid var(--gold);z-index:2;}
+.gantt-row{position:relative;height:36px;border-bottom:1px solid var(--line);}
+.gantt-row:nth-child(odd){background:rgba(0,0,0,.02);}
+.gantt-rowlabel{position:sticky;left:0;width:150px;height:36px;background:var(--card);z-index:3;
+  display:flex;align-items:center;gap:6px;padding-left:12px;font-size:.78rem;border-right:1px solid var(--line);}
+.gantt-yearline{position:absolute;top:0;bottom:0;border-left:1px dashed rgba(0,0,0,.07);}
+.gantt-bar{position:absolute;top:7px;height:22px;border-radius:4px;cursor:pointer;display:flex;align-items:center;
+  padding:0 7px;font-size:.72rem;color:#fff;white-space:nowrap;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.2);}
+.gantt-bar:hover{filter:brightness(1.12);}
+.gantt-dot{position:absolute;top:7px;width:16px;height:16px;border-radius:50%;cursor:pointer;border:2px solid #fff;
+  box-shadow:0 1px 3px rgba(0,0,0,.35);}
+.gantt-dot:hover{filter:brightness(1.15);}
+
+/* ---------- map ---------- */
+#mapview{position:absolute;inset:0;}
+#leafmap{position:absolute;top:0;left:0;right:0;bottom:64px;}
+.map-controls{
+  position:absolute;left:0;right:0;bottom:0;height:64px;
+  background:var(--ink);color:var(--paper);display:flex;align-items:center;gap:14px;padding:0 20px;
+}
+.map-controls input[type=range]{flex:1;accent-color:var(--gold);}
+.map-controls .yearlabel{font-family:'Fraunces';min-width:48px;text-align:center;font-size:1.1rem;}
+.map-controls button{
+  background:transparent;border:1px solid rgba(255,255,255,.3);color:var(--paper);
+  width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:.95rem;flex-shrink:0;
+}
+.leaflet-popup-content{font-family:'IBM Plex Sans';font-size:.85rem;}
+.leaflet-popup-content b{font-family:'Fraunces';font-size:.95rem;}
+
+/* ---------- stats ---------- */
+.stat-block{margin-bottom:34px;}
+.stat-block h3{margin:0 0 12px;font-size:1rem;}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:.82rem;}
+.bar-row .bl{width:190px;flex-shrink:0;text-align:right;color:var(--ink-soft);}
+.bar-row .bt{flex:1;background:var(--paper-deep);border-radius:2px;overflow:hidden;height:16px;}
+.bar-row .bt div{height:100%;}
+.bar-row .bv{width:70px;flex-shrink:0;color:var(--ink-soft);}
+
+/* ---------- modal ---------- */
+.overlay{position:fixed;inset:0;background:rgba(20,22,26,.55);display:none;align-items:flex-start;justify-content:center;padding:4vh 16px;overflow-y:auto;z-index:1000;}
+.overlay.open{display:flex;}
+.modal{background:var(--card);border-radius:6px;max-width:560px;width:100%;padding:22px 24px 24px;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+.modal h2{margin:0 0 16px;font-size:1.25rem;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:.82rem;color:var(--ink-soft);margin-bottom:4px;font-weight:500;}
+.field input[type=text],.field input[type=date],.field input[type=password],.field textarea,.field input[type=number]{
+  width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;color:var(--ink);
+}
+.field textarea{min-height:70px;resize:vertical;}
+.field .hint{font-size:.75rem;color:var(--grey);margin-top:3px;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:220px;overflow-y:auto;border:1px solid var(--line);padding:8px;border-radius:var(--radius);background:#fff;}
+.cat-grid label{display:flex;align-items:center;gap:6px;font-size:.85rem;cursor:pointer;}
+.modal-actions{display:flex;justify-content:space-between;margin-top:18px;gap:8px;}
+.modal-actions .right{display:flex;gap:8px;}
+.minimap{height:180px;border-radius:var(--radius);border:1px solid var(--line);margin-top:6px;}
+.searchbox-wrap{position:relative;}
+.searchresults{position:absolute;z-index:10;background:#fff;border:1px solid var(--line);width:100%;max-height:160px;overflow-y:auto;border-radius:var(--radius);box-shadow:0 6px 16px rgba(0,0,0,.15);}
+.searchresults div{padding:7px 10px;font-size:.82rem;cursor:pointer;border-bottom:1px solid #f0ece0;}
+.searchresults div:hover{background:var(--paper);}
+.catlist-settings{max-height:320px;overflow-y:auto;}
+.catlist-settings .catedit{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid var(--line);}
+.catlist-settings input[type=text]{flex:1;padding:5px 8px;}
+.catlist-settings input[type=color]{width:32px;height:28px;padding:0;border:none;background:none;}
+.err{color:var(--danger);font-size:.82rem;margin-top:6px;}
+.small-note{font-size:.78rem;color:var(--grey);margin-top:10px;line-height:1.4;}
+
+@media (max-width:820px){
+  .app{grid-template-columns:1fr;}
+  .hamburger{display:flex;}
+  .sidebar{
+    position:fixed;top:53px;left:0;bottom:0;width:82%;max-width:300px;z-index:900;
+    transform:translateX(-105%);transition:transform .2s ease;box-shadow:6px 0 20px rgba(0,0,0,.2);
+  }
+  .sidebar.open{transform:translateX(0);}
+  .sidebar-close{display:flex;position:absolute;top:8px;right:8px;background:transparent;border:1px solid var(--line);color:var(--ink);}
+  .sidebar-backdrop.open{display:block;}
+  .view-inner{padding:16px;}
+  .row2{grid-template-columns:1fr;}
+  .cat-grid{grid-template-columns:1fr;}
+  .bar-row .bl{width:120px;font-size:.72rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="topbar">
+    <button class="iconbtn hamburger" id="hamburgerBtn" title="Menu">☰</button>
+    <div class="brand">
+      <h1>Life Time Line</h1>
+      <div class="age" id="ageDisplay">—</div>
+    </div>
+    <div class="spacer"></div>
+    <button class="iconbtn" id="fullscreenBtn" title="Schermo intero">⛶</button>
+  </div>
+
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+  <div class="sidebar" id="sidebar">
+    <button class="iconbtn sidebar-close" id="sidebarCloseBtn" title="Chiudi menu">✕</button>
+    <h2>Filtri</h2>
+    <div id="catFilterList"></div>
+    <div class="filter-actions">
+      <button class="linklike" id="selAllBtn">tutte</button>
+      <button class="linklike" id="selNoneBtn">nessuna</button>
+    </div>
+
+    <div id="privacyPanel"></div>
+
+    <h2>Azioni</h2>
+    <button class="btn block" id="addEventBtn">+ Nuovo evento</button>
+    <button class="btn secondary block" id="manageCatBtn">Gestisci categorie</button>
+    <button class="btn secondary block" id="trashBtn">Cestino <span id="trashCount"></span></button>
+    <button class="btn secondary block" id="exportBtn">Esporta dati (.json)</button>
+    <button class="btn secondary block" id="importBtn">Importa dati (.json)</button>
+    <input type="file" id="importFile" accept="application/json" style="display:none">
+  </div>
+
+  <div class="main">
+    <div class="tabs">
+      <button class="tab active" data-tab="timeline">Elenco</button>
+      <button class="tab" data-tab="diagram">Diagramma</button>
+      <button class="tab" data-tab="map">Mappa</button>
+      <button class="tab" data-tab="stats">Statistiche</button>
+    </div>
+    <div class="view" id="view">
+      <div class="view-inner" id="timelineView"></div>
+
+      <div id="diagramView" style="display:none;">
+        <div class="empty-state" id="diagramEmpty" style="display:none;">
+          <div class="big">Ancora nessun evento</div>
+          <p>Aggiungi qualche evento per vederlo qui su una vera linea del tempo, con le durate e i punti cliccabili.</p>
+        </div>
+        <div class="gantt-outer" id="ganttOuter">
+          <div class="gantt-inner" id="ganttInner">
+            <div class="gantt-header" id="ganttHeader"></div>
+            <div id="ganttLanes"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="mapview" style="display:none;">
+        <div id="leafmap"></div>
+        <div class="map-controls">
+          <label style="display:flex;align-items:center;gap:6px;font-size:.82rem;flex-shrink:0;">
+            <input type="checkbox" id="mapShowAllChk" checked> Tutti gli anni
+          </label>
+          <button id="playBtn" title="Play/Pausa">▶</button>
+          <span class="yearlabel" id="mapYearLabel">—</span>
+          <input type="range" id="mapYearSlider" min="1977" max="2026" value="2026" disabled>
+        </div>
+      </div>
+
+      <div class="view-inner" id="statsView" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Event modal -->
+<div class="overlay" id="eventOverlay">
+  <div class="modal">
+    <h2 id="eventModalTitle">Nuovo evento</h2>
+    <div class="field">
+      <label>Titolo *</label>
+      <input type="text" id="f_title" maxlength="140">
+    </div>
+    <div class="field">
+      <label>Descrizione</label>
+      <textarea id="f_desc"></textarea>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Data inizio *</label>
+        <input type="date" id="f_start">
+        <div class="hint" id="f_start_hint"></div>
+      </div>
+      <div class="field">
+        <label>Data fine <span style="font-weight:400">(uguale se puntuale)</span></label>
+        <input type="date" id="f_end">
+        <div class="hint" id="f_end_hint"></div>
+        <label style="display:flex;align-items:center;gap:6px;margin-top:6px;font-weight:400;">
+          <input type="checkbox" id="f_ongoing"> Fino ad oggi (è ancora in corso)
+        </label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Categorie * (una o più)</label>
+      <div class="cat-grid" id="f_categories"></div>
+    </div>
+    <div class="field">
+      <label style="display:flex;align-items:center;gap:6px;font-weight:500;">
+        <input type="checkbox" id="f_locked"> 🔒 Proteggi questo evento con PIN
+      </label>
+      <div class="hint">Indipendente dalla categoria: puoi proteggere qualsiasi evento singolo, a prescindere da come lo classifichi.</div>
+    </div>
+    <div class="field">
+      <label>Luogo (facoltativo)</label>
+      <div class="searchbox-wrap">
+        <input type="text" id="f_locname" placeholder="Nome del luogo — cerca o scrivi liberamente">
+        <div class="searchresults" id="f_locresults" style="display:none;"></div>
+      </div>
+      <div class="minimap" id="f_minimap"></div>
+      <div class="hint">Clicca sulla mappa per impostare/spostare il punto. <button class="linklike" id="f_locclear" type="button">rimuovi luogo</button></div>
+    </div>
+    <div class="err" id="eventErr" style="display:none;"></div>
+    <div class="modal-actions">
+      <div>
+        <button class="btn danger" id="deleteEventBtn" style="display:none;">Elimina</button>
+      </div>
+      <div class="right">
+        <button class="btn secondary" id="cancelEventBtn">Annulla</button>
+        <button class="btn" id="saveEventBtn">Salva</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Categories management modal -->
+<div class="overlay" id="catOverlay">
+  <div class="modal">
+    <h2>Categorie</h2>
+    <div class="catlist-settings" id="catManageList"></div>
+    <div class="field" style="margin-top:14px;">
+      <label>Nuova categoria</label>
+      <div style="display:flex;gap:8px;">
+        <input type="text" id="newCatName" placeholder="Nome categoria" style="flex:1;">
+        <input type="color" id="newCatColor" value="#607d8b">
+        <button class="btn small" id="addCatBtn">Aggiungi</button>
+      </div>
+    </div>
+    <div class="small-note">La protezione con PIN si imposta evento per evento (nel modulo di creazione/modifica evento), non per intera categoria.</div>
+    <div class="modal-actions">
+      <div></div>
+      <div class="right"><button class="btn" id="closeCatBtn">Chiudi</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- Event info popover (read-only, from the diagram) -->
+<div class="overlay" id="infoOverlay">
+  <div class="modal" style="max-width:460px;">
+    <h2 id="info_title"></h2>
+    <div class="dates" id="info_dates" style="font-size:.85rem;color:var(--ink-soft);margin-bottom:10px;"></div>
+    <div class="tag-row" id="info_tags" style="margin-bottom:10px;"></div>
+    <div class="desc" id="info_desc" style="font-size:.92rem;white-space:pre-wrap;"></div>
+    <div class="loc" id="info_loc" style="font-size:.85rem;color:var(--teal-deep);margin-top:8px;"></div>
+    <div class="modal-actions">
+      <div></div>
+      <div class="right">
+        <button class="btn secondary" id="infoCloseBtn">Chiudi</button>
+        <button class="btn" id="infoEditBtn">Modifica</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Trash modal -->
+<div class="overlay" id="trashOverlay">
+  <div class="modal">
+    <h2>Cestino</h2>
+    <p style="font-size:.85rem;color:var(--ink-soft);margin-top:-8px;">Gli eventi eliminati restano qui finché non li ripristini o li elimini definitivamente.</p>
+    <div id="trashList"></div>
+    <div class="modal-actions">
+      <div></div>
+      <div class="right"><button class="btn" id="closeTrashBtn">Chiudi</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- PIN unlock modal -->
+<div class="overlay" id="pwOverlay">
+  <div class="modal" style="max-width:380px;">
+    <h2>Sblocca contenuti protetti</h2>
+    <p style="font-size:.88rem;color:var(--ink-soft);">Inserisci il PIN per visualizzare e modificare le categorie protette in questa sessione.</p>
+    <div class="field">
+      <label>PIN</label>
+      <input type="password" id="pwInput1" inputmode="numeric" maxlength="6" autocomplete="off">
+    </div>
+    <div class="err" id="pwErr" style="display:none;"></div>
+    <div class="modal-actions">
+      <div></div>
+      <div class="right">
+        <button class="btn secondary" id="pwCancelBtn">Annulla</button>
+        <button class="btn" id="pwConfirmBtn">Sblocca</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================
+   STATE & PERSISTENCE
+   ============================================================ */
+const LS = {
+  events: 'bio_events_public_v1',
+  categories: 'bio_categories_v1',
+  settings: 'bio_settings_v1',
+  privateBlob: 'bio_private_blob_v1',
+  trashPublic: 'bio_trash_public_v1'
+};
+
+const DEFAULT_CATEGORIES = [
+  {id:'periodi', label:'Grandi periodi della vita', color:'#2F4858'},
+  {id:'scuola', label:'Scuola e formazione', color:'#5B7B9A'},
+  {id:'lavoro', label:'Lavoro', color:'#35625b'},
+  {id:'loveaffairs', label:'Love affairs', color:'#9C4A5C'},
+  {id:'viaggi', label:"Viaggi e periodi all'estero", color:'#B1813A'},
+  {id:'case', label:'Case dove ho vissuto', color:'#6B5B95'},
+  {id:'cambiavita', label:'Grandi eventi che hanno cambiato la vita', color:'#C1440E'},
+  {id:'incredibili', label:'Cose incredibili che mi sono successe', color:'#B8860B'},
+  {id:'malattie', label:'Grandi malattie o problemi', color:'#7A2E2E'},
+  {id:'sconfitte', label:'Sconfitte', color:'#5A5A5A'},
+  {id:'vittorie', label:'Vittorie', color:'#3d6b3f'},
+  {id:'minori', label:'Periodi minori', color:'#9E9E9E'},
+  {id:'altri', label:'Altri eventi', color:'#607D8B'},
+];
+
+const APP_TITLE = 'Life Time Line';
+const DEFAULT_SETTINGS = {
+  birthISO: '1977-10-07T23:20:00'
+};
+
+function loadJSON(key, fallback){
+  try{
+    const raw = localStorage.getItem(key);
+    if(!raw) return fallback;
+    return JSON.parse(raw);
+  }catch(e){ return fallback; }
+}
+function saveJSON(key, val){
+  localStorage.setItem(key, JSON.stringify(val));
+}
+
+let state = {
+  categories: loadJSON(LS.categories, DEFAULT_CATEGORIES),
+  settings: Object.assign({}, DEFAULT_SETTINGS, loadJSON(LS.settings, {})),
+  publicEvents: loadJSON(LS.events, []),
+  publicTrash: loadJSON(LS.trashPublic, []),
+  privateEvents: [],          // decrypted-in-memory, only when unlocked
+  privateTrash: [],           // decrypted-in-memory trashed protected events, only when unlocked
+  privateUnlocked: false,
+  cryptoKey: null,            // in-memory CryptoKey while unlocked
+  visibleCats: new Set(),     // category ids currently checked
+  activeTab: 'timeline',
+  mapYear: null,
+  mapPlaying: false,
+  mapShowAll: true,
+  mapPlayTimer: null,
+  editingEventId: null,
+  editLocation: null,         // {name, lat, lng} for the open modal
+  minimapInstance: null,
+  minimapMarker: null,
+  leafMap: null,
+  mapMarkersLayer: null,
+};
+
+// init visible categories = all
+state.categories.forEach(c => state.visibleCats.add(c.id));
+
+function persistCategories(){ saveJSON(LS.categories, state.categories); }
+function persistSettings(){ saveJSON(LS.settings, state.settings); }
+function persistPublicEvents(){ saveJSON(LS.events, state.publicEvents); }
+function persistPublicTrash(){ saveJSON(LS.trashPublic, state.publicTrash); }
+
+/* ---- one-time migration: merge morose+amanti into "Love affairs",
+   move protection from category-level to per-event `locked` flag ---- */
+function remapLoveCategoriesInList(list){
+  list.forEach(ev => {
+    ev.categories = Array.from(new Set(ev.categories.map(cid =>
+      (cid === 'morose' || cid === 'amanti') ? 'loveaffairs' : cid
+    )));
+  });
+}
+function migratePublicData(){
+  const hadOldLove = state.categories.some(c => c.id === 'morose' || c.id === 'amanti');
+  if(hadOldLove){
+    state.categories = state.categories.filter(c => c.id !== 'morose' && c.id !== 'amanti');
+    if(!state.categories.some(c => c.id === 'loveaffairs')){
+      state.categories.push({id:'loveaffairs', label:'Love affairs', color:'#9C4A5C'});
+    }
+    state.visibleCats.add('loveaffairs');
+    remapLoveCategoriesInList(state.publicEvents);
+    remapLoveCategoriesInList(state.publicTrash);
+  }
+  let catsChanged = hadOldLove;
+  state.categories.forEach(c => { if('protected' in c){ delete c.protected; catsChanged = true; } });
+  [state.publicEvents, state.publicTrash].forEach(list => {
+    list.forEach(ev => { if(ev.locked === undefined) ev.locked = false; });
+  });
+  if(catsChanged) persistCategories();
+  persistPublicEvents();
+  persistPublicTrash();
+}
+migratePublicData();
+
+/* ============================================================
+   CRYPTO (Web Crypto API — AES-GCM + PBKDF2)
+   ============================================================ */
+function b64encode(buf){
+  const bytes = new Uint8Array(buf);
+  let bin = '';
+  for(let i=0;i<bytes.length;i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin);
+}
+function b64decode(str){
+  const bin = atob(str);
+  const bytes = new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) bytes[i] = bin.charCodeAt(i);
+  return bytes.buffer;
+}
+async function deriveKey(password, saltB64){
+  const enc = new TextEncoder();
+  const salt = saltB64 ? new Uint8Array(b64decode(saltB64)) : crypto.getRandomValues(new Uint8Array(16));
+  const baseKey = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+  const key = await crypto.subtle.deriveKey(
+    {name:'PBKDF2', salt: salt, iterations: 150000, hash:'SHA-256'},
+    baseKey,
+    {name:'AES-GCM', length:256},
+    false,
+    ['encrypt','decrypt']
+  );
+  return {key, saltB64: saltB64 || b64encode(salt.buffer)};
+}
+async function encryptData(key, obj){
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const enc = new TextEncoder();
+  const ct = await crypto.subtle.encrypt({name:'AES-GCM', iv}, key, enc.encode(JSON.stringify(obj)));
+  return {iv: b64encode(iv.buffer), ct: b64encode(ct)};
+}
+async function decryptData(key, blob){
+  const iv = new Uint8Array(b64decode(blob.iv));
+  const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv}, key, b64decode(blob.ct));
+  const dec = new TextDecoder();
+  return JSON.parse(dec.decode(pt));
+}
+
+const FIXED_PIN = '6632';
+const FIXED_SALT_B64 = 'YW1lLXZpdGEtc2FsdC0wMQ==';
+
+async function unlockPrivacy(pin){
+  if(pin !== FIXED_PIN) throw new Error('PIN errato.');
+  const {key} = await deriveKey(FIXED_PIN, FIXED_SALT_B64);
+  state.cryptoKey = key;
+  const blob = loadJSON(LS.privateBlob, null);
+  if(blob){
+    try{
+      const data = await decryptData(key, blob);
+      if(Array.isArray(data)){
+        // backward compatibility with the earlier format (bare array, no trash)
+        state.privateEvents = data;
+        state.privateTrash = [];
+      } else {
+        state.privateEvents = data.events || [];
+        state.privateTrash = data.trash || [];
+      }
+    }catch(e){
+      state.privateEvents = [];
+      state.privateTrash = [];
+    }
+  } else {
+    state.privateEvents = [];
+    state.privateTrash = [];
+  }
+  // migrate: events that lived in the private bucket under the old
+  // category-level protection model become individually `locked` by default;
+  // also remap the retired morose/amanti category ids to loveaffairs
+  let migrated = false;
+  [state.privateEvents, state.privateTrash].forEach(list => {
+    list.forEach(ev => {
+      const beforeCats = ev.categories.join(',');
+      ev.categories = Array.from(new Set(ev.categories.map(cid =>
+        (cid === 'morose' || cid === 'amanti') ? 'loveaffairs' : cid
+      )));
+      if(ev.categories.join(',') !== beforeCats) migrated = true;
+      if(ev.locked === undefined){ ev.locked = true; migrated = true; }
+    });
+  });
+  state.privateUnlocked = true;
+  if(migrated) await savePrivateBlob();
+}
+
+function lockPrivacy(){
+  state.privateUnlocked = false;
+  state.cryptoKey = null;
+  state.privateEvents = [];
+  state.privateTrash = [];
+}
+
+async function savePrivateBlob(){
+  if(!state.cryptoKey) return;
+  const blob = await encryptData(state.cryptoKey, {events: state.privateEvents, trash: state.privateTrash});
+  saveJSON(LS.privateBlob, blob);
+}
+
+function privateEventCountLocked(){
+  // count of events stored in the encrypted blob, without decrypting
+  const blob = loadJSON(LS.privateBlob, null);
+  if(!blob) return 0;
+  // we cannot know count without decrypting; store a hint counter separately
+  const hint = loadJSON(LS.privateBlob + '_count', 0);
+  return hint;
+}
+function updatePrivateCountHint(){
+  localStorage.setItem(LS.privateBlob + '_count', String(state.privateEvents.length));
+}
+
+/* ============================================================
+   HELPERS: dates & age
+   ============================================================ */
+function pad2(n){ return String(n).padStart(2,'0'); }
+function todayISO(){
+  const d = new Date();
+  return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+}
+function effectiveEndDate(ev){
+  return ev.ongoing ? todayISO() : ev.endDate;
+}
+function isoToDMY(iso){
+  if(!iso) return '';
+  const [y,m,d] = iso.split('-');
+  return `${d}/${m}/${y}`;
+}
+function getBirthDate(){
+  return new Date(state.settings.birthISO);
+}
+function ageAt(dateObj){
+  const birth = getBirthDate();
+  let years = dateObj.getFullYear() - birth.getFullYear();
+  let months = dateObj.getMonth() - birth.getMonth();
+  let days = dateObj.getDate() - birth.getDate();
+  if(days < 0){
+    months -= 1;
+    const prevMonth = new Date(dateObj.getFullYear(), dateObj.getMonth(), 0).getDate();
+    days += prevMonth;
+  }
+  if(months < 0){ years -= 1; months += 12; }
+  if(years < 0){ years = 0; months = 0; days = 0; }
+  return {years, months, days};
+}
+function formatAge(a){
+  const parts = [];
+  parts.push(a.years + (a.years===1?' anno':' anni'));
+  if(a.months>0) parts.push(a.months + (a.months===1?' mese':' mesi'));
+  return parts.join(', ');
+}
+function updateAgeDisplay(){
+  const now = new Date();
+  const a = ageAt(now);
+  document.getElementById('ageDisplay').textContent = `Età: ${formatAge(a)}, ${a.days}g`;
+}
+
+/* ============================================================
+   EVENTS: combined accessor
+   ============================================================ */
+function allEventsForDisplay(){
+  // public + (private if unlocked)
+  const list = state.publicEvents.map(e => Object.assign({}, e, {_locked:false}));
+  if(state.privateUnlocked){
+    state.privateEvents.forEach(e => list.push(Object.assign({}, e, {_locked:false})));
+  }
+  return list;
+}
+function categoryById(id){
+  return state.categories.find(c => c.id === id);
+}
+function eventWantsPrivate(ev){
+  return !!ev.locked;
+}
+function visibleEvents(){
+  return allEventsForDisplay().filter(ev => {
+    return ev.categories.some(cid => state.visibleCats.has(cid));
+  });
+}
+
+function findEventBucketAndIndex(id){
+  let idx = state.publicEvents.findIndex(e => e.id === id);
+  if(idx >= 0) return {bucket:'public', idx};
+  idx = state.privateEvents.findIndex(e => e.id === id);
+  if(idx >= 0) return {bucket:'private', idx};
+  return null;
+}
+
+async function upsertEvent(ev){
+  const wantsPrivate = eventWantsPrivate(ev);
+  if(wantsPrivate && !state.privateUnlocked){
+    throw new Error('LOCKED');
+  }
+  const existing = ev.id ? findEventBucketAndIndex(ev.id) : null;
+  if(!ev.id) ev.id = (crypto.randomUUID ? crypto.randomUUID() : 'ev_'+Date.now()+'_'+Math.random().toString(36).slice(2));
+
+  // remove from old bucket if moving
+  if(existing){
+    if(existing.bucket === 'public') state.publicEvents.splice(existing.idx,1);
+    else state.privateEvents.splice(existing.idx,1);
+  }
+  if(wantsPrivate){
+    state.privateEvents.push(ev);
+    await savePrivateBlob();
+    updatePrivateCountHint();
+  } else {
+    state.publicEvents.push(ev);
+    persistPublicEvents();
+  }
+}
+
+async function softDeleteEvent(id){
+  const loc = findEventBucketAndIndex(id);
+  if(!loc) return;
+  if(loc.bucket === 'public'){
+    const [ev] = state.publicEvents.splice(loc.idx,1);
+    ev._deletedAt = new Date().toISOString();
+    state.publicTrash.push(ev);
+    persistPublicEvents();
+    persistPublicTrash();
+  } else {
+    const [ev] = state.privateEvents.splice(loc.idx,1);
+    ev._deletedAt = new Date().toISOString();
+    state.privateTrash.push(ev);
+    await savePrivateBlob();
+    updatePrivateCountHint();
+  }
+}
+
+function findTrashBucketAndIndex(id){
+  let idx = state.publicTrash.findIndex(e => e.id === id);
+  if(idx >= 0) return {bucket:'public', idx};
+  idx = state.privateTrash.findIndex(e => e.id === id);
+  if(idx >= 0) return {bucket:'private', idx};
+  return null;
+}
+
+async function restoreEvent(id){
+  const loc = findTrashBucketAndIndex(id);
+  if(!loc) return;
+  const list = loc.bucket === 'public' ? state.publicTrash : state.privateTrash;
+  const [ev] = list.splice(loc.idx,1);
+  delete ev._deletedAt;
+  // re-evaluate protection using the event's own lock flag
+  const wantsPrivate = eventWantsPrivate(ev);
+  if(wantsPrivate && !state.privateUnlocked){
+    // put it back where it was, can't move without the key
+    list.push(ev);
+    throw new Error('LOCKED');
+  }
+  if(wantsPrivate){
+    state.privateEvents.push(ev);
+  } else {
+    state.publicEvents.push(ev);
+  }
+  persistPublicEvents(); persistPublicTrash();
+  if(state.cryptoKey){ await savePrivateBlob(); updatePrivateCountHint(); }
+}
+
+async function permanentlyDeleteFromTrash(id){
+  const loc = findTrashBucketAndIndex(id);
+  if(!loc) return;
+  if(loc.bucket === 'public'){
+    state.publicTrash.splice(loc.idx,1);
+    persistPublicTrash();
+  } else {
+    state.privateTrash.splice(loc.idx,1);
+    await savePrivateBlob();
+  }
+}
+
+function allTrashForDisplay(){
+  const list = state.publicTrash.slice();
+  if(state.privateUnlocked) list.push(...state.privateTrash);
+  return list;
+}
+
+/* ============================================================
+   RENDER: sidebar filters + privacy panel
+   ============================================================ */
+function renderCatFilterList(){
+  const wrap = document.getElementById('catFilterList');
+  wrap.innerHTML = '';
+  state.categories.forEach(c => {
+    const row = document.createElement('label');
+    row.className = 'cat-row';
+    row.innerHTML = `
+      <input type="checkbox" ${state.visibleCats.has(c.id)?'checked':''} data-cid="${c.id}">
+      <span class="cat-swatch" style="background:${c.color}"></span>
+      <span class="lbl">${escapeHtml(c.label)}</span>
+    `;
+    row.querySelector('input').addEventListener('change', (e) => {
+      if(e.target.checked) state.visibleCats.add(c.id);
+      else state.visibleCats.delete(c.id);
+      renderAll();
+    });
+    wrap.appendChild(row);
+  });
+}
+
+function renderPrivacyPanel(){
+  const wrap = document.getElementById('privacyPanel');
+  const lockedCount = privateEventCountLocked();
+  if(!state.privateUnlocked && lockedCount === 0){
+    wrap.innerHTML = '';
+    return;
+  }
+  if(state.privateUnlocked){
+    wrap.innerHTML = `<div class="privacy-box"><p>Eventi protetti sbloccati per questa sessione (${state.privateEvents.length}).</p>
+      <button class="btn secondary small block" id="lockBtn">🔒 Blocca ora</button></div>`;
+    document.getElementById('lockBtn').addEventListener('click', () => { lockPrivacy(); renderAll(); });
+  } else {
+    wrap.innerHTML = `<div class="privacy-box"><p>🔒 ${lockedCount} eventi protetti, nascosti.</p>
+      <button class="btn small block" id="unlockBtn">Sblocca</button></div>`;
+    document.getElementById('unlockBtn').addEventListener('click', () => openPasswordUnlock());
+  }
+}
+
+function escapeHtml(s){
+  const d = document.createElement('div');
+  d.textContent = s == null ? '' : s;
+  return d.innerHTML;
+}
+
+/* ============================================================
+   RENDER: timeline
+   ============================================================ */
+function renderTimeline(){
+  const container = document.getElementById('timelineView');
+  const evs = visibleEvents().slice().sort((a,b) => a.startDate.localeCompare(b.startDate));
+  if(evs.length === 0){
+    container.innerHTML = `<div class="empty-state"><div class="big">Ancora nessun evento qui</div>
+      <p>Aggiungi il primo evento della tua cronologia, oppure controlla i filtri nella barra laterale.</p></div>`;
+    return;
+  }
+  let html = '';
+  let lastYear = null;
+  evs.forEach(ev => {
+    const startYear = ev.startDate.slice(0,4);
+    if(startYear !== lastYear){
+      lastYear = startYear;
+      const ageAtYear = ageAt(new Date(startYear+'-06-15'));
+      html += `<div class="tl-year"><span class="yr">${startYear}</span><span class="yr-age">${formatAge(ageAtYear)} circa</span><hr></div>`;
+    }
+    const primaryCat = categoryById(ev.categories[0]) || {color:'#999'};
+    const dateStr = ev.ongoing
+      ? `${isoToDMY(ev.startDate)} — in corso`
+      : (ev.startDate === ev.endDate
+        ? isoToDMY(ev.startDate)
+        : `${isoToDMY(ev.startDate)} — ${isoToDMY(ev.endDate)}`);
+    const ageStart = ageAt(new Date(ev.startDate));
+    html += `<div class="event-card" style="border-left-color:${primaryCat.color}" data-id="${ev.id}">
+      <div class="ev-head">
+        <div>
+          <h3>${escapeHtml(ev.title)}${ev.locked ? ' <span title="Protetto con PIN" style="font-size:.8rem;">🔒</span>' : ''}</h3>
+          <div class="dates">${dateStr} · avevi ${formatAge(ageStart)}</div>
+        </div>
+        <div class="ev-actions">
+          <button class="editBtn" title="Modifica">✎</button>
+          <button class="delBtn" title="Elimina">🗑</button>
+        </div>
+      </div>
+      ${ev.description ? `<div class="desc">${escapeHtml(ev.description)}</div>` : ''}
+      ${ev.location ? `<div class="loc">📍 ${escapeHtml(ev.location.name)}</div>` : ''}
+      <div class="tag-row">${ev.categories.map(cid => {
+        const c = categoryById(cid);
+        if(!c) return '';
+        return `<span class="tag" style="background:${c.color}">${escapeHtml(c.label)}</span>`;
+      }).join('')}</div>
+    </div>`;
+  });
+  container.innerHTML = html;
+  container.querySelectorAll('.editBtn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const id = e.target.closest('.event-card').dataset.id;
+      openEventModal(id);
+    });
+  });
+  container.querySelectorAll('.delBtn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      const id = e.target.closest('.event-card').dataset.id;
+      const ev = allEventsForDisplay().find(x=>x.id===id);
+      if(confirm(`Spostare "${ev.title}" nel cestino? Potrai ripristinarlo dal cestino in qualsiasi momento.`)){
+        await softDeleteEvent(id);
+        renderAll();
+      }
+    });
+  });
+}
+
+/* ============================================================
+   RENDER: diagram (real visual timeline — Gantt-style)
+   ============================================================ */
+const GANTT_LABEL_W = 150;
+const GANTT_YEAR_W = 90; // px per year, sets zoom level
+const GANTT_PX_PER_DAY = GANTT_YEAR_W / 365.25;
+
+function ganttDateToX(dateObj){
+  const start = new Date(getBirthDate().getFullYear(), getBirthDate().getMonth(), getBirthDate().getDate());
+  const days = (dateObj - start) / 86400000;
+  return GANTT_LABEL_W + days * GANTT_PX_PER_DAY;
+}
+
+function renderDiagram(){
+  const evs = visibleEvents();
+  const emptyEl = document.getElementById('diagramEmpty');
+  const outerEl = document.getElementById('ganttOuter');
+  if(evs.length === 0){
+    emptyEl.style.display = 'block';
+    outerEl.style.display = 'none';
+    return;
+  }
+  emptyEl.style.display = 'none';
+  outerEl.style.display = 'block';
+
+  const today = new Date();
+  const birth = new Date(getBirthDate().getFullYear(), getBirthDate().getMonth(), getBirthDate().getDate());
+  let latest = today;
+  evs.forEach(ev => {
+    const end = new Date(effectiveEndDate(ev));
+    if(end > latest) latest = end;
+  });
+  const startYear = birth.getFullYear();
+  const endYear = latest.getFullYear() + 1;
+  const totalWidth = ganttDateToX(new Date(endYear, 0, 1));
+
+  // header with year ticks
+  const header = document.getElementById('ganttHeader');
+  let headerHtml = `<div class="gantt-header-label">Categoria</div>`;
+  for(let y = startYear; y <= endYear; y++){
+    const x = ganttDateToX(new Date(y, 0, 1));
+    headerHtml += `<div class="gantt-yeartick" style="left:${x}px;">${y}</div>`;
+  }
+  header.style.width = totalWidth + 'px';
+  header.innerHTML = headerHtml;
+
+  // lanes: one per currently-visible category that has at least one event, in category order
+  const lanesWrap = document.getElementById('ganttLanes');
+  const cats = state.categories.filter(c => state.visibleCats.has(c.id) && evs.some(ev => ev.categories.includes(c.id)));
+  let lanesHtml = '';
+  cats.forEach(c => {
+    lanesHtml += `<div class="gantt-row" style="width:${totalWidth}px;" data-cat="${c.id}">
+      <div class="gantt-rowlabel"><span class="cat-swatch" style="background:${c.color}"></span>${escapeHtml(c.label)}</div>
+    </div>`;
+  });
+  // today marker + vertical year lines, appended once at the end (absolute over the whole lanes block)
+  const todayX = ganttDateToX(today);
+  lanesWrap.style.position = 'relative';
+  lanesWrap.style.width = totalWidth + 'px';
+  lanesWrap.innerHTML = lanesHtml +
+    `<div class="gantt-todayline" style="left:${todayX}px;height:${cats.length*36}px;" title="Oggi"></div>`;
+
+  // place bars/dots into each lane
+  cats.forEach(c => {
+    const row = lanesWrap.querySelector(`.gantt-row[data-cat="${c.id}"]`);
+    const rowEvs = evs.filter(ev => ev.categories.includes(c.id));
+    rowEvs.forEach(ev => {
+      const x1 = ganttDateToX(new Date(ev.startDate));
+      const effEnd = new Date(effectiveEndDate(ev));
+      const x2 = ganttDateToX(effEnd);
+      const isPunctual = ev.startDate === ev.endDate && !ev.ongoing;
+      let el;
+      if(isPunctual){
+        el = document.createElement('div');
+        el.className = 'gantt-dot';
+        el.style.left = (x1-8) + 'px';
+        el.style.background = c.color;
+        el.title = ev.title;
+      } else {
+        el = document.createElement('div');
+        el.className = 'gantt-bar';
+        const w = Math.max(x2 - x1, 8);
+        el.style.left = x1 + 'px';
+        el.style.width = w + 'px';
+        el.style.background = c.color;
+        el.textContent = ev.title;
+        el.title = ev.title;
+      }
+      el.dataset.id = ev.id;
+      el.addEventListener('click', () => openEventInfo(ev.id));
+      row.appendChild(el);
+    });
+  });
+}
+
+function openEventInfo(id){
+  const ev = allEventsForDisplay().find(e => e.id === id);
+  if(!ev) return;
+  document.getElementById('info_title').textContent = (ev.locked ? '🔒 ' : '') + ev.title;
+  const dateStr = ev.ongoing
+    ? `${isoToDMY(ev.startDate)} — in corso`
+    : (ev.startDate === ev.endDate ? isoToDMY(ev.startDate) : `${isoToDMY(ev.startDate)} — ${isoToDMY(ev.endDate)}`);
+  const ageStart = ageAt(new Date(ev.startDate));
+  document.getElementById('info_dates').textContent = `${dateStr} · avevi ${formatAge(ageStart)}`;
+  document.getElementById('info_tags').innerHTML = ev.categories.map(cid => {
+    const c = categoryById(cid);
+    if(!c) return '';
+    return `<span class="tag" style="background:${c.color}">${escapeHtml(c.label)}</span>`;
+  }).join('');
+  document.getElementById('info_desc').textContent = ev.description || '';
+  document.getElementById('info_loc').textContent = ev.location ? '📍 ' + ev.location.name : '';
+  document.getElementById('infoEditBtn').dataset.id = ev.id;
+  document.getElementById('infoOverlay').classList.add('open');
+}
+document.getElementById('infoCloseBtn').addEventListener('click', ()=>{
+  document.getElementById('infoOverlay').classList.remove('open');
+});
+document.getElementById('infoEditBtn').addEventListener('click', (e)=>{
+  const id = e.target.dataset.id;
+  document.getElementById('infoOverlay').classList.remove('open');
+  openEventModal(id);
+});
+
+/* ============================================================
+   RENDER: map
+   ============================================================ */
+function initMapIfNeeded(){
+  if(state.leafMap) return;
+  state.leafMap = L.map('leafmap', {worldCopyJump:true}).setView([20,10], 2);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    maxZoom: 18
+  }).addTo(state.leafMap);
+  state.mapMarkersLayer = L.layerGroup().addTo(state.leafMap);
+
+  const slider = document.getElementById('mapYearSlider');
+  const birthYear = getBirthDate().getFullYear();
+  const curYear = new Date().getFullYear();
+  slider.min = birthYear;
+  slider.max = curYear;
+  slider.value = curYear;
+  state.mapYear = curYear;
+  slider.addEventListener('input', () => {
+    state.mapYear = parseInt(slider.value,10);
+    renderMapMarkers();
+  });
+  document.getElementById('playBtn').addEventListener('click', toggleMapPlay);
+  document.getElementById('mapShowAllChk').addEventListener('change', (e)=>{
+    state.mapShowAll = e.target.checked;
+    document.getElementById('mapYearSlider').disabled = state.mapShowAll;
+    if(state.mapPlaying) toggleMapPlay(); // stop any running animation
+    renderMapMarkers();
+  });
+}
+
+function renderMapMarkers(){
+  if(!state.leafMap) return;
+  document.getElementById('mapYearLabel').textContent = state.mapShowAll ? 'Tutti' : state.mapYear;
+  state.mapMarkersLayer.clearLayers();
+  const evs = visibleEvents().filter(ev => ev.location && ev.location.lat != null && ev.location.lng != null);
+  evs.forEach(ev => {
+    if(!state.mapShowAll){
+      const sy = parseInt(ev.startDate.slice(0,4),10);
+      const ey = ev.ongoing ? new Date().getFullYear() : parseInt(ev.endDate.slice(0,4),10);
+      if(state.mapYear < sy || state.mapYear > ey) return;
+    }
+    const c = categoryById(ev.categories[0]) || {color:'#999'};
+    const marker = L.circleMarker([ev.location.lat, ev.location.lng], {
+      radius:7, color:'#fff', weight:1.5, fillColor:c.color, fillOpacity:.9
+    });
+    marker.bindPopup(`<b>${escapeHtml(ev.title)}</b><br>${isoToDMY(ev.startDate)}${ev.ongoing?' — in corso':(ev.startDate!==ev.endDate?' — '+isoToDMY(ev.endDate):'')}<br>${escapeHtml(ev.location.name)}`);
+    marker.addTo(state.mapMarkersLayer);
+  });
+}
+
+function fitMapToAllLocations(){
+  const evs = visibleEvents().filter(ev => ev.location && ev.location.lat != null && ev.location.lng != null);
+  if(evs.length === 0) return;
+  const bounds = evs.map(ev => [ev.location.lat, ev.location.lng]);
+  state.leafMap.fitBounds(bounds, {padding:[30,30], maxZoom:6});
+}
+
+function toggleMapPlay(){
+  const btn = document.getElementById('playBtn');
+  if(state.mapPlaying){
+    clearInterval(state.mapPlayTimer);
+    state.mapPlaying = false;
+    btn.textContent = '▶';
+    return;
+  }
+  // starting playback always switches out of "tutti gli anni" mode
+  if(state.mapShowAll){
+    state.mapShowAll = false;
+    document.getElementById('mapShowAllChk').checked = false;
+    document.getElementById('mapYearSlider').disabled = false;
+  }
+  state.mapPlaying = true;
+  btn.textContent = '⏸';
+  const slider = document.getElementById('mapYearSlider');
+  const maxY = parseInt(slider.max,10);
+  state.mapPlayTimer = setInterval(() => {
+    let y = parseInt(slider.value,10) + 1;
+    if(y > maxY){ y = parseInt(slider.min,10); }
+    slider.value = y;
+    state.mapYear = y;
+    renderMapMarkers();
+  }, 700);
+}
+
+/* ============================================================
+   RENDER: stats
+   ============================================================ */
+function daysBetween(a,b){
+  const d1 = new Date(a), d2 = new Date(b);
+  return Math.round((d2-d1)/86400000) + 1;
+}
+function renderStats(){
+  const container = document.getElementById('statsView');
+  const evs = visibleEvents();
+  if(evs.length === 0){
+    container.innerHTML = `<div class="empty-state"><div class="big">Nessun dato da mostrare</div><p>Aggiungi eventi per vedere le statistiche.</p></div>`;
+    return;
+  }
+  // days per category
+  const daysByCategory = {};
+  const countByCategory = {};
+  state.categories.forEach(c => { daysByCategory[c.id]=0; countByCategory[c.id]=0; });
+  evs.forEach(ev => {
+    const d = daysBetween(ev.startDate, effectiveEndDate(ev));
+    ev.categories.forEach(cid => {
+      if(daysByCategory[cid] === undefined) return;
+      daysByCategory[cid] += d;
+      countByCategory[cid] += 1;
+    });
+  });
+  const maxDays = Math.max(1, ...Object.values(daysByCategory));
+  const maxCount = Math.max(1, ...Object.values(countByCategory));
+
+  // events per decade
+  const byDecade = {};
+  evs.forEach(ev => {
+    const y = parseInt(ev.startDate.slice(0,4),10);
+    const dec = Math.floor(y/10)*10;
+    byDecade[dec] = (byDecade[dec]||0)+1;
+  });
+  const decades = Object.keys(byDecade).map(Number).sort((a,b)=>a-b);
+  const maxDecade = Math.max(1, ...Object.values(byDecade));
+
+  function barsHtml(items, maxVal, fmt){
+    return items.map(it => `
+      <div class="bar-row">
+        <div class="bl">${escapeHtml(it.label)}</div>
+        <div class="bt"><div style="width:${(it.val/maxVal*100).toFixed(1)}%;background:${it.color}"></div></div>
+        <div class="bv">${fmt(it.val)}</div>
+      </div>`).join('');
+  }
+
+  const catsWithData = state.categories.filter(c => countByCategory[c.id] > 0);
+
+  container.innerHTML = `
+    <div class="stat-block">
+      <h3>Giorni totali per categoria</h3>
+      ${barsHtml(catsWithData.map(c=>({label:c.label,val:daysByCategory[c.id],color:c.color})), maxDays, v=>v+' g')}
+    </div>
+    <div class="stat-block">
+      <h3>Numero di eventi per categoria</h3>
+      ${barsHtml(catsWithData.map(c=>({label:c.label,val:countByCategory[c.id],color:c.color})), maxCount, v=>v)}
+    </div>
+    <div class="stat-block">
+      <h3>Eventi per decennio</h3>
+      ${barsHtml(decades.map(dec=>({label:dec+'s',val:byDecade[dec],color:'#B1813A'})), maxDecade, v=>v)}
+    </div>
+    <div class="small-note">Nota: i "giorni totali" sommano le categorie assegnate a ciascun evento: un evento con più categorie viene conteggiato in ognuna, quindi i totali possono superare i giorni di vita effettivi.</div>
+  `;
+}
+
+/* ============================================================
+   MASTER RENDER
+   ============================================================ */
+function renderAll(){
+  renderCatFilterList();
+  renderPrivacyPanel();
+  updateTrashCount();
+  updateAgeDisplay();
+  if(state.activeTab === 'timeline') renderTimeline();
+  if(state.activeTab === 'diagram') renderDiagram();
+  if(state.activeTab === 'map'){ initMapIfNeeded(); renderMapMarkers(); }
+  if(state.activeTab === 'stats') renderStats();
+}
+
+/* ============================================================
+   TABS
+   ============================================================ */
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    state.activeTab = tab.dataset.tab;
+    document.getElementById('timelineView').style.display = state.activeTab==='timeline' ? 'block':'none';
+    document.getElementById('diagramView').style.display = state.activeTab==='diagram' ? 'block':'none';
+    document.getElementById('mapview').style.display = state.activeTab==='map' ? 'block':'none';
+    document.getElementById('statsView').style.display = state.activeTab==='stats' ? 'block':'none';
+    if(state.activeTab === 'diagram') renderDiagram();
+    if(state.activeTab === 'map'){
+      initMapIfNeeded();
+      setTimeout(()=>{ state.leafMap.invalidateSize(); renderMapMarkers(); fitMapToAllLocations(); }, 50);
+    }
+    if(state.activeTab === 'stats') renderStats();
+  });
+});
+
+/* ============================================================
+   SIDEBAR misc
+   ============================================================ */
+document.getElementById('selAllBtn').addEventListener('click', ()=>{
+  state.categories.forEach(c=>state.visibleCats.add(c.id)); renderAll();
+});
+document.getElementById('selNoneBtn').addEventListener('click', ()=>{
+  state.visibleCats.clear(); renderAll();
+});
+function openSidebar(){
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('sidebarBackdrop').classList.add('open');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarBackdrop').classList.remove('open');
+}
+document.getElementById('hamburgerBtn').addEventListener('click', ()=>{
+  const sb = document.getElementById('sidebar');
+  sb.classList.contains('open') ? closeSidebar() : openSidebar();
+});
+document.getElementById('sidebarCloseBtn').addEventListener('click', closeSidebar);
+document.getElementById('sidebarBackdrop').addEventListener('click', closeSidebar);
+document.getElementById('fullscreenBtn').addEventListener('click', ()=>{
+  if(!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+  else document.exitFullscreen();
+});
+
+/* ============================================================
+   EVENT MODAL
+   ============================================================ */
+const eventOverlay = document.getElementById('eventOverlay');
+
+function renderCategoryCheckboxes(selected){
+  const wrap = document.getElementById('f_categories');
+  wrap.innerHTML = state.categories.map(c => `
+    <label>
+      <input type="checkbox" value="${c.id}" ${selected.includes(c.id)?'checked':''}>
+      <span class="cat-swatch" style="background:${c.color}"></span>
+      ${escapeHtml(c.label)}
+    </label>`).join('');
+}
+
+function openEventModal(id){
+  state.editingEventId = id || null;
+  document.getElementById('eventErr').style.display='none';
+  const ev = id ? allEventsForDisplay().find(e=>e.id===id) : null;
+  document.getElementById('eventModalTitle').textContent = ev ? 'Modifica evento' : 'Nuovo evento';
+  document.getElementById('f_title').value = ev ? ev.title : '';
+  document.getElementById('f_desc').value = ev ? (ev.description||'') : '';
+  document.getElementById('f_start').value = ev ? ev.startDate : '';
+  document.getElementById('f_end').value = ev && !ev.ongoing ? ev.endDate : '';
+  document.getElementById('f_start_hint').textContent = ev ? isoToDMY(ev.startDate) : '';
+  document.getElementById('f_end_hint').textContent = ev && !ev.ongoing ? isoToDMY(ev.endDate) : '';
+  document.getElementById('f_ongoing').checked = !!(ev && ev.ongoing);
+  document.getElementById('f_end').disabled = !!(ev && ev.ongoing);
+  document.getElementById('f_locked').checked = !!(ev && ev.locked);
+  document.getElementById('f_locname').value = ev && ev.location ? ev.location.name : '';
+  state.editLocation = ev && ev.location ? Object.assign({}, ev.location) : null;
+  renderCategoryCheckboxes(ev ? ev.categories : []);
+  document.getElementById('deleteEventBtn').style.display = ev ? 'inline-flex' : 'none';
+  eventOverlay.classList.add('open');
+  setTimeout(initMiniMap, 30);
+}
+
+function closeEventModal(){
+  eventOverlay.classList.remove('open');
+  if(state.minimapInstance){ state.minimapInstance.remove(); state.minimapInstance=null; state.minimapMarker=null; }
+}
+
+document.getElementById('addEventBtn').addEventListener('click', ()=> openEventModal(null));
+document.getElementById('cancelEventBtn').addEventListener('click', closeEventModal);
+
+document.getElementById('f_start').addEventListener('change', e=>{
+  document.getElementById('f_start_hint').textContent = e.target.value ? isoToDMY(e.target.value) : '';
+});
+document.getElementById('f_end').addEventListener('change', e=>{
+  document.getElementById('f_end_hint').textContent = e.target.value ? isoToDMY(e.target.value) : '';
+});
+document.getElementById('f_ongoing').addEventListener('change', e=>{
+  const endInput = document.getElementById('f_end');
+  endInput.disabled = e.target.checked;
+  if(e.target.checked){
+    endInput.value = '';
+    document.getElementById('f_end_hint').textContent = '';
+  }
+});
+
+document.getElementById('f_locked').addEventListener('change', e=>{
+  if(e.target.checked && !state.privateUnlocked){
+    e.target.checked = false;
+    eventOverlay.classList.remove('open');
+    openPasswordUnlock(
+      ()=>{ eventOverlay.classList.add('open'); document.getElementById('f_locked').checked = true; },
+      ()=>{ eventOverlay.classList.add('open'); }
+    );
+  }
+});
+
+document.getElementById('saveEventBtn').addEventListener('click', async ()=>{
+  const title = document.getElementById('f_title').value.trim();
+  const desc = document.getElementById('f_desc').value.trim();
+  const start = document.getElementById('f_start').value;
+  const ongoing = document.getElementById('f_ongoing').checked;
+  let end = ongoing ? null : (document.getElementById('f_end').value || start);
+  const cats = Array.from(document.querySelectorAll('#f_categories input:checked')).map(i=>i.value);
+  const errEl = document.getElementById('eventErr');
+
+  if(!title || !start || cats.length===0){
+    errEl.textContent = 'Titolo, data di inizio e almeno una categoria sono obbligatori.';
+    errEl.style.display='block';
+    return;
+  }
+  if(!ongoing && end < start){ end = start; }
+
+  const locked = document.getElementById('f_locked').checked;
+  const ev = {
+    id: state.editingEventId,
+    title, description: desc,
+    startDate: start, endDate: end, ongoing, locked,
+    location: state.editLocation,
+    categories: cats
+  };
+  try{
+    await upsertEvent(ev);
+    closeEventModal();
+    renderAll();
+  }catch(e){
+    if(e.message === 'LOCKED'){
+      errEl.textContent = 'Questo evento include una categoria protetta: sblocca prima la sezione protetta (barra laterale) per poterlo salvare.';
+      errEl.style.display = 'block';
+    } else {
+      errEl.textContent = 'Errore nel salvataggio: ' + e.message;
+      errEl.style.display = 'block';
+    }
+  }
+});
+
+document.getElementById('deleteEventBtn').addEventListener('click', async ()=>{
+  if(!state.editingEventId) return;
+  if(confirm('Spostare questo evento nel cestino? Potrai ripristinarlo in qualsiasi momento.')){
+    await softDeleteEvent(state.editingEventId);
+    closeEventModal();
+    renderAll();
+  }
+});
+
+/* ---- mini map (location picker) ---- */
+function initMiniMap(){
+  if(state.minimapInstance){ state.minimapInstance.remove(); state.minimapInstance=null; }
+  const start = state.editLocation ? [state.editLocation.lat, state.editLocation.lng] : [45.5,12.2];
+  state.minimapInstance = L.map('f_minimap').setView(start, state.editLocation?6:3);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap'}).addTo(state.minimapInstance);
+  if(state.editLocation){
+    state.minimapMarker = L.marker(start).addTo(state.minimapInstance);
+  }
+  state.minimapInstance.on('click', (e)=>{
+    const name = document.getElementById('f_locname').value.trim() || 'Punto selezionato';
+    state.editLocation = {name, lat: e.latlng.lat, lng: e.latlng.lng};
+    if(state.minimapMarker) state.minimapMarker.setLatLng(e.latlng);
+    else state.minimapMarker = L.marker(e.latlng).addTo(state.minimapInstance);
+  });
+}
+
+document.getElementById('f_locclear').addEventListener('click', ()=>{
+  state.editLocation = null;
+  document.getElementById('f_locname').value='';
+  if(state.minimapMarker){ state.minimapInstance.removeLayer(state.minimapMarker); state.minimapMarker=null; }
+});
+
+// Nominatim search (debounced)
+let searchTimer = null;
+let lastSearchResults = [];
+
+function selectSearchResult(d){
+  const lat = parseFloat(d.lat), lon = parseFloat(d.lon);
+  document.getElementById('f_locname').value = d.display_name;
+  state.editLocation = {name: d.display_name, lat, lng: lon};
+  document.getElementById('f_locresults').style.display='none';
+  if(state.minimapInstance){
+    state.minimapInstance.setView([lat,lon], 8);
+    if(state.minimapMarker) state.minimapMarker.setLatLng([lat,lon]);
+    else state.minimapMarker = L.marker([lat,lon]).addTo(state.minimapInstance);
+  }
+}
+
+document.getElementById('f_locname').addEventListener('input', (e)=>{
+  const q = e.target.value.trim();
+  clearTimeout(searchTimer);
+  const results = document.getElementById('f_locresults');
+  if(q.length < 3){ results.style.display='none'; lastSearchResults=[]; return; }
+  searchTimer = setTimeout(async ()=>{
+    try{
+      const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=5&q=${encodeURIComponent(q)}`);
+      const data = await res.json();
+      lastSearchResults = data;
+      if(!data.length){ results.style.display='none'; return; }
+      results.innerHTML = data.map((d,i) => `<div data-i="${i}">${escapeHtml(d.display_name)}</div>`).join('');
+      results.style.display='block';
+      results.querySelectorAll('div').forEach(div=>{
+        div.addEventListener('click', ()=> selectSearchResult(lastSearchResults[parseInt(div.dataset.i,10)]));
+      });
+    }catch(err){ results.style.display='none'; }
+  }, 500);
+});
+
+document.getElementById('f_locname').addEventListener('keydown', (e)=>{
+  if(e.key !== 'Enter') return;
+  e.preventDefault();
+  const results = document.getElementById('f_locresults');
+  if(lastSearchResults.length && results.style.display !== 'none'){
+    // pick the first suggestion and place it on the map
+    selectSearchResult(lastSearchResults[0]);
+  } else {
+    // no suggestion picked (or search still empty): accept the typed name as-is,
+    // without coordinates — it can still be placed by clicking the mini-map below
+    const name = e.target.value.trim();
+    if(name){
+      state.editLocation = state.editLocation && state.editLocation.name === name
+        ? state.editLocation
+        : {name, lat: null, lng: null};
+    } else {
+      state.editLocation = null;
+    }
+    results.style.display='none';
+  }
+  document.getElementById('f_desc').focus();
+});
+
+/* ============================================================
+   CATEGORY MANAGEMENT MODAL
+   ============================================================ */
+const catOverlay = document.getElementById('catOverlay');
+document.getElementById('manageCatBtn').addEventListener('click', ()=>{
+  renderCatManageList();
+  catOverlay.classList.add('open');
+});
+document.getElementById('closeCatBtn').addEventListener('click', ()=> catOverlay.classList.remove('open'));
+
+function renderCatManageList(){
+  const wrap = document.getElementById('catManageList');
+  wrap.innerHTML = state.categories.map(c => `
+    <div class="catedit" data-cid="${c.id}">
+      <input type="color" value="${c.color}" data-role="color">
+      <input type="text" value="${escapeHtml(c.label)}" data-role="label">
+      <button class="btn small danger" data-role="del">✕</button>
+    </div>
+  `).join('');
+
+  wrap.querySelectorAll('.catedit').forEach(row => {
+    const cid = row.dataset.cid;
+    const cat = categoryById(cid);
+    row.querySelector('[data-role=color]').addEventListener('change', e=>{
+      cat.color = e.target.value; persistCategories(); renderAll();
+    });
+    row.querySelector('[data-role=label]').addEventListener('change', e=>{
+      cat.label = e.target.value.trim() || cat.label; persistCategories(); renderAll();
+    });
+    row.querySelector('[data-role=del]').addEventListener('click', ()=>{
+      const inUse = allEventsForDisplay().some(ev => ev.categories.includes(cid));
+      if(inUse && !confirm('Alcuni eventi usano questa categoria: verrà rimossa da quegli eventi. Continuare?')) return;
+      state.categories = state.categories.filter(c=>c.id!==cid);
+      state.visibleCats.delete(cid);
+      [state.publicEvents, state.privateEvents, state.publicTrash, state.privateTrash].forEach(list=>{
+        list.forEach(ev => { ev.categories = ev.categories.filter(x=>x!==cid); });
+      });
+      persistCategories(); persistPublicEvents(); persistPublicTrash();
+      if(state.privateUnlocked) savePrivateBlob();
+      renderCatManageList(); renderAll();
+    });
+  });
+}
+
+/* ============================================================
+   TRASH (CESTINO)
+   ============================================================ */
+const trashOverlay = document.getElementById('trashOverlay');
+document.getElementById('trashBtn').addEventListener('click', ()=>{
+  renderTrashList();
+  trashOverlay.classList.add('open');
+});
+document.getElementById('closeTrashBtn').addEventListener('click', ()=> trashOverlay.classList.remove('open'));
+
+function updateTrashCount(){
+  const n = allTrashForDisplay().length;
+  document.getElementById('trashCount').textContent = n>0 ? `(${n})` : '';
+}
+
+function renderTrashList(){
+  const wrap = document.getElementById('trashList');
+  const items = allTrashForDisplay().slice().sort((a,b)=> (b._deletedAt||'').localeCompare(a._deletedAt||''));
+  if(items.length === 0){
+    wrap.innerHTML = '<p style="color:var(--ink-soft);font-size:.88rem;">Il cestino è vuoto.</p>';
+    return;
+  }
+  wrap.innerHTML = items.map(ev => `
+    <div class="catedit" data-id="${ev.id}" style="flex-wrap:wrap;">
+      <div style="flex:1;min-width:180px;">
+        <div style="font-weight:500;">${escapeHtml(ev.title)}</div>
+        <div style="font-size:.75rem;color:var(--ink-soft);">${isoToDMY(ev.startDate)}${ev.ongoing?' — in corso':(ev.startDate!==ev.endDate?' — '+isoToDMY(ev.endDate):'')}</div>
+      </div>
+      <button class="btn small secondary" data-role="restore">Ripristina</button>
+      <button class="btn small danger" data-role="purge">Elimina per sempre</button>
+    </div>
+  `).join('');
+  wrap.querySelectorAll('.catedit').forEach(row=>{
+    const id = row.dataset.id;
+    row.querySelector('[data-role=restore]').addEventListener('click', async ()=>{
+      try{
+        await restoreEvent(id);
+        renderTrashList(); renderAll();
+      }catch(e){
+        if(e.message === 'LOCKED'){
+          trashOverlay.classList.remove('open');
+          openPasswordUnlock(
+            ()=>{ trashOverlay.classList.add('open'); renderTrashList(); renderAll(); },
+            ()=>{ trashOverlay.classList.add('open'); }
+          );
+        }
+      }
+    });
+    row.querySelector('[data-role=purge]').addEventListener('click', async ()=>{
+      if(confirm('Eliminare definitivamente questo evento? Non potrà più essere recuperato.')){
+        await permanentlyDeleteFromTrash(id);
+        renderTrashList(); renderAll();
+      }
+    });
+  });
+}
+
+document.getElementById('addCatBtn').addEventListener('click', ()=>{
+  const name = document.getElementById('newCatName').value.trim();
+  const color = document.getElementById('newCatColor').value;
+  if(!name) return;
+  const id = 'c_' + Date.now().toString(36);
+  state.categories.push({id, label:name, color});
+  state.visibleCats.add(id);
+  persistCategories();
+  document.getElementById('newCatName').value='';
+  renderCatManageList(); renderAll();
+});
+
+/* ============================================================
+   PASSWORD MODAL
+   ============================================================ */
+const pwOverlay = document.getElementById('pwOverlay');
+let pwCallback = null;
+let pwCancelCallback = null;
+
+function openPasswordUnlock(cb, onCancel){
+  pwCallback = cb || null;
+  pwCancelCallback = onCancel || null;
+  document.getElementById('pwInput1').value='';
+  document.getElementById('pwErr').style.display='none';
+  pwOverlay.classList.add('open');
+  setTimeout(()=>document.getElementById('pwInput1').focus(), 30);
+}
+document.getElementById('pwCancelBtn').addEventListener('click', ()=>{
+  pwOverlay.classList.remove('open');
+  pwCallback=null;
+  const cancelCb = pwCancelCallback; pwCancelCallback=null;
+  if(cancelCb) cancelCb();
+});
+async function confirmPin(){
+  const p1 = document.getElementById('pwInput1').value.trim();
+  const errEl = document.getElementById('pwErr');
+  try{
+    await unlockPrivacy(p1);
+    pwOverlay.classList.remove('open');
+    const cb = pwCallback; pwCallback=null; pwCancelCallback=null;
+    renderAll();
+    if(cb) cb();
+  }catch(e){
+    errEl.textContent = e.message;
+    errEl.style.display='block';
+  }
+}
+document.getElementById('pwConfirmBtn').addEventListener('click', confirmPin);
+document.getElementById('pwInput1').addEventListener('keydown', e=>{ if(e.key==='Enter') confirmPin(); });
+
+/* ============================================================
+   EXPORT / IMPORT
+   ============================================================ */
+document.getElementById('exportBtn').addEventListener('click', ()=>{
+  const data = {
+    categories: state.categories,
+    settings: state.settings,
+    publicEvents: state.publicEvents,
+    publicTrash: state.publicTrash,
+    privateBlob: loadJSON(LS.privateBlob, null),
+    privateCountHint: privateEventCountLocked(),
+    exportedAt: new Date().toISOString(),
+    formatVersion: 2
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'cronologia-backup.json';
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('importBtn').addEventListener('click', ()=> document.getElementById('importFile').click());
+document.getElementById('importFile').addEventListener('change', (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try{
+      const data = JSON.parse(reader.result);
+      if(!confirm('Importare questi dati sovrascriverà quelli attuali in questo browser. Continuare?')) return;
+      state.categories = data.categories || DEFAULT_CATEGORIES;
+      state.settings = Object.assign({}, DEFAULT_SETTINGS, data.settings || {});
+      state.publicEvents = data.publicEvents || [];
+      state.publicTrash = data.publicTrash || [];
+      state.visibleCats = new Set(state.categories.map(c=>c.id));
+      lockPrivacy();
+      persistCategories(); persistSettings(); persistPublicEvents(); persistPublicTrash();
+      if(data.privateBlob) saveJSON(LS.privateBlob, data.privateBlob);
+      if(data.privateCountHint !== undefined) localStorage.setItem(LS.privateBlob+'_count', String(data.privateCountHint));
+      renderAll();
+      alert('Importazione completata.');
+    }catch(err){
+      alert('File non valido: ' + err.message);
+    }
+    e.target.value = '';
+  };
+  reader.readAsText(file);
+});
+
+/* ============================================================
+   INIT
+   ============================================================ */
+document.querySelector('.topbar h1').textContent = APP_TITLE;
+document.title = APP_TITLE;
+setInterval(updateAgeDisplay, 60000);
+renderAll();
+
+})();
+</script>
+</body>
+</html>
