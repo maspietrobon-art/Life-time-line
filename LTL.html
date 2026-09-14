@@ -61,6 +61,7 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
   display:flex;align-items:center;justify-content:center;font-size:1rem;
 }
 .iconbtn:hover{background:rgba(255,255,255,.12);}
+#privacyToggleBtn{width:auto;min-width:34px;padding:0 8px;gap:4px;font-size:.85rem;white-space:nowrap;}
 .hamburger{display:none;}
 .sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(20,22,26,.4);z-index:890;}
 .sidebar-close{display:none;}
@@ -158,11 +159,15 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
   display:flex;align-items:center;gap:6px;padding-left:12px;font-size:.78rem;border-right:1px solid var(--line);}
 .gantt-yearline{position:absolute;top:0;bottom:0;border-left:1px dashed rgba(0,0,0,.07);}
 .gantt-bar{position:absolute;top:7px;height:22px;border-radius:4px;cursor:pointer;display:flex;align-items:center;
-  padding:0 7px;font-size:.72rem;color:#fff;white-space:nowrap;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.2);}
+  padding:0 7px;font-size:.72rem;color:#fff;white-space:nowrap;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.2);z-index:1;}
 .gantt-bar:hover{filter:brightness(1.12);}
-.gantt-dot{position:absolute;top:7px;width:16px;height:16px;border-radius:50%;cursor:pointer;border:2px solid #fff;
-  box-shadow:0 1px 3px rgba(0,0,0,.35);}
-.gantt-dot:hover{filter:brightness(1.15);}
+.gantt-point{position:absolute;top:7px;height:22px;display:flex;align-items:center;gap:5px;cursor:pointer;
+  white-space:nowrap;z-index:2;}
+.gantt-point-dot{width:14px;height:14px;border-radius:50%;border:2px solid #fff;flex-shrink:0;
+  box-shadow:0 1px 3px rgba(0,0,0,.4);}
+.gantt-point-label{font-size:.72rem;color:var(--ink);background:var(--card);padding:1px 7px;border-radius:10px;
+  box-shadow:0 1px 3px rgba(0,0,0,.2);border:1px solid var(--line);}
+.gantt-point:hover .gantt-point-label{background:var(--paper);}
 
 /* ---------- map ---------- */
 #mapview{position:absolute;inset:0;}
@@ -245,6 +250,7 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
       <div class="age" id="ageDisplay">—</div>
     </div>
     <div class="spacer"></div>
+    <button class="iconbtn" id="privacyToggleBtn" title="Contenuti protetti">🔒</button>
     <button class="iconbtn" id="fullscreenBtn" title="Schermo intero">⛶</button>
   </div>
 
@@ -851,6 +857,7 @@ function renderCatFilterList(){
 function renderPrivacyPanel(){
   const wrap = document.getElementById('privacyPanel');
   const lockedCount = privateEventCountLocked();
+  updatePrivacyToggleBtn(lockedCount);
   if(!state.privateUnlocked && lockedCount === 0){
     wrap.innerHTML = '';
     return;
@@ -865,6 +872,28 @@ function renderPrivacyPanel(){
     document.getElementById('unlockBtn').addEventListener('click', () => openPasswordUnlock());
   }
 }
+
+function updatePrivacyToggleBtn(lockedCount){
+  const btn = document.getElementById('privacyToggleBtn');
+  if(state.privateUnlocked){
+    btn.textContent = '🔓';
+    btn.title = 'Contenuti protetti sbloccati — clicca per bloccare';
+  } else if(lockedCount > 0){
+    btn.textContent = `🔒 ${lockedCount}`;
+    btn.title = `${lockedCount} eventi protetti nascosti — clicca per sbloccare con il PIN`;
+  } else {
+    btn.textContent = '🔒';
+    btn.title = 'Nessun evento protetto al momento';
+  }
+}
+document.getElementById('privacyToggleBtn').addEventListener('click', () => {
+  if(state.privateUnlocked){
+    lockPrivacy();
+    renderAll();
+  } else {
+    openPasswordUnlock(() => renderAll());
+  }
+});
 
 function escapeHtml(s){
   const d = document.createElement('div');
@@ -1012,10 +1041,9 @@ function renderDiagram(){
       let el;
       if(isPunctual){
         el = document.createElement('div');
-        el.className = 'gantt-dot';
-        el.style.left = (x1-8) + 'px';
-        el.style.background = c.color;
-        el.title = ev.title;
+        el.className = 'gantt-point';
+        el.style.left = x1 + 'px';
+        el.innerHTML = `<span class="gantt-point-dot" style="background:${c.color}"></span><span class="gantt-point-label">${escapeHtml(ev.title)}</span>`;
       } else {
         el = document.createElement('div');
         el.className = 'gantt-bar';
@@ -1176,6 +1204,32 @@ function renderStats(){
   const maxDays = Math.max(1, ...Object.values(daysByCategory));
   const maxCount = Math.max(1, ...Object.values(countByCategory));
 
+  // days & count per country (only events with a recognized country)
+  const daysByCountry = {};
+  const countByCountry = {};
+  evs.forEach(ev => {
+    const country = ev.location && ev.location.country;
+    if(!country) return;
+    const d = daysBetween(ev.startDate, effectiveEndDate(ev));
+    daysByCountry[country] = (daysByCountry[country]||0) + d;
+    countByCountry[country] = (countByCountry[country]||0) + 1;
+  });
+  const countries = Object.keys(daysByCountry).sort((a,b)=>daysByCountry[b]-daysByCountry[a]);
+  const maxCountryDays = Math.max(1, ...Object.values(daysByCountry));
+  const maxCountryCount = Math.max(1, ...Object.values(countByCountry));
+  const COUNTRY_COLOR = '#33625b';
+  const eventsWithoutCountry = evs.filter(ev => ev.location && !ev.location.country).length;
+
+  // events per calendar year
+  const byYear = {};
+  evs.forEach(ev => {
+    const y = parseInt(ev.startDate.slice(0,4),10);
+    byYear[y] = (byYear[y]||0)+1;
+  });
+  const allYears = Object.keys(byYear).map(Number);
+  const minYear = Math.min(...allYears);
+  const maxYear = Math.max(...allYears, new Date().getFullYear());
+
   // events per decade
   const byDecade = {};
   evs.forEach(ev => {
@@ -1195,6 +1249,21 @@ function renderStats(){
       </div>`).join('');
   }
 
+  function yearChartHtml(minY, maxY, dataObj, color){
+    let bars = '';
+    const max = Math.max(1, ...Object.values(dataObj));
+    for(let y = minY; y <= maxY; y++){
+      const val = dataObj[y] || 0;
+      const h = val > 0 ? Math.max(3, Math.round(val/max*70)) : 1;
+      const showLabel = (y % 5 === 0) || y === minY || y === maxY;
+      bars += `<div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;width:13px;flex-shrink:0;" title="${y}: ${val} evento/i">
+        <div style="width:8px;height:${h}px;background:${val>0?color:'var(--line)'};border-radius:2px 2px 0 0;"></div>
+        <div style="font-size:.6rem;color:var(--ink-soft);margin-top:3px;height:12px;">${showLabel?y:''}</div>
+      </div>`;
+    }
+    return `<div style="display:flex;align-items:flex-end;gap:2px;overflow-x:auto;padding-bottom:2px;height:98px;">${bars}</div>`;
+  }
+
   const catsWithData = state.categories.filter(c => countByCategory[c.id] > 0);
 
   container.innerHTML = `
@@ -1207,10 +1276,25 @@ function renderStats(){
       ${barsHtml(catsWithData.map(c=>({label:c.label,val:countByCategory[c.id],color:c.color})), maxCount, v=>v)}
     </div>
     <div class="stat-block">
+      <h3>Giorni totali per paese</h3>
+      ${countries.length ? barsHtml(countries.map(k=>({label:k,val:daysByCountry[k],color:COUNTRY_COLOR})), maxCountryDays, v=>v+' g')
+        : '<p style="color:var(--ink-soft);font-size:.85rem;">Nessun evento con un paese riconosciuto (usa la ricerca del luogo o clicca sulla minimappa per far riconoscere il paese).</p>'}
+    </div>
+    <div class="stat-block">
+      <h3>Numero di eventi per paese</h3>
+      ${countries.length ? barsHtml(countries.map(k=>({label:k,val:countByCountry[k],color:COUNTRY_COLOR})), maxCountryCount, v=>v)
+        : '<p style="color:var(--ink-soft);font-size:.85rem;">—</p>'}
+      ${eventsWithoutCountry>0 ? `<div class="small-note">${eventsWithoutCountry} evento/i con luogo ma senza paese riconosciuto, non incluso/i qui.</div>` : ''}
+    </div>
+    <div class="stat-block">
+      <h3>Eventi per anno</h3>
+      ${yearChartHtml(minYear, maxYear, byYear, '#B1813A')}
+    </div>
+    <div class="stat-block">
       <h3>Eventi per decennio</h3>
       ${barsHtml(decades.map(dec=>({label:dec+'s',val:byDecade[dec],color:'#B1813A'})), maxDecade, v=>v)}
     </div>
-    <div class="small-note">Nota: i "giorni totali" sommano le categorie assegnate a ciascun evento: un evento con più categorie viene conteggiato in ognuna, quindi i totali possono superare i giorni di vita effettivi.</div>
+    <div class="small-note">Nota: i "giorni totali" sommano le categorie (o i paesi) assegnati a ciascun evento: un evento con più categorie viene conteggiato in ognuna, quindi i totali possono superare i giorni di vita effettivi.</div>
   `;
 }
 
@@ -1407,9 +1491,19 @@ function initMiniMap(){
   }
   state.minimapInstance.on('click', (e)=>{
     const name = document.getElementById('f_locname').value.trim() || 'Punto selezionato';
-    state.editLocation = {name, lat: e.latlng.lat, lng: e.latlng.lng};
+    state.editLocation = {name, lat: e.latlng.lat, lng: e.latlng.lng, country: null};
     if(state.minimapMarker) state.minimapMarker.setLatLng(e.latlng);
     else state.minimapMarker = L.marker(e.latlng).addTo(state.minimapInstance);
+    // best-effort reverse geocoding to recognize the country, non-blocking
+    const clickedLoc = state.editLocation;
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&lat=${e.latlng.lat}&lon=${e.latlng.lng}`)
+      .then(r => r.json())
+      .then(data => {
+        if(state.editLocation === clickedLoc && data && data.address && data.address.country){
+          state.editLocation.country = data.address.country;
+        }
+      })
+      .catch(()=>{});
   });
 }
 
@@ -1426,7 +1520,7 @@ let lastSearchResults = [];
 function selectSearchResult(d){
   const lat = parseFloat(d.lat), lon = parseFloat(d.lon);
   document.getElementById('f_locname').value = d.display_name;
-  state.editLocation = {name: d.display_name, lat, lng: lon};
+  state.editLocation = {name: d.display_name, lat, lng: lon, country: (d.address && d.address.country) || null};
   document.getElementById('f_locresults').style.display='none';
   if(state.minimapInstance){
     state.minimapInstance.setView([lat,lon], 8);
@@ -1442,7 +1536,7 @@ document.getElementById('f_locname').addEventListener('input', (e)=>{
   if(q.length < 3){ results.style.display='none'; lastSearchResults=[]; return; }
   searchTimer = setTimeout(async ()=>{
     try{
-      const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=5&q=${encodeURIComponent(q)}`);
+      const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=5&q=${encodeURIComponent(q)}`);
       const data = await res.json();
       lastSearchResults = data;
       if(!data.length){ results.style.display='none'; return; }
@@ -1469,7 +1563,7 @@ document.getElementById('f_locname').addEventListener('keydown', (e)=>{
     if(name){
       state.editLocation = state.editLocation && state.editLocation.name === name
         ? state.editLocation
-        : {name, lat: null, lng: null};
+        : {name, lat: null, lng: null, country: null};
     } else {
       state.editLocation = null;
     }
