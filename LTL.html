@@ -466,7 +466,13 @@ const DEFAULT_CATEGORIES = [
   {id:'scuola', label:'Scuola e formazione', color:'#5B7B9A'},
   {id:'lavoro', label:'Lavoro', color:'#35625b'},
   {id:'loveaffairs', label:'Love affairs', color:'#9C4A5C'},
+  {id:'invaghimenti', label:'Invaghimenti', color:'#C77DA0'},
   {id:'viaggi', label:"Viaggi e periodi all'estero", color:'#B1813A'},
+  {id:'viaggiaereo', label:'Viaggi in aereo', color:'#2E86AB'},
+  {id:'viaggitreno', label:'Viaggi in treno', color:'#6D4F76'},
+  {id:'viaggibus', label:'Viaggi in autobus', color:'#A0724A'},
+  {id:'viagginave', label:'Viaggi in nave', color:'#1F7A8C'},
+  {id:'viaggiauto', label:'Viaggi in auto', color:'#946B2D'},
   {id:'case', label:'Case dove ho vissuto', color:'#6B5B95'},
   {id:'cambiavita', label:'Grandi eventi che hanno cambiato la vita', color:'#C1440E'},
   {id:'incredibili', label:'Cose incredibili che mi sono successe', color:'#B8860B'},
@@ -474,6 +480,7 @@ const DEFAULT_CATEGORIES = [
   {id:'sconfitte', label:'Sconfitte', color:'#5A5A5A'},
   {id:'vittorie', label:'Vittorie', color:'#3d6b3f'},
   {id:'minori', label:'Periodi minori', color:'#9E9E9E'},
+  {id:'eventiesterni', label:'Eventi esterni', color:'#4A4E69'},
   {id:'altri', label:'Altri eventi', color:'#607D8B'},
 ];
 
@@ -554,6 +561,22 @@ function migratePublicData(){
   persistPublicTrash();
 }
 migratePublicData();
+
+// one-time migration: add any new default categories the user doesn't have yet
+// (e.g. categories introduced in later versions of the app), without touching
+// categories they've already customized or removed on their own.
+function migrateMissingDefaultCategories(){
+  let changed = false;
+  DEFAULT_CATEGORIES.forEach(dc => {
+    if(!state.categories.some(c => c.id === dc.id)){
+      state.categories.push({id: dc.id, label: dc.label, color: dc.color});
+      state.visibleCats.add(dc.id);
+      changed = true;
+    }
+  });
+  if(changed) persistCategories();
+}
+migrateMissingDefaultCategories();
 
 /* ============================================================
    CRYPTO (Web Crypto API — AES-GCM + PBKDF2)
@@ -704,6 +727,13 @@ function formatAge(a){
   parts.push(a.years + (a.years===1?' anno':' anni'));
   if(a.months>0) parts.push(a.months + (a.months===1?' mese':' mesi'));
   return parts.join(', ');
+}
+function yearsLabel(n){
+  return n + (n===1 ? ' anno' : ' anni');
+}
+function dmyAge(iso){
+  if(!iso) return '';
+  return `${isoToDMY(iso)} (${yearsLabel(ageAt(new Date(iso)).years)})`;
 }
 function updateAgeDisplay(){
   const now = new Date();
@@ -919,20 +949,19 @@ function renderTimeline(){
     if(startYear !== lastYear){
       lastYear = startYear;
       const ageAtYear = ageAt(new Date(startYear+'-06-15'));
-      html += `<div class="tl-year"><span class="yr">${startYear}</span><span class="yr-age">${formatAge(ageAtYear)} circa</span><hr></div>`;
+      html += `<div class="tl-year"><span class="yr">${startYear} (${yearsLabel(ageAtYear.years)})</span><hr></div>`;
     }
     const primaryCat = categoryById(ev.categories[0]) || {color:'#999'};
     const dateStr = ev.ongoing
-      ? `${isoToDMY(ev.startDate)} — in corso`
+      ? `${dmyAge(ev.startDate)} — in corso`
       : (ev.startDate === ev.endDate
-        ? isoToDMY(ev.startDate)
-        : `${isoToDMY(ev.startDate)} — ${isoToDMY(ev.endDate)}`);
-    const ageStart = ageAt(new Date(ev.startDate));
+        ? dmyAge(ev.startDate)
+        : `${dmyAge(ev.startDate)} — ${dmyAge(ev.endDate)}`);
     html += `<div class="event-card" style="border-left-color:${primaryCat.color}" data-id="${ev.id}">
       <div class="ev-head">
         <div>
           <h3>${escapeHtml(ev.title)}${ev.locked ? ' <span title="Protetto con PIN" style="font-size:.8rem;">🔒</span>' : ''}</h3>
-          <div class="dates">${dateStr} · avevi ${formatAge(ageStart)}</div>
+          <div class="dates">${dateStr}</div>
         </div>
         <div class="ev-actions">
           <button class="editBtn" title="Modifica">✎</button>
@@ -1038,12 +1067,14 @@ function renderDiagram(){
       const effEnd = new Date(effectiveEndDate(ev));
       const x2 = ganttDateToX(effEnd);
       const isPunctual = ev.startDate === ev.endDate && !ev.ongoing;
+      const tooltipDates = ev.ongoing ? `${dmyAge(ev.startDate)} — in corso` : (isPunctual ? dmyAge(ev.startDate) : `${dmyAge(ev.startDate)} — ${dmyAge(ev.endDate)}`);
       let el;
       if(isPunctual){
         el = document.createElement('div');
         el.className = 'gantt-point';
         el.style.left = x1 + 'px';
         el.innerHTML = `<span class="gantt-point-dot" style="background:${c.color}"></span><span class="gantt-point-label">${escapeHtml(ev.title)}</span>`;
+        el.title = `${ev.title}\n${tooltipDates}`;
       } else {
         el = document.createElement('div');
         el.className = 'gantt-bar';
@@ -1052,7 +1083,7 @@ function renderDiagram(){
         el.style.width = w + 'px';
         el.style.background = c.color;
         el.textContent = ev.title;
-        el.title = ev.title;
+        el.title = `${ev.title}\n${tooltipDates}`;
       }
       el.dataset.id = ev.id;
       el.addEventListener('click', () => openEventInfo(ev.id));
@@ -1066,10 +1097,9 @@ function openEventInfo(id){
   if(!ev) return;
   document.getElementById('info_title').textContent = (ev.locked ? '🔒 ' : '') + ev.title;
   const dateStr = ev.ongoing
-    ? `${isoToDMY(ev.startDate)} — in corso`
-    : (ev.startDate === ev.endDate ? isoToDMY(ev.startDate) : `${isoToDMY(ev.startDate)} — ${isoToDMY(ev.endDate)}`);
-  const ageStart = ageAt(new Date(ev.startDate));
-  document.getElementById('info_dates').textContent = `${dateStr} · avevi ${formatAge(ageStart)}`;
+    ? `${dmyAge(ev.startDate)} — in corso`
+    : (ev.startDate === ev.endDate ? dmyAge(ev.startDate) : `${dmyAge(ev.startDate)} — ${dmyAge(ev.endDate)}`);
+  document.getElementById('info_dates').textContent = dateStr;
   document.getElementById('info_tags').innerHTML = ev.categories.map(cid => {
     const c = categoryById(cid);
     if(!c) return '';
@@ -1136,7 +1166,8 @@ function renderMapMarkers(){
     const marker = L.circleMarker([ev.location.lat, ev.location.lng], {
       radius:7, color:'#fff', weight:1.5, fillColor:c.color, fillOpacity:.9
     });
-    marker.bindPopup(`<b>${escapeHtml(ev.title)}</b><br>${isoToDMY(ev.startDate)}${ev.ongoing?' — in corso':(ev.startDate!==ev.endDate?' — '+isoToDMY(ev.endDate):'')}<br>${escapeHtml(ev.location.name)}`);
+    const popupDateLine = ev.ongoing ? `${dmyAge(ev.startDate)} — in corso` : (ev.startDate!==ev.endDate ? `${dmyAge(ev.startDate)} — ${dmyAge(ev.endDate)}` : dmyAge(ev.startDate));
+    marker.bindPopup(`<b>${escapeHtml(ev.title)}</b><br>${popupDateLine}<br>${escapeHtml(ev.location.name)}`);
     marker.addTo(state.mapMarkersLayer);
   });
 }
@@ -1385,8 +1416,8 @@ function openEventModal(id){
   document.getElementById('f_desc').value = ev ? (ev.description||'') : '';
   document.getElementById('f_start').value = ev ? ev.startDate : '';
   document.getElementById('f_end').value = ev && !ev.ongoing ? ev.endDate : '';
-  document.getElementById('f_start_hint').textContent = ev ? isoToDMY(ev.startDate) : '';
-  document.getElementById('f_end_hint').textContent = ev && !ev.ongoing ? isoToDMY(ev.endDate) : '';
+  document.getElementById('f_start_hint').textContent = ev ? dmyAge(ev.startDate) : '';
+  document.getElementById('f_end_hint').textContent = ev && !ev.ongoing ? dmyAge(ev.endDate) : '';
   document.getElementById('f_ongoing').checked = !!(ev && ev.ongoing);
   document.getElementById('f_end').disabled = !!(ev && ev.ongoing);
   document.getElementById('f_locked').checked = !!(ev && ev.locked);
@@ -1407,10 +1438,10 @@ document.getElementById('addEventBtn').addEventListener('click', ()=> openEventM
 document.getElementById('cancelEventBtn').addEventListener('click', closeEventModal);
 
 document.getElementById('f_start').addEventListener('change', e=>{
-  document.getElementById('f_start_hint').textContent = e.target.value ? isoToDMY(e.target.value) : '';
+  document.getElementById('f_start_hint').textContent = e.target.value ? dmyAge(e.target.value) : '';
 });
 document.getElementById('f_end').addEventListener('change', e=>{
-  document.getElementById('f_end_hint').textContent = e.target.value ? isoToDMY(e.target.value) : '';
+  document.getElementById('f_end_hint').textContent = e.target.value ? dmyAge(e.target.value) : '';
 });
 document.getElementById('f_ongoing').addEventListener('change', e=>{
   const endInput = document.getElementById('f_end');
@@ -1642,7 +1673,7 @@ function renderTrashList(){
     <div class="catedit" data-id="${ev.id}" style="flex-wrap:wrap;">
       <div style="flex:1;min-width:180px;">
         <div style="font-weight:500;">${escapeHtml(ev.title)}</div>
-        <div style="font-size:.75rem;color:var(--ink-soft);">${isoToDMY(ev.startDate)}${ev.ongoing?' — in corso':(ev.startDate!==ev.endDate?' — '+isoToDMY(ev.endDate):'')}</div>
+        <div style="font-size:.75rem;color:var(--ink-soft);">${ev.ongoing?`${dmyAge(ev.startDate)} — in corso`:(ev.startDate!==ev.endDate?`${dmyAge(ev.startDate)} — ${dmyAge(ev.endDate)}`:dmyAge(ev.startDate))}</div>
       </div>
       <button class="btn small secondary" data-role="restore">Ripristina</button>
       <button class="btn small danger" data-role="purge">Elimina per sempre</button>
