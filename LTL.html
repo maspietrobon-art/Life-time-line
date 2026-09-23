@@ -508,7 +508,7 @@ let state = {
   privateEvents: [],          // decrypted-in-memory, only when unlocked
   privateTrash: [],           // decrypted-in-memory trashed protected events, only when unlocked
   privateUnlocked: false,
-  cryptoKey: null,            // in-memory CryptoKey while unlocked
+  privateCount: Number(localStorage.getItem('bio_private_blob_v1_count') || 0),
   visibleCats: new Set(),     // category ids currently checked
   activeTab: 'timeline',
   mapYear: null,
@@ -526,10 +526,99 @@ let state = {
 // init visible categories = all
 state.categories.forEach(c => state.visibleCats.add(c.id));
 
-function persistCategories(){ saveJSON(LS.categories, state.categories); }
-function persistSettings(){ saveJSON(LS.settings, state.settings); }
-function persistPublicEvents(){ saveJSON(LS.events, state.publicEvents); }
-function persistPublicTrash(){ saveJSON(LS.trashPublic, state.publicTrash); }
+/* ============================================================
+   DATABASE ONLINE (Google Sheets + Apps Script)
+   - "pubblico": categorie, impostazioni, eventi e cestino pubblici → leggibili da tutti
+   - "privato":  eventi e cestino protetti → leggibili solo con il PIN (verificato dal server)
+   ============================================================ */
+const DB_URL = 'https://script.google.com/macros/s/AKfycbzYiApc93V6yjhI8RmkBX-rxBqsm3pF-9-p-4VlW1Z85xSTPFgmWgQWtYnMZpbJBPCr/exec';
+const DB_APP = 'cronologia';
+const SS_PIN = 'bio_session_pin';
+const LS_IMPORT = 'bio_private_import_v3';   // eventi protetti importati da file, in attesa del PIN
+const LS_LEGACY_FLAG = 'bio_private_legacy_import';
+let adminPin = null;
+try{ adminPin = sessionStorage.getItem(SS_PIN); }catch(e){}
+let remoteReady = false, pendingPublic = false, pendingPrivate = false;
+let flushTimer = null, flushing = false, flushAgain = false, askingPin = false;
+
+function dbCall(payload){
+  payload.app = DB_APP;
+  return fetch(DB_URL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) })
+    .then(r => r.json());
+}
+
+const syncPill = document.createElement('div');
+syncPill.setAttribute('style','position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:9000;padding:7px 14px;border-radius:999px;font:500 12.5px system-ui,sans-serif;background:rgba(30,34,44,.92);color:#e6e9f0;box-shadow:0 6px 18px rgba(0,0,0,.25);display:none;max-width:92vw;text-align:center;');
+document.body.appendChild(syncPill);
+let pillTimer = null;
+function syncStatus(text, color, autohide){
+  clearTimeout(pillTimer);
+  syncPill.textContent = text;
+  syncPill.style.color = color || '#e6e9f0';
+  syncPill.style.display = 'block';
+  if(autohide) pillTimer = setTimeout(()=>{ syncPill.style.display='none'; }, 2500);
+}
+
+function publicPayload(){
+  return { categories: state.categories, settings: state.settings, events: state.publicEvents,
+           trash: state.publicTrash, privateCount: state.privateCount || 0 };
+}
+function schedulePublic(){ if(!remoteReady) return; pendingPublic = true; scheduleFlush(); }
+function schedulePrivate(){ if(!remoteReady || !state.privateUnlocked) return; pendingPrivate = true; scheduleFlush(); }
+function scheduleFlush(){
+  syncStatus('☁ Salvataggio…');
+  clearTimeout(flushTimer);
+  flushTimer = setTimeout(flush, 1200);
+}
+function askPinToSave(){
+  if(askingPin) return;
+  askingPin = true;
+  syncStatus('🔒 Inserisci il PIN per salvare online');
+  openPasswordUnlock(
+    ()=>{ askingPin = false; flush(); },
+    ()=>{ askingPin = false; syncStatus('⚠ Modifiche NON salvate online (serve il PIN)', '#ff9b9b'); }
+  );
+}
+async function flush(){
+  if(!pendingPublic && !pendingPrivate) return;
+  if(!adminPin){ askPinToSave(); return; }
+  if(flushing){ flushAgain = true; return; }
+  flushing = true;
+  try{
+    if(pendingPublic){
+      pendingPublic = false;
+      const r = await dbCall({ azione:'salva', pin: adminPin, chiave:'pubblico', valore: publicPayload(), protezione:'' });
+      if(!r || !r.ok){ pendingPublic = true; throw (r || {}); }
+    }
+    if(pendingPrivate && state.privateUnlocked){
+      pendingPrivate = false;
+      const r = await dbCall({ azione:'salva', pin: adminPin, chiave:'privato',
+        valore: { events: state.privateEvents, trash: state.privateTrash }, protezione:'admin' });
+      if(!r || !r.ok){ pendingPrivate = true; throw (r || {}); }
+    }
+    syncStatus('☁ Salvato online', '#8fe3b8', true);
+  }catch(err){
+    if(err && err.errore === 'pin'){
+      adminPin = null; try{ sessionStorage.removeItem(SS_PIN); }catch(e){}
+      syncStatus('⚠ PIN non più valido: sbloccalo di nuovo', '#ff9b9b');
+    } else if(err && err.errore === 'bloccato'){
+      syncStatus('⚠ Troppi tentativi: riprova tra 15 minuti', '#ff9b9b');
+    } else {
+      syncStatus('⚠ Non salvato online (' + ((err && err.errore) || 'connessione') + ')', '#ff9b9b');
+    }
+  }finally{
+    flushing = false;
+    if(flushAgain){ flushAgain = false; flush(); }
+  }
+}
+window.addEventListener('beforeunload', e => {
+  if(pendingPublic || pendingPrivate || flushing){ e.preventDefault(); e.returnValue = ''; return ''; }
+});
+
+function persistCategories(){ saveJSON(LS.categories, state.categories); schedulePublic(); }
+function persistSettings(){ saveJSON(LS.settings, state.settings); schedulePublic(); }
+function persistPublicEvents(){ saveJSON(LS.events, state.publicEvents); schedulePublic(); }
+function persistPublicTrash(){ saveJSON(LS.trashPublic, state.publicTrash); schedulePublic(); }
 
 /* ---- one-time migration: merge morose+amanti into "Love affairs",
    move protection from category-level to per-event `locked` flag ---- */
@@ -619,74 +708,87 @@ async function decryptData(key, blob){
   return JSON.parse(dec.decode(pt));
 }
 
-const FIXED_PIN = '6632';
+// Chiave usata SOLO per leggere i vecchi backup cifrati (versione precedente della pagina).
+// Non è il PIN: il PIN ora si verifica online nel foglio Google (scheda CONFIG).
+const LEGACY_KEY = '6632';
 const FIXED_SALT_B64 = 'YW1lLXZpdGEtc2FsdC0wMQ==';
 
 async function unlockPrivacy(pin){
-  if(pin !== FIXED_PIN) throw new Error('PIN errato.');
-  const {key} = await deriveKey(FIXED_PIN, FIXED_SALT_B64);
-  state.cryptoKey = key;
-  const blob = loadJSON(LS.privateBlob, null);
-  if(blob){
-    try{
-      const data = await decryptData(key, blob);
-      if(Array.isArray(data)){
-        // backward compatibility with the earlier format (bare array, no trash)
-        state.privateEvents = data;
-        state.privateTrash = [];
-      } else {
-        state.privateEvents = data.events || [];
-        state.privateTrash = data.trash || [];
-      }
-    }catch(e){
-      state.privateEvents = [];
-      state.privateTrash = [];
-    }
+  let res;
+  try{ res = await dbCall({ azione:'carica', pin: pin }); }
+  catch(e){ throw new Error('Connessione non riuscita. Riprova.'); }
+  if(res && res.errore === 'bloccato') throw new Error('Troppi tentativi sbagliati: riprova tra 15 minuti.');
+  if(!res || !res.ok || !res.admin) throw new Error('PIN errato.');
+
+  adminPin = pin;
+  try{ sessionStorage.setItem(SS_PIN, pin); }catch(e){}
+
+  const priv = res.dati && res.dati.privato;
+  state.privateEvents = (priv && priv.events) || [];
+  state.privateTrash = (priv && priv.trash) || [];
+  let pushPrivate = false;
+
+  // eventi protetti importati da un file di backup
+  const imported = loadJSON(LS_IMPORT, null);
+  if(imported){
+    state.privateEvents = imported.events || [];
+    state.privateTrash = imported.trash || [];
+    localStorage.removeItem(LS_IMPORT);
+    pushPrivate = true;
   } else {
-    state.privateEvents = [];
-    state.privateTrash = [];
+    // vecchio formato cifrato (backup della versione precedente)
+    const blob = loadJSON(LS.privateBlob, null);
+    if(blob && (!priv || localStorage.getItem(LS_LEGACY_FLAG) === '1')){
+      try{
+        const {key} = await deriveKey(LEGACY_KEY, FIXED_SALT_B64);
+        const data = await decryptData(key, blob);
+        state.privateEvents = Array.isArray(data) ? data : (data.events || []);
+        state.privateTrash = Array.isArray(data) ? [] : (data.trash || []);
+        localStorage.removeItem(LS.privateBlob);
+        localStorage.removeItem(LS_LEGACY_FLAG);
+        pushPrivate = true;
+      }catch(e){ /* backup non leggibile: si tiene quello online */ }
+    } else if(blob && priv){
+      localStorage.removeItem(LS.privateBlob);
+    }
   }
-  // migrate: events that lived in the private bucket under the old
-  // category-level protection model become individually `locked` by default;
-  // also remap the retired morose/amanti category ids to loveaffairs
-  let migrated = false;
+
+  // migrazioni categorie (come nella versione precedente)
   [state.privateEvents, state.privateTrash].forEach(list => {
     list.forEach(ev => {
-      const beforeCats = ev.categories.join(',');
-      ev.categories = Array.from(new Set(ev.categories.map(cid =>
+      const beforeCats = (ev.categories || []).join(',');
+      ev.categories = Array.from(new Set((ev.categories || []).map(cid =>
         (cid === 'morose' || cid === 'amanti') ? 'loveaffairs' : cid
       )));
-      if(ev.categories.join(',') !== beforeCats) migrated = true;
-      if(ev.locked === undefined){ ev.locked = true; migrated = true; }
+      if(ev.categories.join(',') !== beforeCats) pushPrivate = true;
+      if(ev.locked === undefined){ ev.locked = true; pushPrivate = true; }
     });
   });
   state.privateUnlocked = true;
-  if(migrated) await savePrivateBlob();
+  if(state.privateCount !== state.privateEvents.length) updatePrivateCountHint();
+  if(pushPrivate) schedulePrivate();
+  if(pendingPublic || pendingPrivate) scheduleFlush();
 }
 
 function lockPrivacy(){
   state.privateUnlocked = false;
-  state.cryptoKey = null;
   state.privateEvents = [];
   state.privateTrash = [];
+  adminPin = null;
+  try{ sessionStorage.removeItem(SS_PIN); }catch(e){}
 }
 
 async function savePrivateBlob(){
-  if(!state.cryptoKey) return;
-  const blob = await encryptData(state.cryptoKey, {events: state.privateEvents, trash: state.privateTrash});
-  saveJSON(LS.privateBlob, blob);
+  schedulePrivate();
 }
 
 function privateEventCountLocked(){
-  // count of events stored in the encrypted blob, without decrypting
-  const blob = loadJSON(LS.privateBlob, null);
-  if(!blob) return 0;
-  // we cannot know count without decrypting; store a hint counter separately
-  const hint = loadJSON(LS.privateBlob + '_count', 0);
-  return hint;
+  return state.privateCount || 0;
 }
 function updatePrivateCountHint(){
-  localStorage.setItem(LS.privateBlob + '_count', String(state.privateEvents.length));
+  state.privateCount = state.privateEvents.length;
+  localStorage.setItem(LS.privateBlob + '_count', String(state.privateCount));
+  schedulePublic();
 }
 
 /* ============================================================
@@ -840,7 +942,7 @@ async function restoreEvent(id){
     state.publicEvents.push(ev);
   }
   persistPublicEvents(); persistPublicTrash();
-  if(state.cryptoKey){ await savePrivateBlob(); updatePrivateCountHint(); }
+  if(state.privateUnlocked){ await savePrivateBlob(); updatePrivateCountHint(); }
 }
 
 async function permanentlyDeleteFromTrash(id){
@@ -1758,15 +1860,17 @@ document.getElementById('pwInput1').addEventListener('keydown', e=>{ if(e.key===
    EXPORT / IMPORT
    ============================================================ */
 document.getElementById('exportBtn').addEventListener('click', ()=>{
+  if(!state.privateUnlocked && privateEventCountLocked() > 0 &&
+     !confirm('Gli eventi protetti NON saranno inclusi perché sono bloccati. Per includerli, annulla e sblocca prima con il PIN.\n\nEsportare comunque solo quelli pubblici?')) return;
   const data = {
     categories: state.categories,
     settings: state.settings,
     publicEvents: state.publicEvents,
     publicTrash: state.publicTrash,
-    privateBlob: loadJSON(LS.privateBlob, null),
+    privateData: state.privateUnlocked ? { events: state.privateEvents, trash: state.privateTrash } : null,
     privateCountHint: privateEventCountLocked(),
     exportedAt: new Date().toISOString(),
-    formatVersion: 2
+    formatVersion: 3
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
@@ -1784,18 +1888,26 @@ document.getElementById('importFile').addEventListener('change', (e)=>{
   reader.onload = () => {
     try{
       const data = JSON.parse(reader.result);
-      if(!confirm('Importare questi dati sovrascriverà quelli attuali in questo browser. Continuare?')) return;
+      if(!confirm('Importare questi dati sovrascriverà quelli attuali (anche online, per tutti i dispositivi). Continuare?')) return;
       state.categories = data.categories || DEFAULT_CATEGORIES;
       state.settings = Object.assign({}, DEFAULT_SETTINGS, data.settings || {});
       state.publicEvents = data.publicEvents || [];
       state.publicTrash = data.publicTrash || [];
       state.visibleCats = new Set(state.categories.map(c=>c.id));
+      const keepPin = adminPin;
       lockPrivacy();
+      adminPin = keepPin;
+      if(keepPin){ try{ sessionStorage.setItem(SS_PIN, keepPin); }catch(e){} }
+      let hasPrivate = false;
+      if(data.privateData){ saveJSON(LS_IMPORT, data.privateData); hasPrivate = true; }
+      else if(data.privateBlob){ saveJSON(LS.privateBlob, data.privateBlob); localStorage.setItem(LS_LEGACY_FLAG, '1'); hasPrivate = true; }
+      if(data.privateCountHint !== undefined){ state.privateCount = Number(data.privateCountHint) || 0; localStorage.setItem(LS.privateBlob+'_count', String(state.privateCount)); }
       persistCategories(); persistSettings(); persistPublicEvents(); persistPublicTrash();
-      if(data.privateBlob) saveJSON(LS.privateBlob, data.privateBlob);
-      if(data.privateCountHint !== undefined) localStorage.setItem(LS.privateBlob+'_count', String(data.privateCountHint));
       renderAll();
-      alert('Importazione completata.');
+      alert(hasPrivate
+        ? 'Importazione completata. Per completare anche gli eventi protetti, sblocca con il PIN (🔒): verranno salvati online.'
+        : 'Importazione completata.');
+      if(hasPrivate && !askingPin){ openPasswordUnlock(() => renderAll()); }
     }catch(err){
       alert('File non valido: ' + err.message);
     }
@@ -1811,6 +1923,47 @@ document.querySelector('.topbar h1').textContent = APP_TITLE;
 document.title = APP_TITLE;
 setInterval(updateAgeDisplay, 60000);
 renderAll();
+
+function applyPublic(p){
+  state.categories = (Array.isArray(p.categories) && p.categories.length) ? p.categories : DEFAULT_CATEGORIES;
+  state.settings = Object.assign({}, DEFAULT_SETTINGS, p.settings || {});
+  state.publicEvents = p.events || [];
+  state.publicTrash = p.trash || [];
+  state.privateCount = Number(p.privateCount) || 0;
+  state.visibleCats = new Set(state.categories.map(c => c.id));
+  // copia locale di cortesia (per aprire più in fretta la prossima volta)
+  try{
+    saveJSON(LS.categories, state.categories); saveJSON(LS.settings, state.settings);
+    saveJSON(LS.events, state.publicEvents); saveJSON(LS.trashPublic, state.publicTrash);
+    localStorage.setItem(LS.privateBlob + '_count', String(state.privateCount));
+  }catch(e){}
+}
+
+(async function loadOnline(){
+  syncStatus('☁ Caricamento dati online…');
+  let res = null;
+  try{ res = await dbCall({ azione:'carica' }); }catch(e){}
+  remoteReady = true;
+  if(!res || !res.ok){
+    syncStatus('⚠ Dati online non raggiungibili: mostro la copia di questo browser', '#ff9b9b');
+    return;
+  }
+  const pub = res.dati && res.dati.pubblico;
+  if(pub){
+    applyPublic(pub);
+    renderAll();
+    syncStatus('☁ Aggiornato', '#8fe3b8', true);
+  } else {
+    // primo avvio: nessun dato online, copio quelli di questo browser
+    pendingPublic = true;
+    syncStatus('Primo avvio: inserisci il PIN per copiare i dati online');
+  }
+  if(adminPin){
+    try{ await unlockPrivacy(adminPin); renderAll(); }
+    catch(e){ adminPin = null; try{ sessionStorage.removeItem(SS_PIN); }catch(_){} }
+  }
+  if(pendingPublic) flush();
+})();
 
 })();
 </script>
