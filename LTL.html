@@ -146,13 +146,40 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
 .empty-state .big{font-family:'Fraunces';font-size:1.3rem;color:var(--ink);margin-bottom:6px;}
 
 /* ---------- diagram (visual timeline) ---------- */
-.gantt-zoombar{position:absolute;top:0;left:0;right:0;height:40px;z-index:7;background:var(--paper-deep);
+#diagramView{position:absolute;inset:0;display:flex;flex-direction:column;}
+.gantt-zoombar{flex-shrink:0;height:40px;z-index:7;background:var(--paper-deep);
   border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;padding:0 14px;}
 .gantt-zoombar input[type=range]{width:140px;accent-color:var(--gold);}
 .gantt-zoombar .hint{font-size:.75rem;color:var(--ink-soft);margin:0;}
 .iconbtn.small{width:26px;height:26px;font-size:.9rem;background:transparent;border:1px solid var(--line);color:var(--ink);}
 .iconbtn.small:hover{background:rgba(0,0,0,.06);}
-.gantt-outer{position:absolute;top:40px;left:0;right:0;bottom:0;overflow:auto;}
+.gantt-outer{position:relative;flex:1;overflow:auto;min-height:0;}
+.gantt-playbar, .gantt-searchbar{
+  flex-shrink:0;z-index:7;background:var(--paper-deep);border-top:1px solid var(--line);
+  display:flex;align-items:center;gap:8px;padding:7px 14px;flex-wrap:wrap;
+}
+.gantt-playbar select, .gantt-searchbar select, .gantt-searchbar input[type=date]{
+  padding:5px 6px;font-size:.78rem;border:1px solid var(--line);border-radius:var(--radius);background:#fff;color:var(--ink-soft);
+}
+.gantt-playbar input[type=range]{flex:1;min-width:100px;accent-color:var(--gold);}
+.gantt-playbar .roundbtn{
+  width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;flex-shrink:0;
+}
+.gantt-playbar .roundbtn:hover{background:rgba(0,0,0,.06);}
+.gantt-playbar .hint{font-size:.78rem;color:var(--ink-soft);min-width:108px;text-align:right;}
+.gantt-summary{
+  flex-shrink:0;max-height:150px;overflow-y:auto;background:var(--card);border-top:1px solid var(--line);
+  padding:10px 14px;
+}
+.gantt-summary-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap;}
+.gantt-summary-head strong{font-family:'Fraunces';font-size:1rem;}
+.gantt-summary-actions{display:flex;gap:6px;flex-shrink:0;}
+.gantt-summary-text{font-size:.85rem;line-height:1.55;white-space:pre-wrap;color:var(--ink);}
+.gantt-playhead{position:absolute;top:0;bottom:0;border-left:2px solid var(--teal-deep);z-index:4;pointer-events:none;}
+.gantt-band{position:absolute;top:0;background:rgba(37,72,66,.14);border-left:1px solid var(--teal-deep);border-right:1px solid var(--teal-deep);z-index:0;pointer-events:none;}
+.gantt-bar.gantt-active{outline:2px solid var(--teal-deep);outline-offset:-1px;}
+.gantt-point.gantt-active .gantt-point-dot{outline:2px solid var(--teal-deep);outline-offset:1px;}
+.gantt-point.gantt-active .gantt-point-label{border-color:var(--teal-deep);font-weight:600;}
 .gantt-inner{position:relative;}
 .gantt-header{position:sticky;top:0;z-index:5;height:30px;background:var(--paper-deep);border-bottom:1px solid var(--line);}
 .gantt-header-label{position:sticky;left:0;top:0;width:150px;height:30px;background:var(--paper-deep);z-index:6;
@@ -316,6 +343,39 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
             <div class="gantt-header" id="ganttHeader"></div>
             <div id="ganttLanes"></div>
           </div>
+        </div>
+        <div class="gantt-playbar" id="ganttPlaybar" style="display:none;">
+          <button class="roundbtn" id="ganttPlayBtn" title="Play/Pausa">▶</button>
+          <select id="ganttSpeedSelect" title="Velocità">
+            <option value="alta">Veloce</option>
+            <option value="media" selected>Media</option>
+            <option value="bassa">Lenta</option>
+          </select>
+          <input type="range" id="ganttPlaySlider" min="0" max="100" value="0">
+          <span class="hint" id="ganttPlayLabel">—</span>
+        </div>
+        <div class="gantt-searchbar" id="ganttSearchbar" style="display:none;">
+          <select id="gs_mode">
+            <option value="day">Giorno</option>
+            <option value="month">Mese</option>
+            <option value="year">Anno</option>
+            <option value="range">Intervallo</option>
+          </select>
+          <input type="date" id="gs_date1">
+          <input type="date" id="gs_date2" style="display:none;">
+          <select id="gs_month" style="display:none;"></select>
+          <select id="gs_year" style="display:none;"></select>
+          <button class="btn small" id="gs_goBtn">Genera testo</button>
+        </div>
+        <div class="gantt-summary" id="ganttSummary" style="display:none;">
+          <div class="gantt-summary-head">
+            <strong id="gs_outTitle">—</strong>
+            <div class="gantt-summary-actions">
+              <button class="btn small secondary" id="gs_copyBtn">Copia</button>
+              <button class="btn small secondary" id="gs_exportBtn">Esporta .txt</button>
+            </div>
+          </div>
+          <div id="gs_outText" class="gantt-summary-text">Premi play, scorri la barra, oppure cerca una data qui sopra.</div>
         </div>
       </div>
 
@@ -1058,6 +1118,12 @@ function renderTimeline(){
    ============================================================ */
 const GANTT_LABEL_W = 150;
 if(state.ganttYearWidth === undefined) state.ganttYearWidth = 90; // px per year, adjustable via the zoom bar
+if(state.ganttDayIndex === undefined) state.ganttDayIndex = 0;   // days since birth, drives the playhead
+state.ganttPlaying = false;
+if(state.ganttPlaySpeed === undefined) state.ganttPlaySpeed = 'media';
+state.ganttPlayTimer = null;
+
+const FULL_MONTHS_IT = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
 
 function ganttPxPerDay(){ return state.ganttYearWidth / 365.25; }
 
@@ -1066,21 +1132,40 @@ function ganttDateToX(dateObj){
   const days = (dateObj - start) / 86400000;
   return GANTT_LABEL_W + days * ganttPxPerDay();
 }
+function dateFromBirthOffset(days){
+  const d = new Date(getBirthDate().getFullYear(), getBirthDate().getMonth(), getBirthDate().getDate());
+  d.setDate(d.getDate() + days);
+  return d;
+}
+// Events whose active span touches [startIso, endIso] at all (a single day when startIso === endIso)
+function eventsOverlapping(evs, startIso, endIso){
+  return evs.filter(ev => !(effectiveEndDate(ev) < startIso || ev.startDate > endIso));
+}
 
 function renderDiagram(){
   const evs = visibleEvents();
   const emptyEl = document.getElementById('diagramEmpty');
   const outerEl = document.getElementById('ganttOuter');
   const zoombarEl = document.getElementById('ganttZoombar');
+  const playbarEl = document.getElementById('ganttPlaybar');
+  const searchbarEl = document.getElementById('ganttSearchbar');
+  const summaryEl = document.getElementById('ganttSummary');
   if(evs.length === 0){
     emptyEl.style.display = 'block';
     outerEl.style.display = 'none';
     zoombarEl.style.display = 'none';
+    playbarEl.style.display = 'none';
+    searchbarEl.style.display = 'none';
+    summaryEl.style.display = 'none';
+    if(state.ganttPlaying) toggleGanttPlay();
     return;
   }
   emptyEl.style.display = 'none';
   outerEl.style.display = 'block';
   zoombarEl.style.display = 'flex';
+  playbarEl.style.display = 'flex';
+  searchbarEl.style.display = 'flex';
+  summaryEl.style.display = 'block';
 
   const today = new Date();
   const birth = new Date(getBirthDate().getFullYear(), getBirthDate().getMonth(), getBirthDate().getDate());
@@ -1092,6 +1177,7 @@ function renderDiagram(){
   const startYear = birth.getFullYear();
   const endYear = latest.getFullYear() + 1;
   const totalWidth = ganttDateToX(new Date(endYear, 0, 1));
+  const totalDays = Math.round((latest - birth) / 86400000);
 
   // header with year ticks (+ month gridlines once zoomed in enough to read them)
   const header = document.getElementById('ganttHeader');
@@ -1165,6 +1251,13 @@ function renderDiagram(){
       row.appendChild(el);
     });
   });
+
+  const playSlider = document.getElementById('ganttPlaySlider');
+  playSlider.max = totalDays;
+  if(state.ganttDayIndex > totalDays) state.ganttDayIndex = totalDays;
+  playSlider.value = state.ganttDayIndex;
+  populateGanttSearchSelects();
+  updateGanttPlayheadAt(state.ganttDayIndex);
 }
 
 function openEventInfo(id){
@@ -1527,9 +1620,10 @@ document.querySelectorAll('.tab').forEach(tab => {
     tab.classList.add('active');
     state.activeTab = tab.dataset.tab;
     document.getElementById('timelineView').style.display = state.activeTab==='timeline' ? 'block':'none';
-    document.getElementById('diagramView').style.display = state.activeTab==='diagram' ? 'block':'none';
+    document.getElementById('diagramView').style.display = state.activeTab==='diagram' ? 'flex':'none';
     document.getElementById('mapview').style.display = state.activeTab==='map' ? 'block':'none';
     document.getElementById('statsView').style.display = state.activeTab==='stats' ? 'block':'none';
+    if(state.activeTab !== 'diagram' && state.ganttPlaying) toggleGanttPlay();
     if(state.activeTab === 'diagram') renderDiagram();
     if(state.activeTab === 'map'){
       initMapIfNeeded();
@@ -1549,6 +1643,190 @@ function setGanttZoom(px){
 document.getElementById('ganttZoomSlider').addEventListener('input', e => setGanttZoom(parseInt(e.target.value,10)));
 document.getElementById('ganttZoomInBtn').addEventListener('click', () => setGanttZoom(state.ganttYearWidth + 20));
 document.getElementById('ganttZoomOutBtn').addEventListener('click', () => setGanttZoom(state.ganttYearWidth - 20));
+
+/* ============================================================
+   DIAGRAM: playhead line / period band, play button, date search,
+   and the dynamic "what's happening now" text summary
+   ============================================================ */
+
+// Draws either a thin line (a single day) or a shaded band (a period) over the
+// lanes at the given date range, highlights the bars/points it touches, and
+// returns the set of matching event ids.
+function showGanttIndicator(startIso, endIso){
+  const lanesWrap = document.getElementById('ganttLanes');
+  const rowCount = lanesWrap.querySelectorAll('.gantt-row').length;
+  const h = rowCount * 36;
+  const x1 = ganttDateToX(new Date(startIso));
+  let line = document.getElementById('ganttPlayheadLine');
+  let band = document.getElementById('ganttBandEl');
+  if(startIso === endIso){
+    if(band) band.style.display = 'none';
+    if(!line){ line = document.createElement('div'); line.id = 'ganttPlayheadLine'; line.className = 'gantt-playhead'; lanesWrap.appendChild(line); }
+    line.style.left = x1 + 'px';
+    line.style.height = h + 'px';
+    line.style.display = h > 0 ? 'block' : 'none';
+  } else {
+    if(line) line.style.display = 'none';
+    const x2 = ganttDateToX(new Date(endIso));
+    if(!band){ band = document.createElement('div'); band.id = 'ganttBandEl'; band.className = 'gantt-band'; lanesWrap.appendChild(band); }
+    band.style.left = x1 + 'px';
+    band.style.width = Math.max(x2 - x1, 2) + 'px';
+    band.style.height = h + 'px';
+    band.style.display = h > 0 ? 'block' : 'none';
+  }
+  const evs = visibleEvents();
+  const matchIds = new Set(eventsOverlapping(evs, startIso, endIso).map(e => e.id));
+  lanesWrap.querySelectorAll('.gantt-bar, .gantt-point').forEach(el => {
+    el.classList.toggle('gantt-active', matchIds.has(el.dataset.id));
+  });
+  return matchIds;
+}
+
+function renderGanttSummary(headerText, evsArr){
+  document.getElementById('gs_outTitle').textContent = headerText;
+  const outText = document.getElementById('gs_outText');
+  if(!evsArr || evsArr.length === 0){
+    outText.textContent = '(nessun evento in questo periodo)';
+    return;
+  }
+  const sorted = evsArr.slice().sort((a,b) => a.startDate.localeCompare(b.startDate));
+  outText.textContent = sorted.map(ev => `• ${ev.title}${ev.locked ? ' 🔒' : ''} — ${eventDateLine(ev)}`).join('\n');
+}
+
+function updateGanttPlayheadAt(dayIndex){
+  const d = dateFromBirthOffset(dayIndex);
+  const iso = dateObjToISO(d);
+  const headerText = `${FULL_MONTHS_IT[d.getMonth()]} ${d.getFullYear()}`;
+  document.getElementById('ganttPlayLabel').textContent = headerText;
+  const matchIds = showGanttIndicator(iso, iso);
+  const evs = visibleEvents().filter(e => matchIds.has(e.id));
+  renderGanttSummary(headerText, evs);
+}
+
+function toggleGanttPlay(){
+  const btn = document.getElementById('ganttPlayBtn');
+  if(state.ganttPlaying){
+    clearInterval(state.ganttPlayTimer);
+    state.ganttPlaying = false;
+    btn.textContent = '▶';
+    return;
+  }
+  const slider = document.getElementById('ganttPlaySlider');
+  const maxDay = parseInt(slider.max, 10);
+  if(parseInt(slider.value, 10) >= maxDay){
+    slider.value = 0;
+    state.ganttDayIndex = 0;
+    updateGanttPlayheadAt(0);
+  }
+  state.ganttPlaying = true;
+  btn.textContent = '⏸';
+  const preset = MAP_SPEED_PRESETS[state.ganttPlaySpeed] || MAP_SPEED_PRESETS.media;
+  state.ganttPlayTimer = setInterval(() => {
+    let d = parseInt(slider.value, 10) + preset.daysPerTick;
+    if(d >= maxDay){
+      d = maxDay;
+      slider.value = d;
+      state.ganttDayIndex = d;
+      updateGanttPlayheadAt(d);
+      clearInterval(state.ganttPlayTimer);
+      state.ganttPlaying = false;
+      document.getElementById('ganttPlayBtn').textContent = '▶';
+      return;
+    }
+    slider.value = d;
+    state.ganttDayIndex = d;
+    updateGanttPlayheadAt(d);
+  }, preset.ms);
+}
+
+document.getElementById('ganttPlayBtn').addEventListener('click', toggleGanttPlay);
+document.getElementById('ganttPlaySlider').addEventListener('input', e => {
+  if(state.ganttPlaying) toggleGanttPlay(); // scrubbing manually stops any running playback
+  state.ganttDayIndex = parseInt(e.target.value, 10);
+  updateGanttPlayheadAt(state.ganttDayIndex);
+});
+document.getElementById('ganttSpeedSelect').addEventListener('change', e => {
+  state.ganttPlaySpeed = e.target.value;
+  if(state.ganttPlaying){ toggleGanttPlay(); toggleGanttPlay(); } // restart the timer at the new speed
+});
+
+/* ---- date search (mese / anno / intervallo) ---- */
+function populateGanttSearchSelects(){
+  const monthSel = document.getElementById('gs_month');
+  if(monthSel.options.length === 0) monthSel.innerHTML = FULL_MONTHS_IT.map((m,i) => `<option value="${i}">${m}</option>`).join('');
+  const yearSel = document.getElementById('gs_year');
+  const firstYear = getBirthDate().getFullYear();
+  const lastYear = new Date().getFullYear();
+  if(yearSel.options.length === 0){
+    let opts = '';
+    for(let y = lastYear; y >= firstYear; y--) opts += `<option value="${y}">${y}</option>`;
+    yearSel.innerHTML = opts;
+  }
+}
+function updateGanttSearchModeUI(){
+  const mode = document.getElementById('gs_mode').value;
+  document.getElementById('gs_month').style.display = mode === 'month' ? 'inline-block' : 'none';
+  document.getElementById('gs_year').style.display = (mode === 'month' || mode === 'year') ? 'inline-block' : 'none';
+  document.getElementById('gs_date1').style.display = mode === 'range' ? 'inline-block' : 'none';
+  document.getElementById('gs_date2').style.display = mode === 'range' ? 'inline-block' : 'none';
+}
+document.getElementById('gs_mode').addEventListener('change', updateGanttSearchModeUI);
+updateGanttSearchModeUI();
+
+document.getElementById('gs_goBtn').addEventListener('click', () => {
+  if(state.ganttPlaying) toggleGanttPlay();
+  const mode = document.getElementById('gs_mode').value;
+  let startIso, endIso, headerText;
+  if(mode === 'month'){
+    const m = parseInt(document.getElementById('gs_month').value, 10);
+    const y = parseInt(document.getElementById('gs_year').value, 10);
+    startIso = dateObjToISO(new Date(y, m, 1));
+    endIso = dateObjToISO(new Date(y, m+1, 0));
+    headerText = `${FULL_MONTHS_IT[m]} ${y}`;
+  } else if(mode === 'year'){
+    const y = parseInt(document.getElementById('gs_year').value, 10);
+    startIso = `${y}-01-01`;
+    endIso = `${y}-12-31`;
+    headerText = `${y}`;
+  } else {
+    const d1 = document.getElementById('gs_date1').value;
+    const d2 = document.getElementById('gs_date2').value;
+    if(!d1 || !d2){ alert('Seleziona entrambe le date dell\'intervallo.'); return; }
+    startIso = d1 < d2 ? d1 : d2;
+    endIso = d1 < d2 ? d2 : d1;
+    headerText = `${isoToDMY(startIso)} – ${isoToDMY(endIso)}`;
+  }
+  const matchIds = showGanttIndicator(startIso, endIso);
+  const evs = visibleEvents().filter(e => matchIds.has(e.id));
+  renderGanttSummary(headerText, evs);
+});
+
+/* ---- copy / export the current summary text ---- */
+function currentGanttSummaryText(){
+  return `${document.getElementById('gs_outTitle').textContent}\n\n${document.getElementById('gs_outText').textContent}`;
+}
+document.getElementById('gs_copyBtn').addEventListener('click', async () => {
+  const text = currentGanttSummaryText();
+  try{
+    await navigator.clipboard.writeText(text);
+  }catch(e){
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    try{ document.execCommand('copy'); }catch(e2){ /* ignore */ }
+    document.body.removeChild(ta);
+  }
+});
+document.getElementById('gs_exportBtn').addEventListener('click', () => {
+  const text = currentGanttSummaryText();
+  const blob = new Blob([text], {type:'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'cronologia-periodo.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+});
 
 /* ============================================================
    SIDEBAR misc
