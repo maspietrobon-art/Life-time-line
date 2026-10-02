@@ -1,0 +1,656 @@
+{
+  "categories": [
+    {
+      "id": "periodi",
+      "label": "Grandi periodi della vita",
+      "color": "#2F4858"
+    },
+    {
+      "id": "scuola",
+      "label": "Studio e formazione",
+      "color": "#5B7B9A"
+    },
+    {
+      "id": "lavoro",
+      "label": "Lavoro",
+      "color": "#35625b"
+    },
+    {
+      "id": "loveaffairs",
+      "label": "Love affairs",
+      "color": "#9C4A5C"
+    },
+    {
+      "id": "invaghimenti",
+      "label": "Invaghimenti",
+      "color": "#C77DA0"
+    },
+    {
+      "id": "viaggi",
+      "label": "Viaggi e periodi all'estero",
+      "color": "#B1813A"
+    },
+    {
+      "id": "viaggiaereo",
+      "label": "Viaggi in aereo",
+      "color": "#2E86AB"
+    },
+    {
+      "id": "viaggitreno",
+      "label": "Viaggi in treno",
+      "color": "#6D4F76"
+    },
+    {
+      "id": "viaggibus",
+      "label": "Viaggi in autobus",
+      "color": "#A0724A"
+    },
+    {
+      "id": "viagginave",
+      "label": "Viaggi in nave",
+      "color": "#1F7A8C"
+    },
+    {
+      "id": "viaggiauto",
+      "label": "Viaggi in auto",
+      "color": "#946B2D"
+    },
+    {
+      "id": "case",
+      "label": "Case dove ho vissuto",
+      "color": "#6B5B95"
+    },
+    {
+      "id": "cambiavita",
+      "label": "Grandi eventi che hanno cambiato la vita",
+      "color": "#C1440E"
+    },
+    {
+      "id": "incredibili",
+      "label": "Cose incredibili che mi sono successe",
+      "color": "#B8860B"
+    },
+    {
+      "id": "malattie",
+      "label": "Grandi malattie o problemi",
+      "color": "#7A2E2E"
+    },
+    {
+      "id": "sconfitte",
+      "label": "Sconfitte",
+      "color": "#5A5A5A"
+    },
+    {
+      "id": "vittorie",
+      "label": "Vittorie",
+      "color": "#3d6b3f"
+    },
+    {
+      "id": "minori",
+      "label": "Periodi minori",
+      "color": "#9E9E9E"
+    },
+    {
+      "id": "eventiesterni",
+      "label": "Eventi esterni",
+      "color": "#4A4E69"
+    },
+    {
+      "id": "altri",
+      "label": "Altri eventi",
+      "color": "#607D8B"
+    }
+  ],
+  "settings": {
+    "birthISO": "1977-10-07T23:20:00"
+  },
+  "publicEvents": [
+    {
+      "id": "cf69ee70-3b8e-4708-a588-1f029bf16bee",
+      "title": "Nascita",
+      "description": "Nato il 7 ottobre 1977 alle 23:20",
+      "startDate": "1977-10-07",
+      "endDate": "1977-10-07",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Oderzo, Province of Treviso, Veneto, 31046, Italy",
+        "lat": 45.7776511,
+        "lng": 12.4932002,
+        "country": "Italy"
+      },
+      "categories": [
+        "cambiavita",
+        "vittorie"
+      ]
+    },
+    {
+      "id": "7b926801-5e1c-48f0-8938-7b671aef8860",
+      "title": "Matrimonio",
+      "description": "Matrimonio Massimo e Ubi",
+      "startDate": "2017-05-20",
+      "endDate": "2017-05-20",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Roncade, Province of Treviso, Veneto, 31056, Italy",
+        "lat": 45.615262,
+        "lng": 12.3944188,
+        "country": "Italy"
+      },
+      "categories": [
+        "loveaffairs",
+        "cambiavita"
+      ]
+    },
+    {
+      "id": "0d399e63-4f0c-433f-abea-52c5499693b0",
+      "title": "Nascita di Fabio",
+      "description": "Nasce mio figlio alle 3:05 a.m.",
+      "startDate": "2021-09-19",
+      "endDate": "2021-09-19",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Esplugues de Llobregat, Bajo Llobregat, Barcelona, Catalonia, 08950, Spain",
+        "lat": 41.3778094,
+        "lng": 2.0886257,
+        "country": "Spain"
+      },
+      "categories": [
+        "cambiavita",
+        "vittorie"
+      ]
+    },
+    {
+      "id": "faff1df4-fcff-4470-aab2-4a861be87d77",
+      "title": "Marrakesh - HP",
+      "description": "Viaggio come traduttore con Andrea Paesante",
+      "startDate": "2019-09-15",
+      "endDate": "2019-09-20",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Marrakesh, Pachalik de Marrakech, Marrakesh Prefecture, Marrakech-Safi, Morocco",
+        "lat": 31.6258257,
+        "lng": -7.9891608,
+        "country": "Morocco"
+      },
+      "categories": [
+        "lavoro",
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "a1481487-4cd5-4384-8ca4-fe5b8f8d4c90",
+      "title": "Sardegna 2",
+      "description": "Viaggio in nave e auto (Ford Focus) con Ubi",
+      "startDate": "2019-07-18",
+      "endDate": "2019-07-26",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Porto Torres, Sassari, Sardinia, 07046, Italy",
+        "lat": 40.8370333,
+        "lng": 8.4013292,
+        "country": "Italy"
+      },
+      "categories": [
+        "viaggi",
+        "viagginave"
+      ]
+    },
+    {
+      "id": "7a532504-d0de-40d9-b361-d6c5c6c4abe4",
+      "title": "Pantelleria",
+      "description": "Incredibile Viaggio offerto da Matteo Antonello - volo bcn-palermo-panrelleria",
+      "startDate": "2025-05-17",
+      "endDate": "2025-05-22",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Pantelleria, Trapani, Sicily, 91017, Italy",
+        "lat": 36.8314576,
+        "lng": 11.9450395,
+        "country": "Italy"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "214ab038-ac4a-4ec0-876f-72766fc6b6bd",
+      "title": "BRASIL",
+      "description": "1° viaggio in Brasile",
+      "startDate": "2008-05-17",
+      "endDate": "2008-11-11",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Salvador, Bahia, Northeast Region, Brazil",
+        "lat": -12.9822499,
+        "lng": -38.4812772,
+        "country": "Brazil"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "cambiavita",
+        "minori"
+      ]
+    },
+    {
+      "id": "0878548d-2e38-40db-be7f-82d132bcfd95",
+      "title": "Frankfort",
+      "description": "Breve tappa per andare da Venezia al Brasile",
+      "startDate": "2008-05-16",
+      "endDate": "2008-05-17",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Frankfurt, Hesse, Germany",
+        "lat": 50.1106444,
+        "lng": 8.6820917,
+        "country": "Germany"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "adb1dc93-70df-4ad5-84f9-26f046f73285",
+      "title": "Frankfurt",
+      "description": "Breve fermata per tornade dal Brasile a Venezia",
+      "startDate": "2008-11-11",
+      "endDate": "2008-11-12",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "b873b20b-9d77-4c31-8a6a-f06dbca4521a",
+      "title": "ERASMUS",
+      "description": "Erasmus a Barcellona. Studiando nell'università ETSAB (UPC)",
+      "startDate": "1999-09-01",
+      "endDate": "2000-07-28",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcelona, Barcelonés, Barcelona, Catalonia, Spain",
+        "lat": 41.3825802,
+        "lng": 2.177073,
+        "country": "Spain"
+      },
+      "categories": [
+        "scuola",
+        "viaggi",
+        "viaggiaereo",
+        "cambiavita",
+        "vittorie",
+        "minori"
+      ]
+    },
+    {
+      "id": "c5b7c18e-ed27-4b96-ab9f-e00ca26d2e3c",
+      "title": "Malaga",
+      "description": "Viaggio a Fuengirola, Málaga, Mijas coi fioi de a piassa",
+      "startDate": "1998-08-12",
+      "endDate": "1998-08-26",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Fuengirola, Costa del Sol Occidental, Malaga, Andalusia, 29640, Spain",
+        "lat": 36.5388398,
+        "lng": -4.6233974,
+        "country": "Spain"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "e188727a-837b-4442-b62e-24ac2cb41824",
+      "title": "Barcelona",
+      "description": "Barcelona, con scalo a Londra,",
+      "startDate": "2003-10-21",
+      "endDate": "2003-11-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcelona, Barcelonés, Barcelona, Catalonia, Spain",
+        "lat": 41.3825802,
+        "lng": 2.177073,
+        "country": "Spain"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "a735de46-c6a2-4dc5-b290-92a3117b6225",
+      "title": "Algeciras",
+      "description": "Viaggio in treno da Barcellona",
+      "startDate": "2003-11-01",
+      "endDate": "2003-11-02",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Algeciras, Campo de Gibraltar, Cádiz, Andalusia, Spain",
+        "lat": 36.1311725,
+        "lng": -5.4473991,
+        "country": "Spain"
+      },
+      "categories": [
+        "viaggi",
+        "viaggitreno"
+      ]
+    },
+    {
+      "id": "4593bdea-618d-470e-88e8-fe1621cbc954",
+      "title": "Tanger",
+      "description": "Viaggio in nave da Algeciras a Tangeri",
+      "startDate": "2003-11-02",
+      "endDate": "2003-11-02",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Tangier, Pashalik de Tánger, Prefecture of Tangier - Assilah, Tangier-Tetouan-Al Hoceima, Morocco",
+        "lat": 35.7696302,
+        "lng": -5.8033522,
+        "country": "Morocco"
+      },
+      "categories": [
+        "viaggi",
+        "viagginave"
+      ]
+    },
+    {
+      "id": "7fe67b1f-45a1-45d1-9cdc-b6f57155d3fd",
+      "title": "Tanger-Algeciras",
+      "description": "Parte del ritorno dal Marocco in treno e nave",
+      "startDate": "2004-07-15",
+      "endDate": "2004-07-15",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Algeciras, Campo de Gibraltar, Cádiz, Andalusia, Spain",
+        "lat": 36.1311725,
+        "lng": -5.4473991,
+        "country": "Spain"
+      },
+      "categories": [
+        "viaggi",
+        "viagginave"
+      ]
+    },
+    {
+      "id": "fda7935a-8542-4606-8e05-b74582b09b7a",
+      "title": "Barcelona",
+      "description": "Passaggio in treno tra Casablanca e Venezia",
+      "startDate": "2004-07-15",
+      "endDate": "2004-07-16",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcelona, Barcelonés, Barcelona, Catalonia, Spain",
+        "lat": 41.3825802,
+        "lng": 2.177073,
+        "country": "Spain"
+      },
+      "categories": [
+        "viaggi",
+        "viaggitreno"
+      ]
+    },
+    {
+      "id": "1d082b78-283b-4dcd-b4cd-f18af21074b9",
+      "title": "SEVILLA",
+      "description": "Viaggio con Xavi-Paolino",
+      "startDate": "2004-01-31",
+      "endDate": "2004-02-02",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Seville, Sevilla, Andalusia, Spain",
+        "lat": 37.3886303,
+        "lng": -5.9953403,
+        "country": "Spain"
+      },
+      "categories": [
+        "viaggi",
+        "viagginave",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "68429578-940c-4895-ad09-383eb25b30f1",
+      "title": "Monastier",
+      "description": "Ritorno a casa nel periodo marocchino - volo via Bruxelles",
+      "startDate": "2004-02-23",
+      "endDate": "2004-03-05",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Vallio, Roncade, Province of Treviso, Veneto, 31056, Italy",
+        "lat": 45.6385124,
+        "lng": 12.4139648,
+        "country": "Italy"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "3e030322-3ddb-412c-8f72-95238116fd1e",
+      "title": "Ceuta",
+      "description": "Viaggio in auto per rinnovo visto",
+      "startDate": "2004-06-01",
+      "endDate": "2004-06-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Ceuta, Spain",
+        "lat": 35.888361,
+        "lng": -5.304138,
+        "country": "Spain"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "9800de48-4fbe-45b0-91e5-be3d045c087e",
+      "title": "MAROCCO",
+      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
+      "startDate": "2003-11-02",
+      "endDate": "2004-01-31",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
+        "lat": 33.5945144,
+        "lng": -7.6200284,
+        "country": "Morocco"
+      },
+      "categories": [
+        "lavoro",
+        "viaggi",
+        "viaggitreno",
+        "viagginave",
+        "cambiavita",
+        "minori"
+      ]
+    },
+    {
+      "id": "b20806d3-d1ec-4fa6-8628-35b40f676b51",
+      "title": "MAROCCO",
+      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
+      "startDate": "2004-06-01",
+      "endDate": "2004-07-15",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
+        "lat": 33.5945144,
+        "lng": -7.6200284,
+        "country": "Morocco"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "3090c521-f58f-4ad6-872a-4bffd1661dc9",
+      "title": "Monastier",
+      "description": "Ritorno a Venezia dall'esperienza marocchina, attraverso Barcellona",
+      "startDate": "2004-07-20",
+      "endDate": "2004-07-20",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Vallio, Roncade, Province of Treviso, Veneto, 31056, Italy",
+        "lat": 45.6385124,
+        "lng": 12.4139648,
+        "country": "Italy"
+      },
+      "categories": [
+        "viaggi",
+        "viaggitreno"
+      ]
+    },
+    {
+      "id": "3beaee12-33ee-486a-b4ac-c6896901f8d9",
+      "title": "VECIO VÈNETO",
+      "description": "infanzia, pubertà, adolescenza",
+      "startDate": "1977-10-07",
+      "endDate": "1999-09-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Vallio, Roncade, Province of Treviso, Veneto, 31056, Italy",
+        "lat": 45.6385124,
+        "lng": 12.4139648,
+        "country": "Italy"
+      },
+      "categories": [
+        "periodi"
+      ]
+    },
+    {
+      "id": "930fadfa-95bc-4c11-8c62-2fe89a7f30d3",
+      "title": "MAROCCO",
+      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
+      "startDate": "2004-02-02",
+      "endDate": "2004-02-23",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
+        "lat": 33.5945144,
+        "lng": -7.6200284,
+        "country": "Morocco"
+      },
+      "categories": [
+        "lavoro",
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "fb577b56-6459-4f23-a972-bcecd1361427",
+      "title": "MAROCCO",
+      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
+      "startDate": "2004-03-05",
+      "endDate": "2004-06-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
+        "lat": 33.5945144,
+        "lng": -7.6200284,
+        "country": "Morocco"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "feff4d45-076e-47f8-9ebe-2fc4376ec64d",
+      "title": "MAROCCO",
+      "description": "L'incredibile avventura marocchina dei Ma.I.+Architects nella Ville de Merde",
+      "startDate": "2003-11-02",
+      "endDate": "2004-07-15",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "lavoro",
+        "viaggi",
+        "minori"
+      ]
+    },
+    {
+      "id": "87ea4868-d926-44fb-92df-5aa05abb653a",
+      "title": "Vipassana 3",
+      "description": "Terzo vipassana di 10gg en el Dhamma Neru, Santa María Palautordera - Barcelona",
+      "startDate": "2020-02-12",
+      "endDate": "2020-02-23",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Santa Maria de Palautordera, Vallés Oriental, Barcelona, Catalonia, 08460, Spain",
+        "lat": 41.693781,
+        "lng": 2.4442321,
+        "country": "Spain"
+      },
+      "categories": [
+        "scuola",
+        "altri"
+      ]
+    }
+  ],
+  "publicTrash": [
+    {
+      "id": "3218be1c-ffd5-4801-90ae-60c3edc57b4b",
+      "title": "MAROCCO",
+      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
+      "startDate": "2026-03-05",
+      "endDate": "2026-06-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
+        "lat": 33.5945144,
+        "lng": -7.6200284,
+        "country": "Morocco"
+      },
+      "categories": [
+        "periodi",
+        "lavoro",
+        "viaggi",
+        "viaggiaereo"
+      ],
+      "_deletedAt": "2026-09-26T14:27:27.955Z"
+    }
+  ],
+  "privateCountHint": 0,
+  "exportedAt": "2026-10-02T16:41:28.221Z",
+  "formatVersion": 3,
+  "privateBlob": {
+    "events": [],
+    "trash": []
+  }
+}

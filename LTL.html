@@ -146,12 +146,19 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
 .empty-state .big{font-family:'Fraunces';font-size:1.3rem;color:var(--ink);margin-bottom:6px;}
 
 /* ---------- diagram (visual timeline) ---------- */
-.gantt-outer{position:absolute;inset:0;overflow:auto;}
+.gantt-zoombar{position:absolute;top:0;left:0;right:0;height:40px;z-index:7;background:var(--paper-deep);
+  border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;padding:0 14px;}
+.gantt-zoombar input[type=range]{width:140px;accent-color:var(--gold);}
+.gantt-zoombar .hint{font-size:.75rem;color:var(--ink-soft);margin:0;}
+.iconbtn.small{width:26px;height:26px;font-size:.9rem;background:transparent;border:1px solid var(--line);color:var(--ink);}
+.iconbtn.small:hover{background:rgba(0,0,0,.06);}
+.gantt-outer{position:absolute;top:40px;left:0;right:0;bottom:0;overflow:auto;}
 .gantt-inner{position:relative;}
 .gantt-header{position:sticky;top:0;z-index:5;height:30px;background:var(--paper-deep);border-bottom:1px solid var(--line);}
 .gantt-header-label{position:sticky;left:0;top:0;width:150px;height:30px;background:var(--paper-deep);z-index:6;
   display:flex;align-items:center;padding-left:12px;font-size:.72rem;color:var(--ink-soft);font-weight:600;border-right:1px solid var(--line);}
 .gantt-yeartick{position:absolute;top:0;height:30px;border-left:1px solid var(--line);padding-left:5px;font-size:.72rem;color:var(--ink-soft);display:flex;align-items:center;white-space:nowrap;}
+.gantt-monthtick{position:absolute;top:30px;height:16px;border-left:1px solid rgba(0,0,0,.08);padding-left:3px;font-size:.6rem;color:var(--grey);display:flex;align-items:center;white-space:nowrap;}
 .gantt-todayline{position:absolute;top:0;bottom:0;border-left:2px solid var(--gold);z-index:2;}
 .gantt-row{position:relative;height:36px;border-bottom:1px solid var(--line);}
 .gantt-row:nth-child(odd){background:rgba(0,0,0,.02);}
@@ -177,10 +184,14 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
   background:var(--ink);color:var(--paper);display:flex;align-items:center;gap:14px;padding:0 20px;
 }
 .map-controls input[type=range]{flex:1;accent-color:var(--gold);}
-.map-controls .yearlabel{font-family:'Fraunces';min-width:48px;text-align:center;font-size:1.1rem;}
+.map-controls .yearlabel{font-family:'Fraunces';min-width:100px;text-align:center;font-size:1rem;flex-shrink:0;}
 .map-controls button{
   background:transparent;border:1px solid rgba(255,255,255,.3);color:var(--paper);
   width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:.95rem;flex-shrink:0;
+}
+.map-controls select{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.3);color:var(--paper);
+  border-radius:var(--radius);padding:5px 6px;font-size:.78rem;flex-shrink:0;
 }
 .leaflet-popup-content{font-family:'IBM Plex Sans';font-size:.85rem;}
 .leaflet-popup-content b{font-family:'Fraunces';font-size:.95rem;}
@@ -206,6 +217,8 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
 }
 .field textarea{min-height:70px;resize:vertical;}
 .field .hint{font-size:.75rem;color:var(--grey);margin-top:3px;}
+.datejump{display:flex;gap:4px;margin-top:4px;}
+.datejump select{flex:1;padding:4px 4px;font-size:.78rem;border:1px solid var(--line);border-radius:var(--radius);background:#fff;color:var(--ink-soft);}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:220px;overflow-y:auto;border:1px solid var(--line);padding:8px;border-radius:var(--radius);background:#fff;}
 .cat-grid label{display:flex;align-items:center;gap:6px;font-size:.85rem;cursor:pointer;}
@@ -257,6 +270,8 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
   <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
   <div class="sidebar" id="sidebar">
     <button class="iconbtn sidebar-close" id="sidebarCloseBtn" title="Chiudi menu">✕</button>
+    <button class="btn block" id="addEventBtn">+ Nuovo evento</button>
+
     <h2>Filtri</h2>
     <div id="catFilterList"></div>
     <div class="filter-actions">
@@ -267,11 +282,11 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
     <div id="privacyPanel"></div>
 
     <h2>Azioni</h2>
-    <button class="btn block" id="addEventBtn">+ Nuovo evento</button>
     <button class="btn secondary block" id="manageCatBtn">Gestisci categorie</button>
     <button class="btn secondary block" id="trashBtn">Cestino <span id="trashCount"></span></button>
-    <button class="btn secondary block" id="exportBtn">Esporta dati (.json)</button>
+    <button class="btn secondary block" id="exportBtn">Esporta snapshot (data.json)</button>
     <button class="btn secondary block" id="importBtn">Importa dati (.json)</button>
+    <div class="hint" style="margin-top:-4px;">Per pubblicare: scarica, poi carica "data.json" su GitHub nella stessa cartella dell'HTML.</div>
     <input type="file" id="importFile" accept="application/json" style="display:none">
   </div>
 
@@ -290,6 +305,12 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
           <div class="big">Ancora nessun evento</div>
           <p>Aggiungi qualche evento per vederlo qui su una vera linea del tempo, con le durate e i punti cliccabili.</p>
         </div>
+        <div class="gantt-zoombar" id="ganttZoombar" style="display:none;">
+          <button class="iconbtn small" id="ganttZoomOutBtn" title="Riduci">−</button>
+          <input type="range" id="ganttZoomSlider" min="20" max="400" value="90">
+          <button class="iconbtn small" id="ganttZoomInBtn" title="Ingrandisci">+</button>
+          <span class="hint" id="ganttZoomLabel" style="min-width:90px;">90 px/anno</span>
+        </div>
         <div class="gantt-outer" id="ganttOuter">
           <div class="gantt-inner" id="ganttInner">
             <div class="gantt-header" id="ganttHeader"></div>
@@ -302,11 +323,16 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
         <div id="leafmap"></div>
         <div class="map-controls">
           <label style="display:flex;align-items:center;gap:6px;font-size:.82rem;flex-shrink:0;">
-            <input type="checkbox" id="mapShowAllChk" checked> Tutti gli anni
+            <input type="checkbox" id="mapShowAllChk" checked> Tutti
           </label>
           <button id="playBtn" title="Play/Pausa">▶</button>
+          <select id="mapSpeedSelect" title="Velocità animazione">
+            <option value="alta" selected>Veloce</option>
+            <option value="media">Media</option>
+            <option value="bassa">Lenta</option>
+          </select>
           <span class="yearlabel" id="mapYearLabel">—</span>
-          <input type="range" id="mapYearSlider" min="1977" max="2026" value="2026" disabled>
+          <input type="range" id="mapDaySlider" min="0" max="100" value="100" step="1" disabled>
         </div>
       </div>
 
@@ -331,11 +357,19 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
       <div class="field">
         <label>Data inizio *</label>
         <input type="date" id="f_start">
+        <div class="datejump">
+          <select class="dj-month" data-target="f_start"></select>
+          <select class="dj-year" data-target="f_start"></select>
+        </div>
         <div class="hint" id="f_start_hint"></div>
       </div>
       <div class="field">
         <label>Data fine <span style="font-weight:400">(uguale se puntuale)</span></label>
         <input type="date" id="f_end">
+        <div class="datejump">
+          <select class="dj-month" data-target="f_end"></select>
+          <select class="dj-year" data-target="f_end"></select>
+        </div>
         <div class="hint" id="f_end_hint"></div>
         <label style="display:flex;align-items:center;gap:6px;margin-top:6px;font-weight:400;">
           <input type="checkbox" id="f_ongoing"> Fino ad oggi (è ancora in corso)
@@ -481,6 +515,7 @@ const DEFAULT_CATEGORIES = [
   {id:'vittorie', label:'Vittorie', color:'#3d6b3f'},
   {id:'minori', label:'Periodi minori', color:'#9E9E9E'},
   {id:'eventiesterni', label:'Eventi esterni', color:'#4A4E69'},
+  {id:'residenza', label:'Residenza', color:'#1E5A46'},
   {id:'altri', label:'Altri eventi', color:'#607D8B'},
 ];
 
@@ -508,12 +543,14 @@ let state = {
   privateEvents: [],          // decrypted-in-memory, only when unlocked
   privateTrash: [],           // decrypted-in-memory trashed protected events, only when unlocked
   privateUnlocked: false,
-  privateCount: Number(localStorage.getItem('bio_private_blob_v1_count') || 0),
+  cryptoKey: null,            // in-memory CryptoKey while unlocked
   visibleCats: new Set(),     // category ids currently checked
   activeTab: 'timeline',
-  mapYear: null,
+  mapDayIndex: null,   // days since birth, drives the day-resolution slider
+  mapBirthRef: null,   // Date object: day 0 of the slider (birth date, truncated)
   mapPlaying: false,
   mapShowAll: true,
+  mapSpeed: 'alta',
   mapPlayTimer: null,
   editingEventId: null,
   editLocation: null,         // {name, lat, lng} for the open modal
@@ -526,99 +563,10 @@ let state = {
 // init visible categories = all
 state.categories.forEach(c => state.visibleCats.add(c.id));
 
-/* ============================================================
-   DATABASE ONLINE (Google Sheets + Apps Script)
-   - "pubblico": categorie, impostazioni, eventi e cestino pubblici → leggibili da tutti
-   - "privato":  eventi e cestino protetti → leggibili solo con il PIN (verificato dal server)
-   ============================================================ */
-const DB_URL = 'https://script.google.com/macros/s/AKfycbzYiApc93V6yjhI8RmkBX-rxBqsm3pF-9-p-4VlW1Z85xSTPFgmWgQWtYnMZpbJBPCr/exec';
-const DB_APP = 'cronologia';
-const SS_PIN = 'bio_session_pin';
-const LS_IMPORT = 'bio_private_import_v3';   // eventi protetti importati da file, in attesa del PIN
-const LS_LEGACY_FLAG = 'bio_private_legacy_import';
-let adminPin = null;
-try{ adminPin = sessionStorage.getItem(SS_PIN); }catch(e){}
-let remoteReady = false, pendingPublic = false, pendingPrivate = false;
-let flushTimer = null, flushing = false, flushAgain = false, askingPin = false;
-
-function dbCall(payload){
-  payload.app = DB_APP;
-  return fetch(DB_URL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) })
-    .then(r => r.json());
-}
-
-const syncPill = document.createElement('div');
-syncPill.setAttribute('style','position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:9000;padding:7px 14px;border-radius:999px;font:500 12.5px system-ui,sans-serif;background:rgba(30,34,44,.92);color:#e6e9f0;box-shadow:0 6px 18px rgba(0,0,0,.25);display:none;max-width:92vw;text-align:center;');
-document.body.appendChild(syncPill);
-let pillTimer = null;
-function syncStatus(text, color, autohide){
-  clearTimeout(pillTimer);
-  syncPill.textContent = text;
-  syncPill.style.color = color || '#e6e9f0';
-  syncPill.style.display = 'block';
-  if(autohide) pillTimer = setTimeout(()=>{ syncPill.style.display='none'; }, 2500);
-}
-
-function publicPayload(){
-  return { categories: state.categories, settings: state.settings, events: state.publicEvents,
-           trash: state.publicTrash, privateCount: state.privateCount || 0 };
-}
-function schedulePublic(){ if(!remoteReady) return; pendingPublic = true; scheduleFlush(); }
-function schedulePrivate(){ if(!remoteReady || !state.privateUnlocked) return; pendingPrivate = true; scheduleFlush(); }
-function scheduleFlush(){
-  syncStatus('☁ Salvataggio…');
-  clearTimeout(flushTimer);
-  flushTimer = setTimeout(flush, 1200);
-}
-function askPinToSave(){
-  if(askingPin) return;
-  askingPin = true;
-  syncStatus('🔒 Inserisci il PIN per salvare online');
-  openPasswordUnlock(
-    ()=>{ askingPin = false; flush(); },
-    ()=>{ askingPin = false; syncStatus('⚠ Modifiche NON salvate online (serve il PIN)', '#ff9b9b'); }
-  );
-}
-async function flush(){
-  if(!pendingPublic && !pendingPrivate) return;
-  if(!adminPin){ askPinToSave(); return; }
-  if(flushing){ flushAgain = true; return; }
-  flushing = true;
-  try{
-    if(pendingPublic){
-      pendingPublic = false;
-      const r = await dbCall({ azione:'salva', pin: adminPin, chiave:'pubblico', valore: publicPayload(), protezione:'' });
-      if(!r || !r.ok){ pendingPublic = true; throw (r || {}); }
-    }
-    if(pendingPrivate && state.privateUnlocked){
-      pendingPrivate = false;
-      const r = await dbCall({ azione:'salva', pin: adminPin, chiave:'privato',
-        valore: { events: state.privateEvents, trash: state.privateTrash }, protezione:'admin' });
-      if(!r || !r.ok){ pendingPrivate = true; throw (r || {}); }
-    }
-    syncStatus('☁ Salvato online', '#8fe3b8', true);
-  }catch(err){
-    if(err && err.errore === 'pin'){
-      adminPin = null; try{ sessionStorage.removeItem(SS_PIN); }catch(e){}
-      syncStatus('⚠ PIN non più valido: sbloccalo di nuovo', '#ff9b9b');
-    } else if(err && err.errore === 'bloccato'){
-      syncStatus('⚠ Troppi tentativi: riprova tra 15 minuti', '#ff9b9b');
-    } else {
-      syncStatus('⚠ Non salvato online (' + ((err && err.errore) || 'connessione') + ')', '#ff9b9b');
-    }
-  }finally{
-    flushing = false;
-    if(flushAgain){ flushAgain = false; flush(); }
-  }
-}
-window.addEventListener('beforeunload', e => {
-  if(pendingPublic || pendingPrivate || flushing){ e.preventDefault(); e.returnValue = ''; return ''; }
-});
-
-function persistCategories(){ saveJSON(LS.categories, state.categories); schedulePublic(); }
-function persistSettings(){ saveJSON(LS.settings, state.settings); schedulePublic(); }
-function persistPublicEvents(){ saveJSON(LS.events, state.publicEvents); schedulePublic(); }
-function persistPublicTrash(){ saveJSON(LS.trashPublic, state.publicTrash); schedulePublic(); }
+function persistCategories(){ saveJSON(LS.categories, state.categories); }
+function persistSettings(){ saveJSON(LS.settings, state.settings); }
+function persistPublicEvents(){ saveJSON(LS.events, state.publicEvents); }
+function persistPublicTrash(){ saveJSON(LS.trashPublic, state.publicTrash); }
 
 /* ---- one-time migration: merge morose+amanti into "Love affairs",
    move protection from category-level to per-event `locked` flag ---- */
@@ -649,7 +597,6 @@ function migratePublicData(){
   persistPublicEvents();
   persistPublicTrash();
 }
-migratePublicData();
 
 // one-time migration: add any new default categories the user doesn't have yet
 // (e.g. categories introduced in later versions of the app), without touching
@@ -665,7 +612,8 @@ function migrateMissingDefaultCategories(){
   });
   if(changed) persistCategories();
 }
-migrateMissingDefaultCategories();
+// Both migrations above (and the remote-snapshot bootstrap, when applicable) now
+// run together from bootstrapData() at the bottom of this script, in the right order.
 
 /* ============================================================
    CRYPTO (Web Crypto API — AES-GCM + PBKDF2)
@@ -708,96 +656,85 @@ async function decryptData(key, blob){
   return JSON.parse(dec.decode(pt));
 }
 
-// Chiave usata SOLO per leggere i vecchi backup cifrati (versione precedente della pagina).
-// Non è il PIN: il PIN ora si verifica online nel foglio Google (scheda CONFIG).
-const LEGACY_KEY = '6632';
+const FIXED_PIN = '6632';
 const FIXED_SALT_B64 = 'YW1lLXZpdGEtc2FsdC0wMQ==';
 
 async function unlockPrivacy(pin){
-  let res;
-  try{ res = await dbCall({ azione:'carica', pin: pin }); }
-  catch(e){ throw new Error('Connessione non riuscita. Riprova.'); }
-  if(res && res.errore === 'bloccato') throw new Error('Troppi tentativi sbagliati: riprova tra 15 minuti.');
-  if(!res || !res.ok || !res.admin) throw new Error('PIN errato.');
-
-  adminPin = pin;
-  try{ sessionStorage.setItem(SS_PIN, pin); }catch(e){}
-
-  const priv = res.dati && res.dati.privato;
-  state.privateEvents = (priv && priv.events) || [];
-  state.privateTrash = (priv && priv.trash) || [];
-  let pushPrivate = false;
-
-  // eventi protetti importati da un file di backup
-  const imported = loadJSON(LS_IMPORT, null);
-  if(imported){
-    state.privateEvents = imported.events || [];
-    state.privateTrash = imported.trash || [];
-    localStorage.removeItem(LS_IMPORT);
-    pushPrivate = true;
-  } else {
-    // vecchio formato cifrato (backup della versione precedente)
-    const blob = loadJSON(LS.privateBlob, null);
-    if(blob && (!priv || localStorage.getItem(LS_LEGACY_FLAG) === '1')){
-      try{
-        const {key} = await deriveKey(LEGACY_KEY, FIXED_SALT_B64);
-        const data = await decryptData(key, blob);
-        state.privateEvents = Array.isArray(data) ? data : (data.events || []);
-        state.privateTrash = Array.isArray(data) ? [] : (data.trash || []);
-        localStorage.removeItem(LS.privateBlob);
-        localStorage.removeItem(LS_LEGACY_FLAG);
-        pushPrivate = true;
-      }catch(e){ /* backup non leggibile: si tiene quello online */ }
-    } else if(blob && priv){
-      localStorage.removeItem(LS.privateBlob);
+  if(pin !== FIXED_PIN) throw new Error('PIN errato.');
+  const {key} = await deriveKey(FIXED_PIN, FIXED_SALT_B64);
+  state.cryptoKey = key;
+  const blob = loadJSON(LS.privateBlob, null);
+  if(blob){
+    try{
+      const data = await decryptData(key, blob);
+      if(Array.isArray(data)){
+        // backward compatibility with the earlier format (bare array, no trash)
+        state.privateEvents = data;
+        state.privateTrash = [];
+      } else {
+        state.privateEvents = data.events || [];
+        state.privateTrash = data.trash || [];
+      }
+    }catch(e){
+      state.privateEvents = [];
+      state.privateTrash = [];
     }
+  } else {
+    state.privateEvents = [];
+    state.privateTrash = [];
   }
-
-  // migrazioni categorie (come nella versione precedente)
+  // migrate: events that lived in the private bucket under the old
+  // category-level protection model become individually `locked` by default;
+  // also remap the retired morose/amanti category ids to loveaffairs
+  let migrated = false;
   [state.privateEvents, state.privateTrash].forEach(list => {
     list.forEach(ev => {
-      const beforeCats = (ev.categories || []).join(',');
-      ev.categories = Array.from(new Set((ev.categories || []).map(cid =>
+      const beforeCats = ev.categories.join(',');
+      ev.categories = Array.from(new Set(ev.categories.map(cid =>
         (cid === 'morose' || cid === 'amanti') ? 'loveaffairs' : cid
       )));
-      if(ev.categories.join(',') !== beforeCats) pushPrivate = true;
-      if(ev.locked === undefined){ ev.locked = true; pushPrivate = true; }
+      if(ev.categories.join(',') !== beforeCats) migrated = true;
+      if(ev.locked === undefined){ ev.locked = true; migrated = true; }
     });
   });
   state.privateUnlocked = true;
-  if(state.privateCount !== state.privateEvents.length) updatePrivateCountHint();
-  if(pushPrivate) schedulePrivate();
-  if(pendingPublic || pendingPrivate) scheduleFlush();
+  if(migrated) await savePrivateBlob();
 }
 
 function lockPrivacy(){
   state.privateUnlocked = false;
+  state.cryptoKey = null;
   state.privateEvents = [];
   state.privateTrash = [];
-  adminPin = null;
-  try{ sessionStorage.removeItem(SS_PIN); }catch(e){}
 }
 
 async function savePrivateBlob(){
-  schedulePrivate();
+  if(!state.cryptoKey) return;
+  const blob = await encryptData(state.cryptoKey, {events: state.privateEvents, trash: state.privateTrash});
+  saveJSON(LS.privateBlob, blob);
 }
 
 function privateEventCountLocked(){
-  return state.privateCount || 0;
+  // count of events stored in the encrypted blob, without decrypting
+  const blob = loadJSON(LS.privateBlob, null);
+  if(!blob) return 0;
+  // we cannot know count without decrypting; store a hint counter separately
+  const hint = loadJSON(LS.privateBlob + '_count', 0);
+  return hint;
 }
 function updatePrivateCountHint(){
-  state.privateCount = state.privateEvents.length;
-  localStorage.setItem(LS.privateBlob + '_count', String(state.privateCount));
-  schedulePublic();
+  localStorage.setItem(LS.privateBlob + '_count', String(state.privateEvents.length));
 }
 
 /* ============================================================
    HELPERS: dates & age
    ============================================================ */
 function pad2(n){ return String(n).padStart(2,'0'); }
-function todayISO(){
-  const d = new Date();
+function dateObjToISO(d){
   return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+}
+function todayISO(){
+  return dateObjToISO(new Date());
 }
 function effectiveEndDate(ev){
   return ev.ongoing ? todayISO() : ev.endDate;
@@ -836,6 +773,28 @@ function yearsLabel(n){
 function dmyAge(iso){
   if(!iso) return '';
   return `${isoToDMY(iso)} (${yearsLabel(ageAt(new Date(iso)).years)})`;
+}
+function eventAgeRangeLabel(ev){
+  const startAge = ageAt(new Date(ev.startDate)).years;
+  const endAge = ageAt(new Date(effectiveEndDate(ev))).years;
+  return startAge === endAge ? yearsLabel(startAge) : `${startAge}-${endAge} anni`;
+}
+function eventDateLine(ev){
+  const datesPart = ev.ongoing
+    ? `${isoToDMY(ev.startDate)} — in corso`
+    : (ev.startDate === ev.endDate ? isoToDMY(ev.startDate) : `${isoToDMY(ev.startDate)} — ${isoToDMY(ev.endDate)}`);
+  return `${datesPart} (${eventAgeRangeLabel(ev)})`;
+}
+const SHORT_MONTHS_IT = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+function shortDate(d){
+  return `${d.getDate()} ${SHORT_MONTHS_IT[d.getMonth()]} ${d.getFullYear()}`;
+}
+function ageYearBounds(n){
+  const b = getBirthDate();
+  const start = new Date(b.getFullYear()+n, b.getMonth(), b.getDate());
+  const end = new Date(b.getFullYear()+n+1, b.getMonth(), b.getDate());
+  end.setDate(end.getDate()-1);
+  return {start, end};
 }
 function updateAgeDisplay(){
   const now = new Date();
@@ -942,7 +901,7 @@ async function restoreEvent(id){
     state.publicEvents.push(ev);
   }
   persistPublicEvents(); persistPublicTrash();
-  if(state.privateUnlocked){ await savePrivateBlob(); updatePrivateCountHint(); }
+  if(state.cryptoKey){ await savePrivateBlob(); updatePrivateCountHint(); }
 }
 
 async function permanentlyDeleteFromTrash(id){
@@ -1045,20 +1004,16 @@ function renderTimeline(){
     return;
   }
   let html = '';
-  let lastYear = null;
+  let lastAgeYear = null;
   evs.forEach(ev => {
-    const startYear = ev.startDate.slice(0,4);
-    if(startYear !== lastYear){
-      lastYear = startYear;
-      const ageAtYear = ageAt(new Date(startYear+'-06-15'));
-      html += `<div class="tl-year"><span class="yr">${startYear} (${yearsLabel(ageAtYear.years)})</span><hr></div>`;
+    const ageYear = ageAt(new Date(ev.startDate)).years;
+    if(ageYear !== lastAgeYear){
+      lastAgeYear = ageYear;
+      const bounds = ageYearBounds(ageYear);
+      html += `<div class="tl-year"><span class="yr">${yearsLabel(ageYear)}</span><span class="yr-age">${shortDate(bounds.start)} – ${shortDate(bounds.end)}</span><hr></div>`;
     }
     const primaryCat = categoryById(ev.categories[0]) || {color:'#999'};
-    const dateStr = ev.ongoing
-      ? `${dmyAge(ev.startDate)} — in corso`
-      : (ev.startDate === ev.endDate
-        ? dmyAge(ev.startDate)
-        : `${dmyAge(ev.startDate)} — ${dmyAge(ev.endDate)}`);
+    const dateStr = eventDateLine(ev);
     html += `<div class="event-card" style="border-left-color:${primaryCat.color}" data-id="${ev.id}">
       <div class="ev-head">
         <div>
@@ -1102,26 +1057,30 @@ function renderTimeline(){
    RENDER: diagram (real visual timeline — Gantt-style)
    ============================================================ */
 const GANTT_LABEL_W = 150;
-const GANTT_YEAR_W = 90; // px per year, sets zoom level
-const GANTT_PX_PER_DAY = GANTT_YEAR_W / 365.25;
+if(state.ganttYearWidth === undefined) state.ganttYearWidth = 90; // px per year, adjustable via the zoom bar
+
+function ganttPxPerDay(){ return state.ganttYearWidth / 365.25; }
 
 function ganttDateToX(dateObj){
   const start = new Date(getBirthDate().getFullYear(), getBirthDate().getMonth(), getBirthDate().getDate());
   const days = (dateObj - start) / 86400000;
-  return GANTT_LABEL_W + days * GANTT_PX_PER_DAY;
+  return GANTT_LABEL_W + days * ganttPxPerDay();
 }
 
 function renderDiagram(){
   const evs = visibleEvents();
   const emptyEl = document.getElementById('diagramEmpty');
   const outerEl = document.getElementById('ganttOuter');
+  const zoombarEl = document.getElementById('ganttZoombar');
   if(evs.length === 0){
     emptyEl.style.display = 'block';
     outerEl.style.display = 'none';
+    zoombarEl.style.display = 'none';
     return;
   }
   emptyEl.style.display = 'none';
   outerEl.style.display = 'block';
+  zoombarEl.style.display = 'flex';
 
   const today = new Date();
   const birth = new Date(getBirthDate().getFullYear(), getBirthDate().getMonth(), getBirthDate().getDate());
@@ -1134,15 +1093,29 @@ function renderDiagram(){
   const endYear = latest.getFullYear() + 1;
   const totalWidth = ganttDateToX(new Date(endYear, 0, 1));
 
-  // header with year ticks
+  // header with year ticks (+ month gridlines once zoomed in enough to read them)
   const header = document.getElementById('ganttHeader');
   let headerHtml = `<div class="gantt-header-label">Categoria</div>`;
   for(let y = startYear; y <= endYear; y++){
     const x = ganttDateToX(new Date(y, 0, 1));
     headerHtml += `<div class="gantt-yeartick" style="left:${x}px;">${y}</div>`;
   }
+  const showMonths = state.ganttYearWidth >= 150;
+  if(showMonths){
+    const monthNames = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+    for(let y = startYear; y <= endYear; y++){
+      for(let m = 0; m < 12; m++){
+        if(y === startYear && m === 0) continue;
+        const x = ganttDateToX(new Date(y, m, 1));
+        headerHtml += `<div class="gantt-monthtick" style="left:${x}px;">${monthNames[m]}</div>`;
+      }
+    }
+  }
   header.style.width = totalWidth + 'px';
+  header.style.height = showMonths ? '46px' : '30px';
   header.innerHTML = headerHtml;
+  const headerLabelEl = header.querySelector('.gantt-header-label');
+  if(headerLabelEl) headerLabelEl.style.height = showMonths ? '46px' : '30px';
 
   // lanes: one per currently-visible category that has at least one event, in category order
   const lanesWrap = document.getElementById('ganttLanes');
@@ -1169,7 +1142,7 @@ function renderDiagram(){
       const effEnd = new Date(effectiveEndDate(ev));
       const x2 = ganttDateToX(effEnd);
       const isPunctual = ev.startDate === ev.endDate && !ev.ongoing;
-      const tooltipDates = ev.ongoing ? `${dmyAge(ev.startDate)} — in corso` : (isPunctual ? dmyAge(ev.startDate) : `${dmyAge(ev.startDate)} — ${dmyAge(ev.endDate)}`);
+      const tooltipDates = eventDateLine(ev);
       let el;
       if(isPunctual){
         el = document.createElement('div');
@@ -1198,10 +1171,7 @@ function openEventInfo(id){
   const ev = allEventsForDisplay().find(e => e.id === id);
   if(!ev) return;
   document.getElementById('info_title').textContent = (ev.locked ? '🔒 ' : '') + ev.title;
-  const dateStr = ev.ongoing
-    ? `${dmyAge(ev.startDate)} — in corso`
-    : (ev.startDate === ev.endDate ? dmyAge(ev.startDate) : `${dmyAge(ev.startDate)} — ${dmyAge(ev.endDate)}`);
-  document.getElementById('info_dates').textContent = dateStr;
+  document.getElementById('info_dates').textContent = eventDateLine(ev);
   document.getElementById('info_tags').innerHTML = ev.categories.map(cid => {
     const c = categoryById(cid);
     if(!c) return '';
@@ -1224,6 +1194,30 @@ document.getElementById('infoEditBtn').addEventListener('click', (e)=>{
 /* ============================================================
    RENDER: map
    ============================================================ */
+const MAP_SPEED_PRESETS = {
+  alta:  {daysPerTick: 30, ms: 50},
+  media: {daysPerTick: 10, ms: 70},
+  bassa: {daysPerTick: 3,  ms: 90}
+};
+
+function computeMapTotalDays(){
+  const birth = new Date(getBirthDate().getFullYear(), getBirthDate().getMonth(), getBirthDate().getDate());
+  state.mapBirthRef = birth;
+  let latest = new Date();
+  allEventsForDisplay().forEach(ev => {
+    if(ev.location && ev.location.lat != null){
+      const end = new Date(effectiveEndDate(ev));
+      if(end > latest) latest = end;
+    }
+  });
+  return Math.max(1, Math.round((latest - birth) / 86400000));
+}
+function mapDayIndexToDate(idx){
+  const d = new Date(state.mapBirthRef);
+  d.setDate(d.getDate() + idx);
+  return d;
+}
+
 function initMapIfNeeded(){
   if(state.leafMap) return;
   state.leafMap = L.map('leafmap', {worldCopyJump:true}).setView([20,10], 2);
@@ -1233,43 +1227,59 @@ function initMapIfNeeded(){
   }).addTo(state.leafMap);
   state.mapMarkersLayer = L.layerGroup().addTo(state.leafMap);
 
-  const slider = document.getElementById('mapYearSlider');
-  const birthYear = getBirthDate().getFullYear();
-  const curYear = new Date().getFullYear();
-  slider.min = birthYear;
-  slider.max = curYear;
-  slider.value = curYear;
-  state.mapYear = curYear;
+  const slider = document.getElementById('mapDaySlider');
+  const totalDays = computeMapTotalDays();
+  slider.min = 0;
+  slider.max = totalDays;
+  slider.value = totalDays;
+  state.mapDayIndex = totalDays;
   slider.addEventListener('input', () => {
-    state.mapYear = parseInt(slider.value,10);
+    state.mapDayIndex = parseInt(slider.value,10);
     renderMapMarkers();
   });
   document.getElementById('playBtn').addEventListener('click', toggleMapPlay);
   document.getElementById('mapShowAllChk').addEventListener('change', (e)=>{
     state.mapShowAll = e.target.checked;
-    document.getElementById('mapYearSlider').disabled = state.mapShowAll;
+    document.getElementById('mapDaySlider').disabled = state.mapShowAll;
     if(state.mapPlaying) toggleMapPlay(); // stop any running animation
     renderMapMarkers();
   });
+  document.getElementById('mapSpeedSelect').addEventListener('change', (e)=>{
+    state.mapSpeed = e.target.value;
+    if(state.mapPlaying){ toggleMapPlay(); toggleMapPlay(); } // restart timer at the new speed
+  });
+}
+
+function refreshMapRange(){
+  // re-syncs the slider's range (e.g. a new event may extend it) without losing the current position when possible
+  if(!state.leafMap) return;
+  const slider = document.getElementById('mapDaySlider');
+  const oldMax = parseInt(slider.max,10) || 0;
+  const wasAtEnd = state.mapDayIndex >= oldMax;
+  const totalDays = computeMapTotalDays();
+  slider.max = totalDays;
+  if(wasAtEnd || state.mapDayIndex > totalDays){
+    slider.value = totalDays;
+    state.mapDayIndex = totalDays;
+  }
 }
 
 function renderMapMarkers(){
   if(!state.leafMap) return;
-  document.getElementById('mapYearLabel').textContent = state.mapShowAll ? 'Tutti' : state.mapYear;
+  document.getElementById('mapYearLabel').textContent = state.mapShowAll ? 'Tutti' : isoToDMY(dateObjToISO(mapDayIndexToDate(state.mapDayIndex)));
   state.mapMarkersLayer.clearLayers();
   const evs = visibleEvents().filter(ev => ev.location && ev.location.lat != null && ev.location.lng != null);
+  const currentISO = state.mapShowAll ? null : dateObjToISO(mapDayIndexToDate(state.mapDayIndex));
   evs.forEach(ev => {
     if(!state.mapShowAll){
-      const sy = parseInt(ev.startDate.slice(0,4),10);
-      const ey = ev.ongoing ? new Date().getFullYear() : parseInt(ev.endDate.slice(0,4),10);
-      if(state.mapYear < sy || state.mapYear > ey) return;
+      const endISO = effectiveEndDate(ev);
+      if(currentISO < ev.startDate || currentISO > endISO) return;
     }
     const c = categoryById(ev.categories[0]) || {color:'#999'};
     const marker = L.circleMarker([ev.location.lat, ev.location.lng], {
       radius:7, color:'#fff', weight:1.5, fillColor:c.color, fillOpacity:.9
     });
-    const popupDateLine = ev.ongoing ? `${dmyAge(ev.startDate)} — in corso` : (ev.startDate!==ev.endDate ? `${dmyAge(ev.startDate)} — ${dmyAge(ev.endDate)}` : dmyAge(ev.startDate));
-    marker.bindPopup(`<b>${escapeHtml(ev.title)}</b><br>${popupDateLine}<br>${escapeHtml(ev.location.name)}`);
+    marker.bindPopup(`<b>${escapeHtml(ev.title)}</b><br>${eventDateLine(ev)}<br>${escapeHtml(ev.location.name)}`);
     marker.addTo(state.mapMarkersLayer);
   });
 }
@@ -1289,23 +1299,38 @@ function toggleMapPlay(){
     btn.textContent = '▶';
     return;
   }
-  // starting playback always switches out of "tutti gli anni" mode
+  // starting playback always switches out of "tutti" mode
   if(state.mapShowAll){
     state.mapShowAll = false;
     document.getElementById('mapShowAllChk').checked = false;
-    document.getElementById('mapYearSlider').disabled = false;
+    document.getElementById('mapDaySlider').disabled = false;
+  }
+  const slider = document.getElementById('mapDaySlider');
+  const maxDay = parseInt(slider.max,10);
+  // if already at the end, restart from the beginning instead of doing nothing
+  if(parseInt(slider.value,10) >= maxDay){
+    slider.value = 0;
+    state.mapDayIndex = 0;
   }
   state.mapPlaying = true;
   btn.textContent = '⏸';
-  const slider = document.getElementById('mapYearSlider');
-  const maxY = parseInt(slider.max,10);
+  const preset = MAP_SPEED_PRESETS[state.mapSpeed] || MAP_SPEED_PRESETS.alta;
   state.mapPlayTimer = setInterval(() => {
-    let y = parseInt(slider.value,10) + 1;
-    if(y > maxY){ y = parseInt(slider.min,10); }
-    slider.value = y;
-    state.mapYear = y;
+    let d = parseInt(slider.value,10) + preset.daysPerTick;
+    if(d >= maxDay){
+      d = maxDay;
+      slider.value = d;
+      state.mapDayIndex = d;
+      renderMapMarkers();
+      clearInterval(state.mapPlayTimer);
+      state.mapPlaying = false;
+      document.getElementById('playBtn').textContent = '▶';
+      return;
+    }
+    slider.value = d;
+    state.mapDayIndex = d;
     renderMapMarkers();
-  }, 700);
+  }, preset.ms);
 }
 
 /* ============================================================
@@ -1315,6 +1340,44 @@ function daysBetween(a,b){
   const d1 = new Date(a), d2 = new Date(b);
   return Math.round((d2-d1)/86400000) + 1;
 }
+
+// For each day of the covered range, attributes it to exactly one country:
+// a "viaggi*" event active that day wins (you're traveling elsewhere that day);
+// otherwise the "Residenza" event active that day provides the default country.
+// Returns null if no "Residenza" events (with a recognized country) exist yet.
+function computeResidenceDays(evs){
+  const residenceEvents = evs.filter(ev => ev.categories.includes('residenza') && ev.location && ev.location.country)
+    .map(ev => ({start: ev.startDate, end: effectiveEndDate(ev), country: ev.location.country}));
+  if(residenceEvents.length === 0) return null;
+  const travelEvents = evs.filter(ev => ev.categories.some(cid => cid.startsWith('viaggi')) && ev.location && ev.location.country)
+    .map(ev => ({start: ev.startDate, end: effectiveEndDate(ev), country: ev.location.country}));
+
+  let rangeStart = residenceEvents.reduce((min,r)=> r.start < min ? r.start : min, residenceEvents[0].start);
+  let rangeEnd = residenceEvents.reduce((max,r)=> r.end > max ? r.end : max, residenceEvents[0].end);
+  travelEvents.forEach(t => { if(t.end > rangeEnd) rangeEnd = t.end; });
+  const todayStr = todayISO();
+  if(rangeEnd > todayStr) rangeEnd = todayStr;
+  if(rangeStart > rangeEnd) return null;
+
+  const dayCounts = {};
+  let unattributed = 0;
+  const d = new Date(rangeStart);
+  const endD = new Date(rangeEnd);
+  while(d <= endD){
+    const iso = dateObjToISO(d);
+    const travel = travelEvents.find(t => t.start <= iso && iso <= t.end);
+    if(travel){
+      dayCounts[travel.country] = (dayCounts[travel.country]||0) + 1;
+    } else {
+      const res = residenceEvents.find(r => r.start <= iso && iso <= r.end);
+      if(res) dayCounts[res.country] = (dayCounts[res.country]||0) + 1;
+      else unattributed++;
+    }
+    d.setDate(d.getDate()+1);
+  }
+  return {dayCounts, unattributed};
+}
+
 function renderStats(){
   const container = document.getElementById('statsView');
   const evs = visibleEvents();
@@ -1352,6 +1415,10 @@ function renderStats(){
   const maxCountryCount = Math.max(1, ...Object.values(countByCountry));
   const COUNTRY_COLOR = '#33625b';
   const eventsWithoutCountry = evs.filter(ev => ev.location && !ev.location.country).length;
+
+  // day-by-day attribution based on "Residenza" periods, with "viaggi*" events
+  // temporarily pulling that day's count to the travel destination instead
+  const residenceStats = computeResidenceDays(evs);
 
   // events per calendar year
   const byYear = {};
@@ -1419,6 +1486,12 @@ function renderStats(){
         : '<p style="color:var(--ink-soft);font-size:.85rem;">—</p>'}
       ${eventsWithoutCountry>0 ? `<div class="small-note">${eventsWithoutCountry} evento/i con luogo ma senza paese riconosciuto, non incluso/i qui.</div>` : ''}
     </div>
+    ${residenceStats ? `
+    <div class="stat-block">
+      <h3>Giorni per paese (basato sulla residenza)</h3>
+      ${barsHtml(Object.keys(residenceStats.dayCounts).sort((a,b)=>residenceStats.dayCounts[b]-residenceStats.dayCounts[a]).map(k=>({label:k,val:residenceStats.dayCounts[k],color:COUNTRY_COLOR})), Math.max(1,...Object.values(residenceStats.dayCounts)), v=>v+' g')}
+      <div class="small-note">Qui ogni giorno conta una volta sola: va al paese di un evento "viaggio in ..." se attivo quel giorno, altrimenti al paese segnato come "Residenza" in quel periodo.${residenceStats.unattributed>0 ? ` ${residenceStats.unattributed} giorno/i senza una Residenza attiva non sono attribuiti a nessun paese.` : ''}</div>
+    </div>` : ''}
     <div class="stat-block">
       <h3>Eventi per anno</h3>
       ${yearChartHtml(minYear, maxYear, byYear, '#B1813A')}
@@ -1441,7 +1514,7 @@ function renderAll(){
   updateAgeDisplay();
   if(state.activeTab === 'timeline') renderTimeline();
   if(state.activeTab === 'diagram') renderDiagram();
-  if(state.activeTab === 'map'){ initMapIfNeeded(); renderMapMarkers(); }
+  if(state.activeTab === 'map'){ initMapIfNeeded(); refreshMapRange(); renderMapMarkers(); }
   if(state.activeTab === 'stats') renderStats();
 }
 
@@ -1460,11 +1533,22 @@ document.querySelectorAll('.tab').forEach(tab => {
     if(state.activeTab === 'diagram') renderDiagram();
     if(state.activeTab === 'map'){
       initMapIfNeeded();
+      refreshMapRange();
       setTimeout(()=>{ state.leafMap.invalidateSize(); renderMapMarkers(); fitMapToAllLocations(); }, 50);
     }
     if(state.activeTab === 'stats') renderStats();
   });
 });
+
+function setGanttZoom(px){
+  state.ganttYearWidth = Math.max(20, Math.min(400, px));
+  document.getElementById('ganttZoomSlider').value = state.ganttYearWidth;
+  document.getElementById('ganttZoomLabel').textContent = `${state.ganttYearWidth} px/anno`;
+  renderDiagram();
+}
+document.getElementById('ganttZoomSlider').addEventListener('input', e => setGanttZoom(parseInt(e.target.value,10)));
+document.getElementById('ganttZoomInBtn').addEventListener('click', () => setGanttZoom(state.ganttYearWidth + 20));
+document.getElementById('ganttZoomOutBtn').addEventListener('click', () => setGanttZoom(state.ganttYearWidth - 20));
 
 /* ============================================================
    SIDEBAR misc
@@ -1527,6 +1611,8 @@ function openEventModal(id){
   state.editLocation = ev && ev.location ? Object.assign({}, ev.location) : null;
   renderCategoryCheckboxes(ev ? ev.categories : []);
   document.getElementById('deleteEventBtn').style.display = ev ? 'inline-flex' : 'none';
+  syncDateJumpSelects('f_start');
+  syncDateJumpSelects('f_end');
   eventOverlay.classList.add('open');
   setTimeout(initMiniMap, 30);
 }
@@ -1539,11 +1625,57 @@ function closeEventModal(){
 document.getElementById('addEventBtn').addEventListener('click', ()=> openEventModal(null));
 document.getElementById('cancelEventBtn').addEventListener('click', closeEventModal);
 
+/* ---- quick year/month jump selects next to each date field ---- */
+function populateDateJumpSelects(){
+  const firstYear = getBirthDate().getFullYear();
+  const lastYear = new Date().getFullYear() + 1;
+  document.querySelectorAll('.dj-month').forEach(sel => {
+    sel.innerHTML = SHORT_MONTHS_IT.map((m,i) => `<option value="${i}">${m}</option>`).join('');
+  });
+  document.querySelectorAll('.dj-year').forEach(sel => {
+    let opts = '';
+    for(let y = lastYear; y >= firstYear; y--) opts += `<option value="${y}">${y}</option>`;
+    sel.innerHTML = opts;
+  });
+}
+populateDateJumpSelects();
+
+function syncDateJumpSelects(inputId){
+  const val = document.getElementById(inputId).value; // YYYY-MM-DD or ''
+  const [y,m] = val ? val.split('-') : [String(new Date().getFullYear()), '01'];
+  document.querySelectorAll(`.dj-month[data-target="${inputId}"]`).forEach(sel => sel.value = String(parseInt(m,10)-1));
+  document.querySelectorAll(`.dj-year[data-target="${inputId}"]`).forEach(sel => sel.value = y);
+}
+
+document.querySelectorAll('.dj-month, .dj-year').forEach(sel => {
+  sel.addEventListener('change', e => {
+    const inputId = e.target.dataset.target;
+    const input = document.getElementById(inputId);
+    const monthSel = document.querySelector(`.dj-month[data-target="${inputId}"]`);
+    const yearSel = document.querySelector(`.dj-year[data-target="${inputId}"]`);
+    const year = parseInt(yearSel.value,10);
+    const month = parseInt(monthSel.value,10); // 0-11
+    const prevDay = input.value ? parseInt(input.value.split('-')[2],10) : 1;
+    const lastDayOfMonth = new Date(year, month+1, 0).getDate();
+    const day = Math.min(prevDay, lastDayOfMonth);
+    input.value = `${year}-${pad2(month+1)}-${pad2(day)}`;
+    input.dispatchEvent(new Event('change'));
+  });
+});
+
 document.getElementById('f_start').addEventListener('change', e=>{
   document.getElementById('f_start_hint').textContent = e.target.value ? dmyAge(e.target.value) : '';
+  syncDateJumpSelects('f_start');
+  // convenient default: an empty end date starts out the same as the start date
+  const endInput = document.getElementById('f_end');
+  if(e.target.value && !endInput.value && !document.getElementById('f_ongoing').checked){
+    endInput.value = e.target.value;
+    endInput.dispatchEvent(new Event('change'));
+  }
 });
 document.getElementById('f_end').addEventListener('change', e=>{
   document.getElementById('f_end_hint').textContent = e.target.value ? dmyAge(e.target.value) : '';
+  syncDateJumpSelects('f_end');
 });
 document.getElementById('f_ongoing').addEventListener('change', e=>{
   const endInput = document.getElementById('f_end');
@@ -1629,7 +1761,7 @@ function initMiniMap(){
     else state.minimapMarker = L.marker(e.latlng).addTo(state.minimapInstance);
     // best-effort reverse geocoding to recognize the country, non-blocking
     const clickedLoc = state.editLocation;
-    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&lat=${e.latlng.lat}&lon=${e.latlng.lng}`)
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&accept-language=it&lat=${e.latlng.lat}&lon=${e.latlng.lng}`)
       .then(r => r.json())
       .then(data => {
         if(state.editLocation === clickedLoc && data && data.address && data.address.country){
@@ -1669,7 +1801,7 @@ document.getElementById('f_locname').addEventListener('input', (e)=>{
   if(q.length < 3){ results.style.display='none'; lastSearchResults=[]; return; }
   searchTimer = setTimeout(async ()=>{
     try{
-      const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=5&q=${encodeURIComponent(q)}`);
+      const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&accept-language=it&limit=8&q=${encodeURIComponent(q)}`);
       const data = await res.json();
       lastSearchResults = data;
       if(!data.length){ results.style.display='none'; return; }
@@ -1775,7 +1907,7 @@ function renderTrashList(){
     <div class="catedit" data-id="${ev.id}" style="flex-wrap:wrap;">
       <div style="flex:1;min-width:180px;">
         <div style="font-weight:500;">${escapeHtml(ev.title)}</div>
-        <div style="font-size:.75rem;color:var(--ink-soft);">${ev.ongoing?`${dmyAge(ev.startDate)} — in corso`:(ev.startDate!==ev.endDate?`${dmyAge(ev.startDate)} — ${dmyAge(ev.endDate)}`:dmyAge(ev.startDate))}</div>
+        <div style="font-size:.75rem;color:var(--ink-soft);">${eventDateLine(ev)}</div>
       </div>
       <button class="btn small secondary" data-role="restore">Ripristina</button>
       <button class="btn small danger" data-role="purge">Elimina per sempre</button>
@@ -1859,23 +1991,43 @@ document.getElementById('pwInput1').addEventListener('keydown', e=>{ if(e.key===
 /* ============================================================
    EXPORT / IMPORT
    ============================================================ */
-document.getElementById('exportBtn').addEventListener('click', ()=>{
-  if(!state.privateUnlocked && privateEventCountLocked() > 0 &&
-     !confirm('Gli eventi protetti NON saranno inclusi perché sono bloccati. Per includerli, annulla e sblocca prima con il PIN.\n\nEsportare comunque solo quelli pubblici?')) return;
-  const data = {
+function buildSnapshotData(){
+  return {
     categories: state.categories,
     settings: state.settings,
     publicEvents: state.publicEvents,
     publicTrash: state.publicTrash,
-    privateData: state.privateUnlocked ? { events: state.privateEvents, trash: state.privateTrash } : null,
+    privateBlob: loadJSON(LS.privateBlob, null),
     privateCountHint: privateEventCountLocked(),
     exportedAt: new Date().toISOString(),
     formatVersion: 3
   };
+}
+
+// Applies a snapshot object (from export, import, or the published data.json) to the live state.
+// Shared by manual import and by the automatic first-visit bootstrap below.
+function applySnapshotData(data){
+  state.categories = data.categories || DEFAULT_CATEGORIES;
+  state.settings = Object.assign({}, DEFAULT_SETTINGS, data.settings || {});
+  state.publicEvents = data.publicEvents || [];
+  state.publicTrash = data.publicTrash || [];
+  state.visibleCats = new Set(state.categories.map(c=>c.id));
+  lockPrivacy();
+  persistCategories(); persistSettings(); persistPublicEvents(); persistPublicTrash();
+  // accept "privateBlob" (current) or "privateData" (an older export's name for the same thing)
+  const blob = data.privateBlob || data.privateData || null;
+  if(blob) saveJSON(LS.privateBlob, blob);
+  if(data.privateCountHint !== undefined) localStorage.setItem(LS.privateBlob+'_count', String(data.privateCountHint));
+  migratePublicData();
+  migrateMissingDefaultCategories();
+}
+
+document.getElementById('exportBtn').addEventListener('click', ()=>{
+  const data = buildSnapshotData();
   const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url; a.download = 'cronologia-backup.json';
+  a.href = url; a.download = 'data.json';
   a.click();
   URL.revokeObjectURL(url);
 });
@@ -1888,26 +2040,10 @@ document.getElementById('importFile').addEventListener('change', (e)=>{
   reader.onload = () => {
     try{
       const data = JSON.parse(reader.result);
-      if(!confirm('Importare questi dati sovrascriverà quelli attuali (anche online, per tutti i dispositivi). Continuare?')) return;
-      state.categories = data.categories || DEFAULT_CATEGORIES;
-      state.settings = Object.assign({}, DEFAULT_SETTINGS, data.settings || {});
-      state.publicEvents = data.publicEvents || [];
-      state.publicTrash = data.publicTrash || [];
-      state.visibleCats = new Set(state.categories.map(c=>c.id));
-      const keepPin = adminPin;
-      lockPrivacy();
-      adminPin = keepPin;
-      if(keepPin){ try{ sessionStorage.setItem(SS_PIN, keepPin); }catch(e){} }
-      let hasPrivate = false;
-      if(data.privateData){ saveJSON(LS_IMPORT, data.privateData); hasPrivate = true; }
-      else if(data.privateBlob){ saveJSON(LS.privateBlob, data.privateBlob); localStorage.setItem(LS_LEGACY_FLAG, '1'); hasPrivate = true; }
-      if(data.privateCountHint !== undefined){ state.privateCount = Number(data.privateCountHint) || 0; localStorage.setItem(LS.privateBlob+'_count', String(state.privateCount)); }
-      persistCategories(); persistSettings(); persistPublicEvents(); persistPublicTrash();
+      if(!confirm('Importare questi dati sovrascriverà quelli attuali in questo browser. Continuare?')) return;
+      applySnapshotData(data);
       renderAll();
-      alert(hasPrivate
-        ? 'Importazione completata. Per completare anche gli eventi protetti, sblocca con il PIN (🔒): verranno salvati online.'
-        : 'Importazione completata.');
-      if(hasPrivate && !askingPin){ openPasswordUnlock(() => renderAll()); }
+      alert('Importazione completata.');
     }catch(err){
       alert('File non valido: ' + err.message);
     }
@@ -1919,51 +2055,34 @@ document.getElementById('importFile').addEventListener('change', (e)=>{
 /* ============================================================
    INIT
    ============================================================ */
+// On a device/browser that has never saved anything here yet, try loading
+// "data.json" published alongside this HTML file (same folder) as a starting
+// snapshot — e.g. the latest export uploaded to GitHub. Works only when the
+// page is actually served over http(s) (GitHub Pages and similar); opening the
+// file directly (file://) can't fetch it, so it just falls through quietly to
+// an empty, locally-editable copy, exactly like before.
+async function bootstrapData(){
+  const hasLocalData = localStorage.getItem(LS.events) !== null;
+  if(!hasLocalData){
+    try{
+      const res = await fetch('./data.json', {cache:'no-store'});
+      if(res.ok){
+        const data = await res.json();
+        applySnapshotData(data);
+        return;
+      }
+    }catch(e){
+      // no data.json reachable — continue with a blank slate, as before
+    }
+  }
+  migratePublicData();
+  migrateMissingDefaultCategories();
+}
+
 document.querySelector('.topbar h1').textContent = APP_TITLE;
 document.title = APP_TITLE;
 setInterval(updateAgeDisplay, 60000);
-renderAll();
-
-function applyPublic(p){
-  state.categories = (Array.isArray(p.categories) && p.categories.length) ? p.categories : DEFAULT_CATEGORIES;
-  state.settings = Object.assign({}, DEFAULT_SETTINGS, p.settings || {});
-  state.publicEvents = p.events || [];
-  state.publicTrash = p.trash || [];
-  state.privateCount = Number(p.privateCount) || 0;
-  state.visibleCats = new Set(state.categories.map(c => c.id));
-  // copia locale di cortesia (per aprire più in fretta la prossima volta)
-  try{
-    saveJSON(LS.categories, state.categories); saveJSON(LS.settings, state.settings);
-    saveJSON(LS.events, state.publicEvents); saveJSON(LS.trashPublic, state.publicTrash);
-    localStorage.setItem(LS.privateBlob + '_count', String(state.privateCount));
-  }catch(e){}
-}
-
-(async function loadOnline(){
-  syncStatus('☁ Caricamento dati online…');
-  let res = null;
-  try{ res = await dbCall({ azione:'carica' }); }catch(e){}
-  remoteReady = true;
-  if(!res || !res.ok){
-    syncStatus('⚠ Dati online non raggiungibili: mostro la copia di questo browser', '#ff9b9b');
-    return;
-  }
-  const pub = res.dati && res.dati.pubblico;
-  if(pub){
-    applyPublic(pub);
-    renderAll();
-    syncStatus('☁ Aggiornato', '#8fe3b8', true);
-  } else {
-    // primo avvio: nessun dato online, copio quelli di questo browser
-    pendingPublic = true;
-    syncStatus('Primo avvio: inserisci il PIN per copiare i dati online');
-  }
-  if(adminPin){
-    try{ await unlockPrivacy(adminPin); renderAll(); }
-    catch(e){ adminPin = null; try{ sessionStorage.removeItem(SS_PIN); }catch(_){} }
-  }
-  if(pendingPublic) flush();
-})();
+bootstrapData().then(renderAll);
 
 })();
 </script>
