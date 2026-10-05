@@ -552,7 +552,10 @@ const LS = {
   categories: 'bio_categories_v1',
   settings: 'bio_settings_v1',
   privateBlob: 'bio_private_blob_v1',
-  trashPublic: 'bio_trash_public_v1'
+  trashPublic: 'bio_trash_public_v1',
+  snapAt: 'bio_snapshot_applied_at_v1',   // exportedAt of the snapshot this device last applied/exported
+  snapSkip: 'bio_snapshot_skipped_v1',   // newer online snapshot the user chose not to apply
+  dirty: 'bio_local_dirty_v1'            // '1' = edits made here since that snapshot
 };
 
 const DEFAULT_CATEGORIES = [
@@ -623,10 +626,12 @@ let state = {
 // init visible categories = all
 state.categories.forEach(c => state.visibleCats.add(c.id));
 
-function persistCategories(){ saveJSON(LS.categories, state.categories); }
+let trackDirty = false; // becomes true once startup (bootstrap + migrations) is done
+function markDirty(){ if(trackDirty) localStorage.setItem(LS.dirty, '1'); }
+function persistCategories(){ saveJSON(LS.categories, state.categories); markDirty(); }
 function persistSettings(){ saveJSON(LS.settings, state.settings); }
-function persistPublicEvents(){ saveJSON(LS.events, state.publicEvents); }
-function persistPublicTrash(){ saveJSON(LS.trashPublic, state.publicTrash); }
+function persistPublicEvents(){ saveJSON(LS.events, state.publicEvents); markDirty(); }
+function persistPublicTrash(){ saveJSON(LS.trashPublic, state.publicTrash); markDirty(); }
 
 /* ---- one-time migration: merge morose+amanti into "Love affairs",
    move protection from category-level to per-event `locked` flag ---- */
@@ -772,6 +777,7 @@ async function savePrivateBlob(){
   if(!state.cryptoKey) return;
   const blob = await encryptData(state.cryptoKey, {events: state.privateEvents, trash: state.privateTrash});
   saveJSON(LS.privateBlob, blob);
+  markDirty();
 }
 
 function privateEventCountLocked(){
@@ -2302,6 +2308,8 @@ function applySnapshotData(data){
 
 document.getElementById('exportBtn').addEventListener('click', ()=>{
   const data = buildSnapshotData();
+  localStorage.setItem(LS.snapAt, data.exportedAt);   // from now on this device is "in sync" with what it just exported
+  localStorage.setItem(LS.dirty, '0');
   const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -2339,18 +2347,51 @@ document.getElementById('importFile').addEventListener('change', (e)=>{
 // page is actually served over http(s) (GitHub Pages and similar); opening the
 // file directly (file://) can't fetch it, so it just falls through quietly to
 // an empty, locally-editable copy, exactly like before.
+async function fetchPublishedSnapshot(){
+  try{
+    const res = await fetch('./data.json?t=' + Date.now(), {cache:'no-store'});
+    if(!res.ok) return null;
+    const data = await res.json();
+    return (data && data.exportedAt) ? data : null;
+  }catch(e){
+    return null; // not served over http(s), or no data.json published yet
+  }
+}
+
+// Decides whether this device should take the published data.json:
+//  - brand-new / empty device               -> take it silently
+//  - published file is newer than what this device last applied or exported:
+//      * no local edits since then          -> take it silently
+//      * local edits (or unknown history)   -> ask once before replacing them
+//  - otherwise                              -> keep local data
 async function bootstrapData(){
   const hasLocalData = localStorage.getItem(LS.events) !== null;
-  if(!hasLocalData){
-    try{
-      const res = await fetch('./data.json', {cache:'no-store'});
-      if(res.ok){
-        const data = await res.json();
-        applySnapshotData(data);
-        return;
+  const snap = await fetchPublishedSnapshot();
+  if(snap){
+    const appliedAt = localStorage.getItem(LS.snapAt);
+    const localIsEmpty = state.publicEvents.length === 0 && !localStorage.getItem(LS.privateBlob);
+    const isNewer = !appliedAt || snap.exportedAt > appliedAt;
+    let apply = false;
+    if(!hasLocalData || localIsEmpty){
+      apply = true;
+    } else if(isNewer){
+      const dirty = !appliedAt || localStorage.getItem(LS.dirty) === '1';
+      if(!dirty){
+        apply = true;
+      } else if(localStorage.getItem(LS.snapSkip) !== snap.exportedAt){
+        const when = new Date(snap.exportedAt).toLocaleString('it-IT');
+        apply = confirm('È disponibile una versione più recente dei dati, pubblicata online (esportata il ' + when + ').\n\n' +
+          'Questo dispositivo ha dati propri non ancora pubblicati: sostituirli con la versione online?\n\n' +
+          'OK = usa la versione online (i dati locali verranno sostituiti)\nAnnulla = tieni i dati di questo dispositivo');
+        if(!apply) localStorage.setItem(LS.snapSkip, snap.exportedAt);
       }
-    }catch(e){
-      // no data.json reachable — continue with a blank slate, as before
+    }
+    if(apply){
+      applySnapshotData(snap);
+      localStorage.setItem(LS.snapAt, snap.exportedAt);
+      localStorage.setItem(LS.dirty, '0');
+      localStorage.removeItem(LS.snapSkip);
+      return;
     }
   }
   migratePublicData();
@@ -2360,7 +2401,7 @@ async function bootstrapData(){
 document.querySelector('.topbar h1').textContent = APP_TITLE;
 document.title = APP_TITLE;
 setInterval(updateAgeDisplay, 60000);
-bootstrapData().then(renderAll);
+bootstrapData().then(() => { trackDirty = true; renderAll(); });
 
 })();
 </script>

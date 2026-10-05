@@ -96,6 +96,11 @@
       "color": "#4A4E69"
     },
     {
+      "id": "residenza",
+      "label": "Residenza",
+      "color": "#1E5A46"
+    },
+    {
       "id": "altri",
       "label": "Altri eventi",
       "color": "#607D8B"
@@ -117,7 +122,7 @@
         "name": "Oderzo, Province of Treviso, Veneto, 31046, Italy",
         "lat": 45.7776511,
         "lng": 12.4932002,
-        "country": "Italy"
+        "country": "Italia"
       },
       "categories": [
         "cambiavita",
@@ -125,176 +130,58 @@
       ]
     },
     {
-      "id": "7b926801-5e1c-48f0-8938-7b671aef8860",
-      "title": "Matrimonio",
-      "description": "Matrimonio Massimo e Ubi",
-      "startDate": "2017-05-20",
-      "endDate": "2017-05-20",
+      "id": "3beaee12-33ee-486a-b4ac-c6896901f8d9",
+      "title": "VECIO VÈNETO",
+      "description": "infanzia, pubertà, adolescenza",
+      "startDate": "1977-10-07",
+      "endDate": "1999-09-01",
       "ongoing": false,
       "locked": false,
       "location": {
-        "name": "Roncade, Province of Treviso, Veneto, 31056, Italy",
-        "lat": 45.615262,
-        "lng": 12.3944188,
-        "country": "Italy"
+        "name": "Vallio, Roncade, Province of Treviso, Veneto, 31056, Italy",
+        "lat": 45.6385124,
+        "lng": 12.4139648,
+        "country": "Italia"
       },
       "categories": [
-        "loveaffairs",
-        "cambiavita"
+        "periodi"
       ]
     },
     {
-      "id": "0d399e63-4f0c-433f-abea-52c5499693b0",
-      "title": "Nascita di Fabio",
-      "description": "Nasce mio figlio alle 3:05 a.m.",
-      "startDate": "2021-09-19",
-      "endDate": "2021-09-19",
+      "id": "9409183b-c3d8-404f-b6e7-41df32d913de",
+      "title": "Residenza: Monastier di Treviso (Italia)",
+      "description": "Paese di residenza: Italia. Durata da foglio VOYAGES: 7999 giorni.",
+      "startDate": "1977-10-07",
+      "endDate": "1999-09-01",
       "ongoing": false,
       "locked": false,
       "location": {
-        "name": "Esplugues de Llobregat, Bajo Llobregat, Barcelona, Catalonia, 08950, Spain",
-        "lat": 41.3778094,
-        "lng": 2.0886257,
-        "country": "Spain"
+        "name": "Monastier di Treviso, Italia",
+        "lat": 45.64,
+        "lng": 12.4175,
+        "country": "Italia"
       },
       "categories": [
-        "cambiavita",
-        "vittorie"
+        "residenza"
       ]
     },
     {
-      "id": "faff1df4-fcff-4470-aab2-4a861be87d77",
-      "title": "Marrakesh - HP",
-      "description": "Viaggio come traduttore con Andrea Paesante",
-      "startDate": "2019-09-15",
-      "endDate": "2019-09-20",
+      "id": "a43e47f1-8c2b-4bbe-84aa-7d7b0513fd5a",
+      "title": "Viaggio 1: Venezia–San Marino–Venezia",
+      "description": "Mezzi: auto. Altre tappe: Rimini. Residente in: Italia. Paesi visitati: San Marino.",
+      "startDate": "1987-05-01",
+      "endDate": "1987-05-01",
       "ongoing": false,
       "locked": false,
       "location": {
-        "name": "Marrakesh, Pachalik de Marrakech, Marrakesh Prefecture, Marrakech-Safi, Morocco",
-        "lat": 31.6258257,
-        "lng": -7.9891608,
-        "country": "Morocco"
-      },
-      "categories": [
-        "lavoro",
-        "viaggi",
-        "viaggiaereo"
-      ]
-    },
-    {
-      "id": "a1481487-4cd5-4384-8ca4-fe5b8f8d4c90",
-      "title": "Sardegna 2",
-      "description": "Viaggio in nave e auto (Ford Focus) con Ubi",
-      "startDate": "2019-07-18",
-      "endDate": "2019-07-26",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Porto Torres, Sassari, Sardinia, 07046, Italy",
-        "lat": 40.8370333,
-        "lng": 8.4013292,
-        "country": "Italy"
+        "name": "San Marino, San Marino",
+        "lat": 43.9424,
+        "lng": 12.4578,
+        "country": "San Marino"
       },
       "categories": [
         "viaggi",
-        "viagginave"
-      ]
-    },
-    {
-      "id": "7a532504-d0de-40d9-b361-d6c5c6c4abe4",
-      "title": "Pantelleria",
-      "description": "Incredibile Viaggio offerto da Matteo Antonello - volo bcn-palermo-panrelleria",
-      "startDate": "2025-05-17",
-      "endDate": "2025-05-22",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Pantelleria, Trapani, Sicily, 91017, Italy",
-        "lat": 36.8314576,
-        "lng": 11.9450395,
-        "country": "Italy"
-      },
-      "categories": [
-        "viaggi",
-        "viaggiaereo"
-      ]
-    },
-    {
-      "id": "214ab038-ac4a-4ec0-876f-72766fc6b6bd",
-      "title": "BRASIL",
-      "description": "1° viaggio in Brasile",
-      "startDate": "2008-05-17",
-      "endDate": "2008-11-11",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Salvador, Bahia, Northeast Region, Brazil",
-        "lat": -12.9822499,
-        "lng": -38.4812772,
-        "country": "Brazil"
-      },
-      "categories": [
-        "viaggi",
-        "viaggiaereo",
-        "cambiavita",
-        "minori"
-      ]
-    },
-    {
-      "id": "0878548d-2e38-40db-be7f-82d132bcfd95",
-      "title": "Frankfort",
-      "description": "Breve tappa per andare da Venezia al Brasile",
-      "startDate": "2008-05-16",
-      "endDate": "2008-05-17",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Frankfurt, Hesse, Germany",
-        "lat": 50.1106444,
-        "lng": 8.6820917,
-        "country": "Germany"
-      },
-      "categories": [
-        "viaggi",
-        "viaggiaereo"
-      ]
-    },
-    {
-      "id": "adb1dc93-70df-4ad5-84f9-26f046f73285",
-      "title": "Frankfurt",
-      "description": "Breve fermata per tornade dal Brasile a Venezia",
-      "startDate": "2008-11-11",
-      "endDate": "2008-11-12",
-      "ongoing": false,
-      "locked": false,
-      "location": null,
-      "categories": [
-        "viaggi",
-        "viaggiaereo"
-      ]
-    },
-    {
-      "id": "b873b20b-9d77-4c31-8a6a-f06dbca4521a",
-      "title": "ERASMUS",
-      "description": "Erasmus a Barcellona. Studiando nell'università ETSAB (UPC)",
-      "startDate": "1999-09-01",
-      "endDate": "2000-07-28",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Barcelona, Barcelonés, Barcelona, Catalonia, Spain",
-        "lat": 41.3825802,
-        "lng": 2.177073,
-        "country": "Spain"
-      },
-      "categories": [
-        "scuola",
-        "viaggi",
-        "viaggiaereo",
-        "cambiavita",
-        "vittorie",
-        "minori"
+        "viaggiauto"
       ]
     },
     {
@@ -309,11 +196,108 @@
         "name": "Fuengirola, Costa del Sol Occidental, Malaga, Andalusia, 29640, Spain",
         "lat": 36.5388398,
         "lng": -4.6233974,
-        "country": "Spain"
+        "country": "Spagna"
       },
       "categories": [
         "viaggi",
         "viaggiaereo"
+      ]
+    },
+    {
+      "id": "42b1c8fe-9e37-4b66-88c8-e6606d1811a2",
+      "title": "Residenza: Barcellona (Spagna)",
+      "description": "Paese di residenza: Spagna. Durata da foglio VOYAGES: 328 giorni.",
+      "startDate": "1999-09-01",
+      "endDate": "2000-07-25",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Spagna",
+        "lat": 41.3874,
+        "lng": 2.1686,
+        "country": "Spagna"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "b873b20b-9d77-4c31-8a6a-f06dbca4521a",
+      "title": "ERASMUS",
+      "description": "Erasmus a Barcellona. Studiando nell'università ETSAB (UPC)",
+      "startDate": "1999-09-01",
+      "endDate": "2000-07-28",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcelona, Barcelonés, Barcelona, Catalonia, Spain",
+        "lat": 41.3825802,
+        "lng": 2.177073,
+        "country": "Spagna"
+      },
+      "categories": [
+        "scuola",
+        "viaggi",
+        "cambiavita",
+        "minori",
+        "viaggiaereo",
+        "vittorie"
+      ]
+    },
+    {
+      "id": "b429198e-5def-4480-a250-dc3718c5fc50",
+      "title": "Residenza: Monastier di Treviso (Italia)",
+      "description": "Paese di residenza: Italia. Durata da foglio VOYAGES: 1183 giorni.",
+      "startDate": "2000-07-25",
+      "endDate": "2003-10-21",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Monastier di Treviso, Italia",
+        "lat": 45.64,
+        "lng": 12.4175,
+        "country": "Italia"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "7f5b7fb7-5862-4347-ba0b-289c07a43e74",
+      "title": "Viaggio 4: Venezia–Barcelona–Venezia",
+      "description": "Mezzi: treno. Altre tappe: Nizza. Residente in: Italia. Paesi visitati: Spagna. Attraversati: Francia. Visti da lontano: Montecarlo.",
+      "startDate": "2001-12-25",
+      "endDate": "2002-01-03",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Spagna",
+        "lat": 41.3874,
+        "lng": 2.1686,
+        "country": "Spagna"
+      },
+      "categories": [
+        "viaggi",
+        "viaggitreno"
+      ]
+    },
+    {
+      "id": "8e64ce91-291c-4c3f-83db-cbebaa8df072",
+      "title": "Viaggio 5: Venezia–Ginevra–Venezia",
+      "description": "Mezzi: auto. Altre tappe: Losanna, Frigurg, Martigny, Monte Bianco. Residente in: Italia. Visitati poco: Svizzera.",
+      "startDate": "2003-06-01",
+      "endDate": "2003-06-02",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Ginevra, Svizzera",
+        "lat": 46.2044,
+        "lng": 6.1432,
+        "country": "Svizzera"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
       ]
     },
     {
@@ -328,11 +312,24 @@
         "name": "Barcelona, Barcelonés, Barcelona, Catalonia, Spain",
         "lat": 41.3825802,
         "lng": 2.177073,
-        "country": "Spain"
+        "country": "Spagna"
       },
       "categories": [
         "viaggi",
         "viaggiaereo"
+      ]
+    },
+    {
+      "id": "3c7dc165-cd05-45aa-a18d-c2860b441cb0",
+      "title": "Senza residenza",
+      "description": "Periodo senza residenza in nessun paese. Durata da foglio VOYAGES: 12 giorni.",
+      "startDate": "2003-10-21",
+      "endDate": "2003-11-02",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "residenza"
       ]
     },
     {
@@ -347,7 +344,7 @@
         "name": "Algeciras, Campo de Gibraltar, Cádiz, Andalusia, Spain",
         "lat": 36.1311725,
         "lng": -5.4473991,
-        "country": "Spain"
+        "country": "Spagna"
       },
       "categories": [
         "viaggi",
@@ -366,107 +363,11 @@
         "name": "Tangier, Pashalik de Tánger, Prefecture of Tangier - Assilah, Tangier-Tetouan-Al Hoceima, Morocco",
         "lat": 35.7696302,
         "lng": -5.8033522,
-        "country": "Morocco"
+        "country": "Marocco"
       },
       "categories": [
         "viaggi",
         "viagginave"
-      ]
-    },
-    {
-      "id": "7fe67b1f-45a1-45d1-9cdc-b6f57155d3fd",
-      "title": "Tanger-Algeciras",
-      "description": "Parte del ritorno dal Marocco in treno e nave",
-      "startDate": "2004-07-15",
-      "endDate": "2004-07-15",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Algeciras, Campo de Gibraltar, Cádiz, Andalusia, Spain",
-        "lat": 36.1311725,
-        "lng": -5.4473991,
-        "country": "Spain"
-      },
-      "categories": [
-        "viaggi",
-        "viagginave"
-      ]
-    },
-    {
-      "id": "fda7935a-8542-4606-8e05-b74582b09b7a",
-      "title": "Barcelona",
-      "description": "Passaggio in treno tra Casablanca e Venezia",
-      "startDate": "2004-07-15",
-      "endDate": "2004-07-16",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Barcelona, Barcelonés, Barcelona, Catalonia, Spain",
-        "lat": 41.3825802,
-        "lng": 2.177073,
-        "country": "Spain"
-      },
-      "categories": [
-        "viaggi",
-        "viaggitreno"
-      ]
-    },
-    {
-      "id": "1d082b78-283b-4dcd-b4cd-f18af21074b9",
-      "title": "SEVILLA",
-      "description": "Viaggio con Xavi-Paolino",
-      "startDate": "2004-01-31",
-      "endDate": "2004-02-02",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Seville, Sevilla, Andalusia, Spain",
-        "lat": 37.3886303,
-        "lng": -5.9953403,
-        "country": "Spain"
-      },
-      "categories": [
-        "viaggi",
-        "viagginave",
-        "viaggiauto"
-      ]
-    },
-    {
-      "id": "68429578-940c-4895-ad09-383eb25b30f1",
-      "title": "Monastier",
-      "description": "Ritorno a casa nel periodo marocchino - volo via Bruxelles",
-      "startDate": "2004-02-23",
-      "endDate": "2004-03-05",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Vallio, Roncade, Province of Treviso, Veneto, 31056, Italy",
-        "lat": 45.6385124,
-        "lng": 12.4139648,
-        "country": "Italy"
-      },
-      "categories": [
-        "viaggi",
-        "viaggiaereo"
-      ]
-    },
-    {
-      "id": "3e030322-3ddb-412c-8f72-95238116fd1e",
-      "title": "Ceuta",
-      "description": "Viaggio in auto per rinnovo visto",
-      "startDate": "2004-06-01",
-      "endDate": "2004-06-01",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Ceuta, Spain",
-        "lat": 35.888361,
-        "lng": -5.304138,
-        "country": "Spain"
-      },
-      "categories": [
-        "viaggi",
-        "viaggiauto"
       ]
     },
     {
@@ -481,110 +382,15 @@
         "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
         "lat": 33.5945144,
         "lng": -7.6200284,
-        "country": "Morocco"
+        "country": "Marocco"
       },
       "categories": [
         "lavoro",
         "viaggi",
-        "viaggitreno",
-        "viagginave",
         "cambiavita",
-        "minori"
-      ]
-    },
-    {
-      "id": "b20806d3-d1ec-4fa6-8628-35b40f676b51",
-      "title": "MAROCCO",
-      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
-      "startDate": "2004-06-01",
-      "endDate": "2004-07-15",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
-        "lat": 33.5945144,
-        "lng": -7.6200284,
-        "country": "Morocco"
-      },
-      "categories": [
-        "viaggi",
-        "viaggiauto"
-      ]
-    },
-    {
-      "id": "3090c521-f58f-4ad6-872a-4bffd1661dc9",
-      "title": "Monastier",
-      "description": "Ritorno a Venezia dall'esperienza marocchina, attraverso Barcellona",
-      "startDate": "2004-07-20",
-      "endDate": "2004-07-20",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Vallio, Roncade, Province of Treviso, Veneto, 31056, Italy",
-        "lat": 45.6385124,
-        "lng": 12.4139648,
-        "country": "Italy"
-      },
-      "categories": [
-        "viaggi",
-        "viaggitreno"
-      ]
-    },
-    {
-      "id": "3beaee12-33ee-486a-b4ac-c6896901f8d9",
-      "title": "VECIO VÈNETO",
-      "description": "infanzia, pubertà, adolescenza",
-      "startDate": "1977-10-07",
-      "endDate": "1999-09-01",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Vallio, Roncade, Province of Treviso, Veneto, 31056, Italy",
-        "lat": 45.6385124,
-        "lng": 12.4139648,
-        "country": "Italy"
-      },
-      "categories": [
-        "periodi"
-      ]
-    },
-    {
-      "id": "930fadfa-95bc-4c11-8c62-2fe89a7f30d3",
-      "title": "MAROCCO",
-      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
-      "startDate": "2004-02-02",
-      "endDate": "2004-02-23",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
-        "lat": 33.5945144,
-        "lng": -7.6200284,
-        "country": "Morocco"
-      },
-      "categories": [
-        "lavoro",
-        "viaggi",
-        "viaggiaereo"
-      ]
-    },
-    {
-      "id": "fb577b56-6459-4f23-a972-bcecd1361427",
-      "title": "MAROCCO",
-      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
-      "startDate": "2004-03-05",
-      "endDate": "2004-06-01",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
-        "lat": 33.5945144,
-        "lng": -7.6200284,
-        "country": "Morocco"
-      },
-      "categories": [
-        "viaggi",
-        "viaggiauto"
+        "minori",
+        "viaggitreno",
+        "viagginave"
       ]
     },
     {
@@ -603,6 +409,2894 @@
       ]
     },
     {
+      "id": "e6a510fe-635e-4d0e-a408-e99b956d756f",
+      "title": "Residenza: Casablanca (Marocco)",
+      "description": "Paese di residenza: Marocco. Durata da foglio VOYAGES: 256 giorni.",
+      "startDate": "2003-11-02",
+      "endDate": "2004-07-15",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Casablanca, Marocco",
+        "lat": 33.5731,
+        "lng": -7.5898,
+        "country": "Marocco"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "1d082b78-283b-4dcd-b4cd-f18af21074b9",
+      "title": "SEVILLA",
+      "description": "Viaggio con Xavi-Paolino",
+      "startDate": "2004-01-31",
+      "endDate": "2004-02-02",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Seville, Sevilla, Andalusia, Spain",
+        "lat": 37.3886303,
+        "lng": -5.9953403,
+        "country": "Spagna"
+      },
+      "categories": [
+        "viaggi",
+        "viagginave",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "930fadfa-95bc-4c11-8c62-2fe89a7f30d3",
+      "title": "MAROCCO",
+      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
+      "startDate": "2004-02-02",
+      "endDate": "2004-02-23",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
+        "lat": 33.5945144,
+        "lng": -7.6200284,
+        "country": "Marocco"
+      },
+      "categories": [
+        "lavoro",
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "68429578-940c-4895-ad09-383eb25b30f1",
+      "title": "Monastier",
+      "description": "Ritorno a casa nel periodo marocchino - volo via Bruxelles",
+      "startDate": "2004-02-23",
+      "endDate": "2004-03-05",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Vallio, Roncade, Province of Treviso, Veneto, 31056, Italy",
+        "lat": 45.6385124,
+        "lng": 12.4139648,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "fb577b56-6459-4f23-a972-bcecd1361427",
+      "title": "MAROCCO",
+      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
+      "startDate": "2004-03-05",
+      "endDate": "2004-06-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
+        "lat": 33.5945144,
+        "lng": -7.6200284,
+        "country": "Marocco"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "3e030322-3ddb-412c-8f72-95238116fd1e",
+      "title": "Ceuta",
+      "description": "Viaggio in auto per rinnovo visto",
+      "startDate": "2004-06-01",
+      "endDate": "2004-06-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Ceuta, Spain",
+        "lat": 35.888361,
+        "lng": -5.304138,
+        "country": "Spagna"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "b20806d3-d1ec-4fa6-8628-35b40f676b51",
+      "title": "MAROCCO",
+      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
+      "startDate": "2004-06-01",
+      "endDate": "2004-07-15",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
+        "lat": 33.5945144,
+        "lng": -7.6200284,
+        "country": "Marocco"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "7fe67b1f-45a1-45d1-9cdc-b6f57155d3fd",
+      "title": "Tanger-Algeciras",
+      "description": "Parte del ritorno dal Marocco in treno e nave",
+      "startDate": "2004-07-15",
+      "endDate": "2004-07-15",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Algeciras, Campo de Gibraltar, Cádiz, Andalusia, Spain",
+        "lat": 36.1311725,
+        "lng": -5.4473991,
+        "country": "Spagna"
+      },
+      "categories": [
+        "viaggi",
+        "viagginave"
+      ]
+    },
+    {
+      "id": "fda7935a-8542-4606-8e05-b74582b09b7a",
+      "title": "Barcelona",
+      "description": "Passaggio in treno tra Casablanca e Venezia",
+      "startDate": "2004-07-15",
+      "endDate": "2004-07-16",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcelona, Barcelonés, Barcelona, Catalonia, Spain",
+        "lat": 41.3825802,
+        "lng": 2.177073,
+        "country": "Spagna"
+      },
+      "categories": [
+        "viaggi",
+        "viaggitreno"
+      ]
+    },
+    {
+      "id": "528b3216-6852-4833-bd7b-f88d06c91076",
+      "title": "Senza residenza",
+      "description": "Periodo senza residenza in nessun paese. Durata da foglio VOYAGES: 10 giorni.",
+      "startDate": "2004-07-15",
+      "endDate": "2004-07-25",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "3090c521-f58f-4ad6-872a-4bffd1661dc9",
+      "title": "Monastier",
+      "description": "Ritorno a Venezia dall'esperienza marocchina, attraverso Barcellona",
+      "startDate": "2004-07-20",
+      "endDate": "2004-07-20",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Vallio, Roncade, Province of Treviso, Veneto, 31056, Italy",
+        "lat": 45.6385124,
+        "lng": 12.4139648,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggitreno"
+      ]
+    },
+    {
+      "id": "2ec30280-50ce-44ae-a9f4-9151ab6bcce7",
+      "title": "Residenza: Monastier di Treviso (Italia)",
+      "description": "Paese di residenza: Italia. Durata da foglio VOYAGES: 129 giorni.",
+      "startDate": "2004-07-25",
+      "endDate": "2004-12-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Monastier di Treviso, Italia",
+        "lat": 45.64,
+        "lng": 12.4175,
+        "country": "Italia"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "45b14a33-28e7-4bf4-ae51-7fb0a9feb1fd",
+      "title": "Viaggio 13: Venezia–Barcelona",
+      "description": "Mezzi: aereo. Paesi visitati: Spagna.",
+      "startDate": "2004-12-01",
+      "endDate": "2004-12-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Spagna",
+        "lat": 41.3874,
+        "lng": 2.1686,
+        "country": "Spagna"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "aa63e8a5-6f18-4751-b6d5-a3a55db92595",
+      "title": "Residenza: Barcellona (Spagna)",
+      "description": "Paese di residenza: Spagna. Durata da foglio VOYAGES: 1250 giorni.",
+      "startDate": "2004-12-01",
+      "endDate": "2008-05-04",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Spagna",
+        "lat": 41.3874,
+        "lng": 2.1686,
+        "country": "Spagna"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "688cb5b0-a9f3-4f97-96d3-6a4608d99917",
+      "title": "Viaggio 14: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2005-02-05",
+      "endDate": "2005-02-19",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "cd6d6ea1-df18-4eed-839a-6acfd282964f",
+      "title": "Viaggio 15: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2005-07-03",
+      "endDate": "2005-07-11",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "7a7c012b-4608-472d-81d3-b093563127bb",
+      "title": "Viaggio 16: Barcelona–Collioure–Barcelona",
+      "description": "Mezzi: auto. Altre tappe: Port De La Selva, Arles Sur Tech. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2005-07-26",
+      "endDate": "2005-07-27",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Collioure, Francia",
+        "lat": 42.5258,
+        "lng": 3.0831,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "c2b1793b-483e-451c-944d-c960fe4a8c17",
+      "title": "Viaggio 17: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2005-07-28",
+      "endDate": "2005-08-03",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "05535024-db03-4528-ba88-470f7efc1462",
+      "title": "Viaggio 17: Venezia–Dubrovnik",
+      "description": "Mezzi: auto, nave. Altre tappe: Trieste, Kurzola. Residente in: Spagna. Paesi visitati: Croazia.",
+      "startDate": "2005-08-03",
+      "endDate": "2005-08-14",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Dubrovnik, Croazia",
+        "lat": 42.6507,
+        "lng": 18.0944,
+        "country": "Croazia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto",
+        "viagginave"
+      ]
+    },
+    {
+      "id": "855b88a3-ab20-4ec7-ba21-a82472a1038f",
+      "title": "Viaggio 17: Dubrovnik–Lubiana",
+      "description": "Mezzi: auto. Altre tappe: Drvenik, Hvar, Split, Pag, Rijeka, Medulin, Fazana, Pola. Residente in: Spagna. Paesi visitati: Slovenia. Attraversati: Bosnia.",
+      "startDate": "2005-08-14",
+      "endDate": "2005-08-18",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Lubiana, Slovenia",
+        "lat": 46.0569,
+        "lng": 14.5058,
+        "country": "Slovenia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "8b96fb2d-761f-460e-a33d-0549613230e5",
+      "title": "Viaggio 17: Lubiana–Barcelona",
+      "description": "Mezzi: auto. Altre tappe: Postioma, Premantura, Venezia. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2005-08-18",
+      "endDate": "2005-08-23",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Italia",
+        "lat": 41.9028,
+        "lng": 12.4964,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "b4c58473-c037-4193-8568-0d9e3f92ce86",
+      "title": "Viaggio 18: Barcelona–Aran Islands–Barcelona",
+      "description": "Mezzi: aereo, nave. Altre tappe: Galway, Mohar Cliffs. Scali: Shannon, Girona. Residente in: Spagna. Paesi visitati: Irlanda.",
+      "startDate": "2005-12-02",
+      "endDate": "2005-12-07",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Isole Aran, Irlanda",
+        "lat": 53.12,
+        "lng": -9.69,
+        "country": "Irlanda"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viagginave"
+      ]
+    },
+    {
+      "id": "87e61ae5-09a8-4ff6-a262-57961c5e8c15",
+      "title": "Viaggio 19: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2005-12-25",
+      "endDate": "2006-01-07",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "f1d306aa-4014-4d3e-a8e6-d7e95d153228",
+      "title": "Viaggio 20: Barcelona–Paris–Barcelona",
+      "description": "Mezzi: treno. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2006-04-13",
+      "endDate": "2006-04-18",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Parigi, Francia",
+        "lat": 48.8566,
+        "lng": 2.3522,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggitreno"
+      ]
+    },
+    {
+      "id": "527821aa-3213-411b-a865-e7e0c58ac7fe",
+      "title": "Viaggio 21: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2006-06-22",
+      "endDate": "2006-06-26",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "7c48ab2f-0d9a-4508-8309-1da3b80ef09b",
+      "title": "Viaggio 22: Barcelona–Lisbona–Barcelona",
+      "description": "Mezzi: aereo. Altre tappe: Sintra, Setubal. Residente in: Spagna. Paesi visitati: Portogallo.",
+      "startDate": "2006-07-14",
+      "endDate": "2006-07-17",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Lisbona, Portogallo",
+        "lat": 38.7223,
+        "lng": -9.1393,
+        "country": "Portogallo"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "e21ddcb4-a554-4b1d-b1c8-68a38b3430ff",
+      "title": "Viaggio 23: Barcelona–Besançon",
+      "description": "Mezzi: auto. Altre tappe: Millau. Residente in: Spagna. Visitati poco: Francia.",
+      "startDate": "2006-08-06",
+      "endDate": "2006-08-07",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Besançon, Francia",
+        "lat": 47.2378,
+        "lng": 6.0241,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "3ce10af2-5ef9-469f-8db0-6424f84b73c8",
+      "title": "Viaggio 23: Besançon–Münster",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Germania.",
+      "startDate": "2006-08-07",
+      "endDate": "2006-08-09",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Münster, Germania",
+        "lat": 51.9607,
+        "lng": 7.6261,
+        "country": "Germania"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "b318225c-9a06-4205-b91c-982ee22a7b6c",
+      "title": "Viaggio 23: Münster–Enschende",
+      "description": "Mezzi: auto. Residente in: Spagna. Visitati poco: Paesi Bassi.",
+      "startDate": "2006-08-09",
+      "endDate": "2006-08-09",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Enschede, Paesi Bassi",
+        "lat": 52.2215,
+        "lng": 6.8937,
+        "country": "Paesi Bassi"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "886dee10-257c-4243-9da0-c17c638767fd",
+      "title": "Viaggio 23: Enschende–Copenaghen",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Danimarca.",
+      "startDate": "2006-08-09",
+      "endDate": "2006-08-12",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Copenaghen, Danimarca",
+        "lat": 55.6761,
+        "lng": 12.5683,
+        "country": "Danimarca"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "b8bf589e-2ca1-4e0e-8a11-7924c74e8f1a",
+      "title": "Viaggio 23: Copenaghen–Malmö",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Svezia.",
+      "startDate": "2006-08-12",
+      "endDate": "2006-08-16",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Malmö, Svezia",
+        "lat": 55.605,
+        "lng": 13.0038,
+        "country": "Svezia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "f5d7fac2-4659-45ee-ae92-39e632dd2cc6",
+      "title": "Viaggio 23: Malmö–Oslo",
+      "description": "Mezzi: auto. Altre tappe: Skagerns, Gottskar, Bohus, Orust. Residente in: Spagna. Paesi visitati: Norvegia.",
+      "startDate": "2006-08-16",
+      "endDate": "2006-08-20",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Oslo, Norvegia",
+        "lat": 59.9139,
+        "lng": 10.7522,
+        "country": "Norvegia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "ce9f6b6a-b34f-4f2d-8430-cf237ae69180",
+      "title": "Viaggio 23: Oslo–Malmö",
+      "description": "Mezzi: auto. Altre tappe: Dalen, Preikestolen, Flekkefjord, Arendal, Nystrand, Lysebotn, Goteborg, Trollhattan, Halmstad. Residente in: Spagna. Paesi visitati: Svezia.",
+      "startDate": "2006-08-20",
+      "endDate": "2006-08-22",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Malmö, Svezia",
+        "lat": 55.605,
+        "lng": 13.0038,
+        "country": "Svezia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "ddaa1232-1c2f-4cac-a825-1ac3f8e69d07",
+      "title": "Viaggio 23: Malmö–Berlino",
+      "description": "Mezzi: auto. Altre tappe: Trelleborg, Gransee. Scali: Sassnitz. Residente in: Spagna. Paesi visitati: Germania.",
+      "startDate": "2006-08-22",
+      "endDate": "2006-08-26",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Berlino, Germania",
+        "lat": 52.52,
+        "lng": 13.405,
+        "country": "Germania"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "3544317a-809c-4625-b6f1-dc18255937cb",
+      "title": "Viaggio 23: Berlino–Venezia",
+      "description": "Mezzi: auto. Altre tappe: München, Cortina D'Ampezzo. Residente in: Spagna. Paesi visitati: Italia. Attraversati: Austria.",
+      "startDate": "2006-08-26",
+      "endDate": "2006-08-26",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "eaa4f73c-6bbd-411c-b16e-d111de7bab73",
+      "title": "Viaggio 24: Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Attraversati: Francia. Visti da lontano: Montecarlo.",
+      "startDate": "2006-09-13",
+      "endDate": "2006-09-13",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "61be1e88-d0ca-44c4-a9d4-c402e8b7c2d0",
+      "title": "Viaggio 25: Barcelona–Oporto–Barcelona",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Portogallo.",
+      "startDate": "2006-12-05",
+      "endDate": "2006-12-10",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Porto, Portogallo",
+        "lat": 41.1579,
+        "lng": -8.6291,
+        "country": "Portogallo"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "fe887fe5-8ec5-47f2-a080-f1209c9a681e",
+      "title": "Viaggio 26: Barcelona–Venezia",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2006-12-23",
+      "endDate": "2006-12-23",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "53a7d734-554c-4bb3-94db-3910ef53b469",
+      "title": "Viaggio 26: Venezia–Edinburgo",
+      "description": "Mezzi: aereo, auto. Altre tappe: Ellean Castle, Isle Of Skye. Residente in: Spagna. Paesi visitati: Regno Unito.",
+      "startDate": "2006-12-23",
+      "endDate": "2007-01-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Edimburgo, Regno Unito",
+        "lat": 55.9533,
+        "lng": -3.1883,
+        "country": "Regno Unito"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "0bdeb644-908c-48b1-bbf3-76b2750ed8b0",
+      "title": "Viaggio 26: Glasgow–Venezia",
+      "description": "Mezzi: aereo, treno. Altre tappe: Brescia. Residente in: Spagna.",
+      "startDate": "2007-01-01",
+      "endDate": "2007-01-12",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggitreno"
+      ]
+    },
+    {
+      "id": "f28e398b-db3e-4112-a6f2-fd6a788fd4fe",
+      "title": "Viaggio 26: Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna.",
+      "startDate": "2007-01-12",
+      "endDate": "2007-01-12",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "6f992939-7767-4a3e-97da-cb78a609980e",
+      "title": "Viaggio 27: Barcelona–Draguignan–Barcelona",
+      "description": "Mezzi: auto. Altre tappe: Montpellier, Avignon, Gorges Du Verdon, Chateaudouble, Tirgance, Moustier. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2007-04-06",
+      "endDate": "2007-04-07",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Draguignan, Francia",
+        "lat": 43.5366,
+        "lng": 6.4646,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "f38b9063-2b23-4cc6-b720-c96d27b781f7",
+      "title": "Viaggio 28: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2007-06-02",
+      "endDate": "2007-06-05",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "fb8b3506-2808-4d0c-b59f-86d41cf4e1f6",
+      "title": "Viaggio 29: Barcelona–Lisbona–Barcelona",
+      "description": "Mezzi: aereo, auto. Altre tappe: Vilanova De Milfontes, Melides, Sines, Setubal, Arrifana, Odemira. Residente in: Spagna. Paesi visitati: Portogallo.",
+      "startDate": "2007-08-07",
+      "endDate": "2007-08-14",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Lisbona, Portogallo",
+        "lat": 38.7223,
+        "lng": -9.1393,
+        "country": "Portogallo"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "f81ddd9e-d9c7-4426-b4df-e5c4fbc3ee83",
+      "title": "Viaggio 30: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2007-08-15",
+      "endDate": "2007-08-23",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "0b623f2d-3418-4cc3-91bc-46bdcc7d3c61",
+      "title": "Viaggio 31: Barcelona–Casablanca–Barcelona",
+      "description": "Mezzi: aereo. Altre tappe: Rabat. Residente in: Spagna. Paesi visitati: Marocco.",
+      "startDate": "2007-10-05",
+      "endDate": "2007-10-08",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Casablanca, Marocco",
+        "lat": 33.5731,
+        "lng": -7.5898,
+        "country": "Marocco"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "6d284916-fceb-4383-8332-923cca7fbe10",
+      "title": "Viaggio 32: Barcelona–Montpellier–Barcelona",
+      "description": "Mezzi: auto. Altre tappe: Narbonne, Sant Guilhem Du Desert. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2007-11-02",
+      "endDate": "2007-11-04",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Montpellier, Francia",
+        "lat": 43.6108,
+        "lng": 3.8767,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "f01061ae-7b5e-4e23-b840-39ba543b4f21",
+      "title": "Viaggio 33: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Altre tappe: (No Monastier Di Treviso!). Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2007-12-27",
+      "endDate": "2008-01-02",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "e44a04e4-0c6e-4321-8bcf-8f061fde31fc",
+      "title": "Viaggio 34: Barcelona–Dublino",
+      "description": "Mezzi: aereo. Altre tappe: Dingle, Killarney, Kenmare, Castlecove, Castlequin. Residente in: Spagna. Paesi visitati: Irlanda.",
+      "startDate": "2008-02-12",
+      "endDate": "2008-02-18",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Dublino, Irlanda",
+        "lat": 53.3498,
+        "lng": -6.2603,
+        "country": "Irlanda"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "3cf4f4c9-cf13-4fb1-87cc-508cd749d8cb",
+      "title": "Viaggio 35: Dublino–Londra–Barcelona",
+      "description": "Mezzi: aereo. Altre tappe: Londra, Salisbury, Winchester, Canterbury, Dover. Residente in: Spagna. Paesi visitati: Regno Unito.",
+      "startDate": "2008-02-18",
+      "endDate": "2008-02-26",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Londra, Regno Unito",
+        "lat": 51.5074,
+        "lng": -0.1278,
+        "country": "Regno Unito"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "17576318-2fb0-4bfd-84b8-c97198f48499",
+      "title": "Viaggio 36: Barcelona–Draguignan",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2008-03-28",
+      "endDate": "2008-03-29",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Draguignan, Francia",
+        "lat": 43.5366,
+        "lng": 6.4646,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "02b08e20-8c6f-4d2d-8016-4162b49b361c",
+      "title": "Viaggio 36: Draguignan–Venezia",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2008-03-29",
+      "endDate": "2008-04-05",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "918d62c5-fd23-4eb9-a1e1-251a75a5caf3",
+      "title": "Viaggio 36: Venezia–Draguignan",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2008-04-05",
+      "endDate": "2008-04-06",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Draguignan, Francia",
+        "lat": 43.5366,
+        "lng": 6.4646,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "b7c576a7-b3cf-4342-bc8a-3d075bb5afa2",
+      "title": "Viaggio 36: Draguignan–Barcelona",
+      "description": "Mezzi: auto. Residente in: Spagna.",
+      "startDate": "2008-04-06",
+      "endDate": "2008-04-06",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "8afb2cfd-8a43-44dc-ab50-45468befe086",
+      "title": "Viaggio 37: Barcelona–Roma–Venezia",
+      "description": "Mezzi: nave, treno. Altre tappe: Civitavecchia, Roma. Paesi visitati: Italia, Città del Vaticano.",
+      "startDate": "2008-05-04",
+      "endDate": "2008-05-07",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Roma, Italia",
+        "lat": 41.9028,
+        "lng": 12.4964,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viagginave",
+        "viaggitreno"
+      ]
+    },
+    {
+      "id": "b1055885-657d-4292-8f14-21b83cd9a833",
+      "title": "Senza residenza",
+      "description": "Periodo senza residenza in nessun paese. Durata da foglio VOYAGES: 192 giorni.",
+      "startDate": "2008-05-04",
+      "endDate": "2008-11-12",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "0878548d-2e38-40db-be7f-82d132bcfd95",
+      "title": "Frankfort",
+      "description": "Breve tappa per andare da Venezia al Brasile",
+      "startDate": "2008-05-16",
+      "endDate": "2008-05-17",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Frankfurt, Hesse, Germany",
+        "lat": 50.1106444,
+        "lng": 8.6820917,
+        "country": "Germania"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "214ab038-ac4a-4ec0-876f-72766fc6b6bd",
+      "title": "BRASIL",
+      "description": "1° viaggio in Brasile",
+      "startDate": "2008-05-17",
+      "endDate": "2008-11-11",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Salvador, Bahia, Northeast Region, Brazil",
+        "lat": -12.9822499,
+        "lng": -38.4812772,
+        "country": "Brasile"
+      },
+      "categories": [
+        "viaggi",
+        "cambiavita",
+        "minori",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "d326a97e-6d5f-4d9c-a135-7b8109553a7f",
+      "title": "Viaggio 38: Foz De Iguaçu–Puerto Iguazu–Foz De Iguaçu",
+      "description": "Mezzi: auto. Paesi visitati: Brasile. Visitati poco: Argentina.",
+      "startDate": "2008-09-30",
+      "endDate": "2008-10-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Foz do Iguaçu, Brasile",
+        "lat": -25.5163,
+        "lng": -54.5854,
+        "country": "Brasile"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "adb1dc93-70df-4ad5-84f9-26f046f73285",
+      "title": "Frankfurt",
+      "description": "Breve fermata per tornade dal Brasile a Venezia",
+      "startDate": "2008-11-11",
+      "endDate": "2008-11-12",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "2e2df7bf-292a-45f8-a80d-d59e1a23f540",
+      "title": "Residenza: Monastier di Treviso (Italia)",
+      "description": "Paese di residenza: Italia. Durata da foglio VOYAGES: 215 giorni.",
+      "startDate": "2008-11-12",
+      "endDate": "2009-06-15",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Monastier di Treviso, Italia",
+        "lat": 45.64,
+        "lng": 12.4175,
+        "country": "Italia"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "83a81525-4272-4146-96a0-ef6dad64314e",
+      "title": "Viaggio 39: Venezia–Sevilla–Venezia",
+      "description": "Mezzi: aereo. Residente in: Italia. Paesi visitati: Spagna.",
+      "startDate": "2008-12-16",
+      "endDate": "2008-12-18",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Siviglia, Spagna",
+        "lat": 37.3891,
+        "lng": -5.9845,
+        "country": "Spagna"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "815b0824-7641-451e-98b7-aee3f7a6926a",
+      "title": "Senza residenza",
+      "description": "Periodo senza residenza in nessun paese. Durata da foglio VOYAGES: 166 giorni.",
+      "startDate": "2009-06-15",
+      "endDate": "2009-11-28",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "f5c24c9b-ef88-41e2-89fc-27f8fb95e537",
+      "title": "Viaggio 40: Roma–Luanda–Venezia",
+      "description": "Mezzi: aereo, auto. Altre tappe: Mbanza Congo, Soyo, Buela, Pedra Do Fetiço, Lufico, Sumpi, Tomboconzeto, Musserra, Kibala, Ndalatando, Kikemba, Bolongongo, Lucala, Calandula, Dondo, Massangano. Scali: Frankfurt. Paesi visitati: Angola. Attraversati: Germania. Visti da lontano: Rep. Dem. del Congo.",
+      "startDate": "2009-09-13",
+      "endDate": "2009-11-08",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Luanda, Angola",
+        "lat": -8.839,
+        "lng": 13.2894,
+        "country": "Angola"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "db8f1115-9678-4220-8049-154ccec556b4",
+      "title": "Viaggio 41: Venezia–Barcelona",
+      "description": "Mezzi: aereo. Paesi visitati: Spagna.",
+      "startDate": "2009-11-28",
+      "endDate": "2009-11-28",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Spagna",
+        "lat": 41.3874,
+        "lng": 2.1686,
+        "country": "Spagna"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "20ba79c0-2e42-4fb8-8644-dfcd942589f5",
+      "title": "Residenza: Barcellona (Spagna)",
+      "description": "Paese di residenza: Spagna. Durata da foglio VOYAGES: 517 giorni.",
+      "startDate": "2009-11-28",
+      "endDate": "2011-04-29",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Spagna",
+        "lat": 41.3874,
+        "lng": 2.1686,
+        "country": "Spagna"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "a795ce80-5fa7-4ad8-8076-a8ba43ac4acd",
+      "title": "Viaggio 42: Barcelona–Paris–Barcelona",
+      "description": "Mezzi: auto. Altre tappe: Orleans, Toulouse, Carcassonne. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2010-03-08",
+      "endDate": "2010-04-03",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Parigi, Francia",
+        "lat": 48.8566,
+        "lng": 2.3522,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "ec3bb453-0442-4d46-afab-75d6b5b7dc83",
+      "title": "Viaggio 43: Barcelona–Roma–Barcelona",
+      "description": "Mezzi: nave, treno. Altre tappe: Civitavecchia, Tivoli, Venezia. Residente in: Spagna. Paesi visitati: Italia, Città del Vaticano.",
+      "startDate": "2010-05-16",
+      "endDate": "2010-06-04",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Roma, Italia",
+        "lat": 41.9028,
+        "lng": 12.4964,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viagginave",
+        "viaggitreno"
+      ]
+    },
+    {
+      "id": "9937d1a3-7826-4025-a541-f192d7b06a6a",
+      "title": "Viaggio 44: Barcelona–Roma",
+      "description": "Mezzi: aereo, auto. Altre tappe: Pescara, L'Aquila. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2010-06-30",
+      "endDate": "2010-07-05",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Roma, Italia",
+        "lat": 41.9028,
+        "lng": 12.4964,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "eab8e591-1e82-4fb6-8867-40b78d74d37b",
+      "title": "Viaggio 45: Roma–Madrid",
+      "description": "Mezzi: aereo. Residente in: Spagna.",
+      "startDate": "2010-07-05",
+      "endDate": "2010-07-14",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "15b0cfe0-9ec0-4252-b218-8a394de53eee",
+      "title": "Viaggio 46: Barcelona–Lisbona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Portogallo.",
+      "startDate": "2010-07-14",
+      "endDate": "2010-07-16",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Lisbona, Portogallo",
+        "lat": 38.7223,
+        "lng": -9.1393,
+        "country": "Portogallo"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "ee997356-fe66-4638-afc7-c797f18bdb85",
+      "title": "Viaggio 46: Lisbona–Luanda",
+      "description": "Mezzi: aereo. Altre tappe: Luena, Menongue, Luau, Kaianda, Cavungo, Lucusse, Lago Dilolo, Luacano, Cazombo, Lumbala Kakengue, Longa, Baixo Longa, Mavinga, Kuito Kuanavale, Mussuma Mutete, Rivungo, Likuwa, Luengue, Nancova, Rito, Mavengue, Kuangar, Kalai, Katwitwi, Dirico, Jamba Cueio, Huambo. Residente in: Spagna. Paesi visitati: Angola. Visti da lontano: Zambia.",
+      "startDate": "2010-07-16",
+      "endDate": "2010-09-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Luanda, Angola",
+        "lat": -8.839,
+        "lng": 13.2894,
+        "country": "Angola"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "50807b8a-fb61-4c9c-b0dc-df04b5bb2c16",
+      "title": "Viaggio 46: Menongue–Rundu",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Namibia.",
+      "startDate": "2010-09-01",
+      "endDate": "2010-09-03",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Rundu, Namibia",
+        "lat": -17.9333,
+        "lng": 19.7667,
+        "country": "Namibia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "3f12ef40-ee7b-4610-96f4-1760a76b484e",
+      "title": "Viaggio 46: Rundu–Menongue",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Angola.",
+      "startDate": "2010-09-03",
+      "endDate": "2010-10-17",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Menongue, Angola",
+        "lat": -14.6568,
+        "lng": 17.6894,
+        "country": "Angola"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "a89df09b-859e-487d-884e-2ccf8c46c0ae",
+      "title": "Viaggio 46: Luanda–Barcelona",
+      "description": "Mezzi: aereo, auto. Scali: Lisbona. Residente in: Spagna. Attraversati: Portogallo.",
+      "startDate": "2010-10-17",
+      "endDate": "2010-10-17",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "b32bfb25-6f41-4092-9e90-e6fb47b6c514",
+      "title": "Viaggio 47: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2010-10-23",
+      "endDate": "2010-11-03",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "c0eb7953-0c89-4ec9-a2f5-c8a235c71d10",
+      "title": "Viaggio 48: Barcelona–Paris–Venezia",
+      "description": "Mezzi: aereo. Altre tappe: Roma, Orvieto, Pitignano, San Galgano. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2010-12-12",
+      "endDate": "2010-12-15",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Parigi, Francia",
+        "lat": 48.8566,
+        "lng": 2.3522,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "bd46cf9a-4faa-4501-8228-fb42e3c53dd3",
+      "title": "Viaggio 48: Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna.",
+      "startDate": "2011-01-09",
+      "endDate": "2011-01-09",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "b4eed84d-f7d7-4c4b-a833-575f471d223b",
+      "title": "Viaggio 49: Barcelona–Roma–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia, Città del Vaticano.",
+      "startDate": "2011-02-02",
+      "endDate": "2011-02-11",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Roma, Italia",
+        "lat": 41.9028,
+        "lng": 12.4964,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "b17a10ed-bc0f-40d3-870e-e6b8d3b946d4",
+      "title": "Viaggio 50: Barcelona–Luanda–Barcelona",
+      "description": "Mezzi: aereo. Altre tappe: Sumbe. Scali: Lisbona. Residente in: Spagna. Paesi visitati: Angola. Attraversati: Portogallo.",
+      "startDate": "2011-02-18",
+      "endDate": "2011-03-07",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Luanda, Angola",
+        "lat": -8.839,
+        "lng": 13.2894,
+        "country": "Angola"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "f4c7e4a9-0933-4f89-b3f2-0c0745c4181d",
+      "title": "Residenza: Kabala (Sierra Leone)",
+      "description": "Paese di residenza: Sierra Leone. Durata da foglio VOYAGES: 95 giorni.",
+      "startDate": "2011-04-29",
+      "endDate": "2011-08-02",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Kabala, Sierra Leone",
+        "lat": 9.5875,
+        "lng": -11.5517,
+        "country": "Sierra Leone"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "c45b9179-0992-48df-9e8e-b1cd2db0df76",
+      "title": "Viaggio 51: Barcelona–Freetown–Barcelona",
+      "description": "Mezzi: aereo, auto. Altre tappe: Tokeh, Kabala, Makeni, Outamba Kilimi, Yiffin, Mongo Bendugu, Sinkunia, Falaba, Sumbaria, Bafodia, Kamabai. Scali: Parigi. Residente in: Sierra Leone. Paesi visitati: Sierra Leone. Attraversati: Francia.",
+      "startDate": "2011-04-29",
+      "endDate": "2011-08-02",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Freetown, Sierra Leone",
+        "lat": 8.4657,
+        "lng": -13.2317,
+        "country": "Sierra Leone"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "f450d3fb-a632-47f8-8397-b797a3fa412c",
+      "title": "Residenza: Barcellona (Spagna)",
+      "description": "Paese di residenza: Spagna. Durata da foglio VOYAGES: 107 giorni.",
+      "startDate": "2011-08-02",
+      "endDate": "2011-11-17",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Spagna",
+        "lat": 41.3874,
+        "lng": 2.1686,
+        "country": "Spagna"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "750a6a9f-322b-4a5e-971d-b2311fbfdb9a",
+      "title": "Viaggio 52: Barcelona–Draguignan",
+      "description": "Mezzi: auto. Altre tappe: Arles. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2011-09-08",
+      "endDate": "2011-09-11",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Draguignan, Francia",
+        "lat": 43.5366,
+        "lng": 6.4646,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "f9ca918e-8332-4393-a306-04f903a9b897",
+      "title": "Viaggio 52: Draguignan–Venezia",
+      "description": "Mezzi: auto. Altre tappe: Angera, Milano. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2011-09-11",
+      "endDate": "2011-09-28",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "699936e2-f603-432d-8699-2e012f5dfb12",
+      "title": "Viaggio 52: Venezia–Draguignan",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2011-09-28",
+      "endDate": "2011-09-30",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Draguignan, Francia",
+        "lat": 43.5366,
+        "lng": 6.4646,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "054e1910-4349-4169-b1e9-6afa14b876b7",
+      "title": "Viaggio 52: Draguignan–Barcelona",
+      "description": "Mezzi: auto. Residente in: Spagna.",
+      "startDate": "2011-09-30",
+      "endDate": "2011-09-30",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "0c14b14b-e420-437f-9223-db38a8b3f81c",
+      "title": "Residenza: Kabala (Sierra Leone)",
+      "description": "Paese di residenza: Sierra Leone. Durata da foglio VOYAGES: 194 giorni.",
+      "startDate": "2011-11-17",
+      "endDate": "2012-05-29",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Kabala, Sierra Leone",
+        "lat": 9.5875,
+        "lng": -11.5517,
+        "country": "Sierra Leone"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "1cdfe520-2ed6-4280-8bc8-1387482f3b76",
+      "title": "Viaggio 53: Barcelona–Freetown–Barcelona",
+      "description": "Mezzi: aereo. Altre tappe: Kabala, Makeni, Bo, Tokeh, Banana Island, Pot Loko, Tiwai Island. Scali: Monrovia, Banjul, Parigi. Residente in: Sierra Leone. Paesi visitati: Sierra Leone. Attraversati: Gambia, Liberia, Francia.",
+      "startDate": "2011-11-17",
+      "endDate": "2012-05-29",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Freetown, Sierra Leone",
+        "lat": 8.4657,
+        "lng": -13.2317,
+        "country": "Sierra Leone"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "62f7b8cd-6843-48be-bc7f-65be04d3149b",
+      "title": "Residenza: Barcellona (Spagna)",
+      "description": "Paese di residenza: Spagna. Durata da foglio VOYAGES: 1356 giorni.",
+      "startDate": "2012-05-29",
+      "endDate": "2016-02-14",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Spagna",
+        "lat": 41.3874,
+        "lng": 2.1686,
+        "country": "Spagna"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "58d22017-7fa5-4c0b-be7c-b98992710265",
+      "title": "Viaggio 54: Barcelona–Marsiglia–Barcelona",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2012-06-16",
+      "endDate": "2012-06-30",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Marsiglia, Francia",
+        "lat": 43.2965,
+        "lng": 5.3698,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "36dacfb7-4e5f-4e7a-8c13-886a25bde3ca",
+      "title": "Viaggio 55: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2012-07-11",
+      "endDate": "2012-08-05",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "48dfa408-afb7-4a16-b55b-0ba5fcadb1a3",
+      "title": "Viaggio 56: Barcelona–Varsavia–Barcelona",
+      "description": "Mezzi: aereo, treno, nave. Altre tappe: Mikolajki, Krakow, Auschwitz, Komorow. Residente in: Spagna. Paesi visitati: Polonia.",
+      "startDate": "2012-09-07",
+      "endDate": "2012-09-23",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Varsavia, Polonia",
+        "lat": 52.2297,
+        "lng": 21.0122,
+        "country": "Polonia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggitreno",
+        "viagginave"
+      ]
+    },
+    {
+      "id": "9ceee45d-a4bd-44f0-9477-a75acb6c780e",
+      "title": "Viaggio 57: Barcelona–Varsavia",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Polonia.",
+      "startDate": "2012-11-22",
+      "endDate": "2012-11-28",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Varsavia, Polonia",
+        "lat": 52.2297,
+        "lng": 21.0122,
+        "country": "Polonia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "670c9d54-5aa3-4de4-ae5a-304cc642963c",
+      "title": "Viaggio 57: Varsavia–Mombai",
+      "description": "Mezzi: aereo, treno. Altre tappe: Varanasi, Hampi, Kochi, Goa, Ellora, Ajanta, Kajuraho, Sarnath, Orchha, Gokarna, Munnar, Kollam. Scali: München. Residente in: Spagna. Paesi visitati: India.",
+      "startDate": "2012-11-28",
+      "endDate": "2012-12-26",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Mumbai, India",
+        "lat": 19.076,
+        "lng": 72.8777,
+        "country": "India"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggitreno"
+      ]
+    },
+    {
+      "id": "359f5b35-c281-44cf-ae13-18a5fb80192d",
+      "title": "Viaggio 57: Goa–Varsavia",
+      "description": "Mezzi: aereo, treno. Scali: Frankfurt. Residente in: Spagna. Paesi visitati: Polonia. Visti da lontano: Slovacchia.",
+      "startDate": "2012-12-26",
+      "endDate": "2012-12-26",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Varsavia, Polonia",
+        "lat": 52.2297,
+        "lng": 21.0122,
+        "country": "Polonia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggitreno"
+      ]
+    },
+    {
+      "id": "8edf1718-3718-45c8-bc78-b6a8de6d2fee",
+      "title": "Viaggio 58: Varsavia–Barcelona",
+      "description": "Mezzi: aereo, treno. Altre tappe: Zakopane. Residente in: Spagna.",
+      "startDate": "2013-01-05",
+      "endDate": "2013-01-05",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggitreno"
+      ]
+    },
+    {
+      "id": "41f51cea-3e5f-4978-a3b7-6eb978b96ca0",
+      "title": "Viaggio 59: Barcelona–Maputo",
+      "description": "Mezzi: aereo. Altre tappe: Bilene, Isla De Inhaca, Maçaneta. Scali: Doha, Johannesburg. Residente in: Spagna. Paesi visitati: Mozambico. Attraversati: Qatar, Sudafrica.",
+      "startDate": "2013-01-15",
+      "endDate": "2013-02-14",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Maputo, Mozambico",
+        "lat": -25.9692,
+        "lng": 32.5732,
+        "country": "Mozambico"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "f32a0ae5-2450-40b2-bf15-512d33a23eca",
+      "title": "Viaggio 59: Maputo–Komatipoort–Maputo",
+      "description": "Mezzi: auto. Altre tappe: Skukuza, Malelane. Residente in: Spagna. Paesi visitati: Sudafrica.",
+      "startDate": "2013-02-14",
+      "endDate": "2013-02-17",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Komatipoort, Sudafrica",
+        "lat": -25.4333,
+        "lng": 31.9333,
+        "country": "Sudafrica"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "95b39971-8477-4857-8f48-a18c7eb94f2a",
+      "title": "Viaggio 59: Maputo–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Mozambico. Attraversati: Sudafrica, Qatar.",
+      "startDate": "2013-03-11",
+      "endDate": "2013-03-11",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Maputo, Mozambico",
+        "lat": -25.9692,
+        "lng": 32.5732,
+        "country": "Mozambico"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "5b637fa2-88f7-4080-a0ea-773d467efe8d",
+      "title": "Viaggio 60: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2013-04-04",
+      "endDate": "2013-04-17",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "b86a1e5e-8091-47b9-9cb0-7d0d7d5b8c9e",
+      "title": "Viaggio 61: Barcelona–Roma–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2013-06-04",
+      "endDate": "2013-06-18",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Roma, Italia",
+        "lat": 41.9028,
+        "lng": 12.4964,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "f9c5d863-6441-4e3d-a550-15361be023a6",
+      "title": "Viaggio 62: Barcelona–Milano",
+      "description": "Mezzi: aereo. Altre tappe: Angera, Venezia, Trieste. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2013-07-15",
+      "endDate": "2013-07-15",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Milano, Italia",
+        "lat": 45.4642,
+        "lng": 9.19,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "0c93c44e-5a4e-4043-a948-5c2547c0fe2a",
+      "title": "Viaggio 62: Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna.",
+      "startDate": "2013-08-14",
+      "endDate": "2013-08-14",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "b31e65af-c4e2-44df-ba89-a449e99dfe8b",
+      "title": "Viaggio 63: Barcelona–Marsiglia–Barcelona",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2013-10-01",
+      "endDate": "2013-10-05",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Marsiglia, Francia",
+        "lat": 43.2965,
+        "lng": 5.3698,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "e48a6dbd-ef91-4fa1-8e71-c72868e22aaf",
+      "title": "Viaggio 64: Barcelona–Marsiglia–Barcelona",
+      "description": "Mezzi: auto. Altre tappe: Monteaux, Menerbes. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2013-11-19",
+      "endDate": "2013-11-22",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Marsiglia, Francia",
+        "lat": 43.2965,
+        "lng": 5.3698,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "210d6c2b-af84-4099-9302-670dc47ea6dd",
+      "title": "Viaggio 65: Barcelona–Arusha–Barcelona",
+      "description": "Mezzi: aereo, auto. Altre tappe: Zanzibar, Kendwa, Serengeti, Ngorongoro, Manyara Lake. Scali: Istanbul. Residente in: Spagna. Paesi visitati: Tanzania. Attraversati: Turchia.",
+      "startDate": "2013-12-03",
+      "endDate": "2013-12-26",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Arusha, Tanzania",
+        "lat": -3.3869,
+        "lng": 36.683,
+        "country": "Tanzania"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "f17a2767-23c9-428a-a172-50ef770c6c0c",
+      "title": "Viaggio 66: Barcelona–Marsiglia–Barcelona",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2014-08-14",
+      "endDate": "2014-08-19",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Marsiglia, Francia",
+        "lat": 43.2965,
+        "lng": 5.3698,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "8af19b4c-09e5-4378-b561-07d7dc1a2af9",
+      "title": "Viaggio 67: Barcelona–Alghero–Barcelona",
+      "description": "Mezzi: aereo, auto. Altre tappe: Orosei, Capo Comino, Scala Manna, Nuoro. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2014-09-28",
+      "endDate": "2014-10-03",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Alghero, Italia",
+        "lat": 40.558,
+        "lng": 8.319,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "b4399845-2ed1-4d36-aad7-48fcf24f997d",
+      "title": "Viaggio 68: Barcelona–Tel Aviv–Barcelona",
+      "description": "Mezzi: aereo. Altre tappe: Gerusalemme, Eilat, Qisareyya, Kyriat Gat, Dead Sea. Scali: Roma. Residente in: Spagna. Paesi visitati: Israele. Attraversati: Italia. Visti da lontano: Giordania, Egitto, Cisgiordania, Gaza.",
+      "startDate": "2014-10-21",
+      "endDate": "2014-11-07",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Tel Aviv, Israele",
+        "lat": 32.0853,
+        "lng": 34.7818,
+        "country": "Israele"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "0d01942a-c5e5-46ad-b6a4-14abb0421e2e",
+      "title": "Viaggio 69: Barcelona–Amsterdam–Barcelona",
+      "description": "Mezzi: aereo. Altre tappe: Delft. Residente in: Spagna. Paesi visitati: Paesi Bassi.",
+      "startDate": "2014-12-13",
+      "endDate": "2014-12-17",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Amsterdam, Paesi Bassi",
+        "lat": 52.37,
+        "lng": 4.895,
+        "country": "Paesi Bassi"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "53eaf5db-3e26-46e9-bcf4-f857a868f8f5",
+      "title": "Viaggio 70: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2014-12-31",
+      "endDate": "2015-01-06",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "7d197fb6-3aa6-45ba-b1b9-6d6b17c3dfa3",
+      "title": "Viaggio 71: Barcelona–Paris–Barcelona",
+      "description": "Mezzi: aereo, auto. Altre tappe: Mont Saint Michel, Dinan, Dinard, Saint Briac, Perros Guirec, Paris. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2015-07-03",
+      "endDate": "2015-07-13",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Parigi, Francia",
+        "lat": 48.8566,
+        "lng": 2.3522,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "30e640f9-8930-4526-87e5-14aabb6ca77d",
+      "title": "Viaggio 72: Barcelona–Bruxelles",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Belgio.",
+      "startDate": "2015-08-24",
+      "endDate": "2015-08-25",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Bruxelles, Belgio",
+        "lat": 50.8503,
+        "lng": 4.3517,
+        "country": "Belgio"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "f00edbc5-77b4-4468-8015-35b9154051e0",
+      "title": "Viaggio 72: Bruxelles–Plymouth",
+      "description": "Mezzi: aereo, auto. Altre tappe: Bristol, Polperro, Liskeard. Residente in: Spagna. Paesi visitati: Regno Unito.",
+      "startDate": "2015-08-25",
+      "endDate": "2015-09-03",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Plymouth, Regno Unito",
+        "lat": 50.3755,
+        "lng": -4.1427,
+        "country": "Regno Unito"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "7ab9031e-6af6-48ef-8eff-f672f30e7061",
+      "title": "Viaggio 72: Plymouth–Marsiglia",
+      "description": "Mezzi: aereo. Scali: Bristol. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2015-09-03",
+      "endDate": "2015-09-11",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Marsiglia, Francia",
+        "lat": 43.2965,
+        "lng": 5.3698,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "434d8926-ba0c-4cbf-bfe2-d4bf8e9daa6c",
+      "title": "Viaggio 72: Marsiglia–Barcelona",
+      "description": "Mezzi: auto. Residente in: Spagna.",
+      "startDate": "2015-09-11",
+      "endDate": "2015-09-11",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "4d57d593-dde5-465e-85e0-bec360d514dc",
+      "title": "Viaggio 73: Barcelona–Milano–Barcelona",
+      "description": "Mezzi: aereo. Altre tappe: Brescia. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2015-09-13",
+      "endDate": "2015-09-18",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Milano, Italia",
+        "lat": 45.4642,
+        "lng": 9.19,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "41659c2e-14ec-4bdc-959b-0808633db168",
+      "title": "Viaggio 74: Barcelona–Plymouth–Barcelona",
+      "description": "Mezzi: aereo. Scali: Bristol. Residente in: Spagna. Paesi visitati: Regno Unito.",
+      "startDate": "2015-09-24",
+      "endDate": "2015-09-30",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Plymouth, Regno Unito",
+        "lat": 50.3755,
+        "lng": -4.1427,
+        "country": "Regno Unito"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "a1d1ef4e-5ac0-47b9-b472-7dc68dc22cd7",
+      "title": "Viaggio 75: Barcelona–Plymouth–Barcelona",
+      "description": "Mezzi: aereo. Altre tappe: Boscastle, Padstow, Totnes. Scali: Londra. Residente in: Spagna. Paesi visitati: Regno Unito.",
+      "startDate": "2015-10-19",
+      "endDate": "2015-10-30",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Plymouth, Regno Unito",
+        "lat": 50.3755,
+        "lng": -4.1427,
+        "country": "Regno Unito"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "b53f2477-74c8-41b9-81bd-9b4a808c0c5a",
+      "title": "Viaggio 76: Barcelona–Recife–Venezia",
+      "description": "Mezzi: aereo, treno. Altre tappe: Sao Paulo, Olinda, Serrambi, Venezia. Scali: Milano. Residente in: Spagna. Paesi visitati: Brasile, Italia. Attraversati: Italia.",
+      "startDate": "2015-12-01",
+      "endDate": "2015-12-15",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Recife, Brasile",
+        "lat": -8.0476,
+        "lng": -34.877,
+        "country": "Brasile"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggitreno"
+      ]
+    },
+    {
+      "id": "b522f53b-5292-4423-9d21-bb53065ff46a",
+      "title": "Viaggio 77: Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna.",
+      "startDate": "2015-12-21",
+      "endDate": "2015-12-21",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "52f680f2-6165-49b0-aba0-683497b3e841",
+      "title": "Viaggio 78: Barcelona–Maputo–Barcelona",
+      "description": "Mezzi: aereo. Scali: Madrid, Addis Abeba. Residente in: Spagna. Paesi visitati: Mozambico. Attraversati: Etiopia.",
+      "startDate": "2016-01-08",
+      "endDate": "2016-02-04",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Maputo, Mozambico",
+        "lat": -25.9692,
+        "lng": 32.5732,
+        "country": "Mozambico"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "9cee4c12-19d3-48c8-b256-398484f4fd34",
+      "title": "Viaggio 79: Barcelona–Recife–Barcelona",
+      "description": "Mezzi: aereo, auto. Altre tappe: Capao, Mamanguape, Lençóis, Praia Do Forte, Pipa, Tibaú Do Sul, Carirí, Penedo, Paulo Afonso, Piranhas, Catimbau, Japaratinga, Pesqueira, Bonito, Caruaru, Tambaba, Nazaré Da Mata. Scali: Francoforte, Fortaleza. Paesi visitati: Brasile. Attraversati: Germania.",
+      "startDate": "2016-02-14",
+      "endDate": "2016-03-25",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Recife, Brasile",
+        "lat": -8.0476,
+        "lng": -34.877,
+        "country": "Brasile"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "2fa96f95-5203-4cfc-a254-ab9fcdb80d47",
+      "title": "Senza residenza",
+      "description": "Periodo senza residenza in nessun paese. Durata da foglio VOYAGES: 395 giorni.",
+      "startDate": "2016-02-14",
+      "endDate": "2017-03-15",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "2730f9a7-ded8-471c-8a97-14327b4cf760",
+      "title": "Viaggio 80: Barcelona–Marsiglia",
+      "description": "Mezzi: auto. Paesi visitati: Francia.",
+      "startDate": "2016-06-30",
+      "endDate": "2016-07-07",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Marsiglia, Francia",
+        "lat": 43.2965,
+        "lng": 5.3698,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "4b0e8b68-7d2a-4d1d-be5d-e59589fced0e",
+      "title": "Viaggio 81: Marsiglia–Venezia",
+      "description": "Mezzi: aereo. Altre tappe: Roma, Napoli, Matera, Catanzaro, Terracina. Paesi visitati: Italia, Città del Vaticano.",
+      "startDate": "2016-07-07",
+      "endDate": "2016-08-25",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "3060a5ed-4744-4587-915e-c950f705c6f5",
+      "title": "Viaggio 82: Venezia–Barcelona–Venezia",
+      "description": "Mezzi: auto. Paesi visitati: Spagna.",
+      "startDate": "2016-08-25",
+      "endDate": "2016-08-29",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Spagna",
+        "lat": 41.3874,
+        "lng": 2.1686,
+        "country": "Spagna"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "6b5cf9b6-dff8-4f49-b171-1b32147b5a8e",
+      "title": "Viaggio 83: Venezia–Recife–Venezia",
+      "description": "Mezzi: aereo, auto. Altre tappe: Triunfo, Olinda, Bezerro, Caruaru, Catimbau, Japarainga, Mamanguape, Sao Vicente Ferrer, Porto Da Rua. Scali: Francoporte. Paesi visitati: Brasile. Attraversati: Germania.",
+      "startDate": "2016-09-03",
+      "endDate": "2017-03-15",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Recife, Brasile",
+        "lat": -8.0476,
+        "lng": -34.877,
+        "country": "Brasile"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "1387269e-3c4c-48a7-8b1b-011211985d55",
+      "title": "Residenza: Monastier di Treviso (Italia)",
+      "description": "Paese di residenza: Italia. Durata da foglio VOYAGES: 135 giorni.",
+      "startDate": "2017-03-15",
+      "endDate": "2017-07-28",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Monastier di Treviso, Italia",
+        "lat": 45.64,
+        "lng": 12.4175,
+        "country": "Italia"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "7b926801-5e1c-48f0-8938-7b671aef8860",
+      "title": "Matrimonio",
+      "description": "Matrimonio Massimo e Ubi",
+      "startDate": "2017-05-20",
+      "endDate": "2017-05-20",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Roncade, Province of Treviso, Veneto, 31056, Italy",
+        "lat": 45.615262,
+        "lng": 12.3944188,
+        "country": "Italia"
+      },
+      "categories": [
+        "loveaffairs",
+        "cambiavita"
+      ]
+    },
+    {
+      "id": "fb9f2216-66b6-48a9-bc66-f14a1b1bf47a",
+      "title": "Viaggio 84: Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Italia. Paesi visitati: Spagna.",
+      "startDate": "2017-06-28",
+      "endDate": "2017-06-30",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Spagna",
+        "lat": 41.3874,
+        "lng": 2.1686,
+        "country": "Spagna"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "f6c3d731-e701-4559-ba07-e867c030a8c7",
+      "title": "Viaggio 85: Venezia–Marsiglia",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2017-07-28",
+      "endDate": "2017-07-29",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Marsiglia, Francia",
+        "lat": 43.2965,
+        "lng": 5.3698,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "eb26bbc8-22cf-4b17-87f7-2a4fc6a74327",
+      "title": "Residenza: Barcellona (Spagna)",
+      "description": "Paese di residenza: Spagna. In corso.",
+      "startDate": "2017-07-28",
+      "endDate": null,
+      "ongoing": true,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Spagna",
+        "lat": 41.3874,
+        "lng": 2.1686,
+        "country": "Spagna"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "76102875-1802-42f0-bbe4-6c16fb454c9e",
+      "title": "Viaggio 85: Marsiglia–Barcelona",
+      "description": "Mezzi: auto. Residente in: Spagna.",
+      "startDate": "2017-07-29",
+      "endDate": "2017-07-29",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "09ff24e3-d4c4-4e5c-ab83-101671915113",
+      "title": "Viaggio 86: Barcelona–Nioux–Barcelona",
+      "description": "Mezzi: auto. Altre tappe: Andorra, Foix. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2017-12-06",
+      "endDate": "2017-12-16",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Niaux, Francia",
+        "lat": 42.8206,
+        "lng": 1.5894,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "2b89efaa-fa8f-4183-b8e0-74ef6500888f",
+      "title": "Viaggio 87: Barcelona–Tel Aviv–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Israele. Visti da lontano: Gaza.",
+      "startDate": "2018-03-03",
+      "endDate": "2018-03-16",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Tel Aviv, Israele",
+        "lat": 32.0853,
+        "lng": 34.7818,
+        "country": "Israele"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "58384891-6803-4ef8-a846-25ae02989e55",
+      "title": "Viaggio 88: Barcelona–Tel Aviv–Barcelona",
+      "description": "Mezzi: aereo. Scali: Istanbul. Residente in: Spagna. Paesi visitati: Israele. Attraversati: Turchia. Visti da lontano: Gaza.",
+      "startDate": "2018-03-24",
+      "endDate": "2018-04-03",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Tel Aviv, Israele",
+        "lat": 32.0853,
+        "lng": 34.7818,
+        "country": "Israele"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "f0da7b00-cb21-4cdc-bc72-1e4dc4224f4d",
+      "title": "Viaggio 89: Barcelona–Palermo–Barcelona",
+      "description": "Mezzi: aereo, auto. Altre tappe: Menfi, Favignana, Trapani, Erice. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2018-05-09",
+      "endDate": "2018-05-19",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Palermo, Italia",
+        "lat": 38.1157,
+        "lng": 13.3615,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "45fc5dac-9576-4cba-acb2-cb9e81b6017c",
+      "title": "Viaggio 90: Barcelona–Corvallis–Barcelona",
+      "description": "Mezzi: aereo. Altre tappe: Newport, Crater Lake. Scali: Amsterdam, Seattle. Residente in: Spagna. Paesi visitati: Stati Uniti. Attraversati: Paesi Bassi.",
+      "startDate": "2018-06-09",
+      "endDate": "2018-06-23",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Corvallis, Stati Uniti",
+        "lat": 44.5646,
+        "lng": -123.262,
+        "country": "Stati Uniti"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "c6e507bf-594c-4a25-af5d-de9ebec5499e",
+      "title": "Viaggio 91: Barcelona–Venezia",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2018-08-11",
+      "endDate": "2018-08-20",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "5843e7cf-9fd5-42fa-8636-c06f786459a2",
+      "title": "Viaggio 92: Barcelona–Tel Aviv",
+      "description": "Mezzi: aereo. Altre tappe: Istanbul. Scali: Istanbul. Residente in: Spagna. Paesi visitati: Israele. Attraversati: Turchia. Visti da lontano: Gaza.",
+      "startDate": "2018-10-06",
+      "endDate": "2018-10-19",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Tel Aviv, Israele",
+        "lat": 32.0853,
+        "lng": 34.7818,
+        "country": "Israele"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "a8a81756-dafa-4f3e-af17-8314c16b85ba",
+      "title": "Viaggio 92: Eilat–Aqaba",
+      "description": "Mezzi: auto. Altre tappe: Wadi Rum, Petra. Residente in: Spagna. Paesi visitati: Giordania. Visti da lontano: Arabia Saudita.",
+      "startDate": "2018-10-19",
+      "endDate": "2018-10-23",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Aqaba, Giordania",
+        "lat": 29.532,
+        "lng": 35.006,
+        "country": "Giordania"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "1ef0c69a-e867-4c0f-9488-6de349a323c1",
+      "title": "Viaggio 92: Eilat–Betlemme",
+      "description": "Mezzi: auto. Altre tappe: Gerusalemme, Jerico. Residente in: Spagna. Paesi visitati: Cisgiordania.",
+      "startDate": "2018-10-23",
+      "endDate": "2018-10-23",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Betlemme, Cisgiordania",
+        "lat": 31.7054,
+        "lng": 35.2024,
+        "country": "Cisgiordania"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "1d08cd50-ef22-481f-bd5d-c955a0c32258",
+      "title": "Viaggio 92: Tel Aviv–Barcelona",
+      "description": "Mezzi: aereo. Scali: Istanbul. Residente in: Spagna. Paesi visitati: Israele. Attraversati: Turchia.",
+      "startDate": "2018-10-23",
+      "endDate": "2018-10-23",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Tel Aviv, Israele",
+        "lat": 32.0853,
+        "lng": 34.7818,
+        "country": "Israele"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "750a268e-988a-4b72-99bf-a91d22813957",
+      "title": "Viaggio 93: Barcelona–Tel Aviv–Barcelona",
+      "description": "Mezzi: aereo. Scali: Istanbul. Residente in: Spagna. Paesi visitati: Israele. Attraversati: Turchia.",
+      "startDate": "2018-11-03",
+      "endDate": "2018-11-09",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Tel Aviv, Israele",
+        "lat": 32.0853,
+        "lng": 34.7818,
+        "country": "Israele"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "90012ff8-7055-432d-ad4b-1f84f43f053b",
+      "title": "Viaggio 94: Barcelona–Tel Aviv–Barcelona",
+      "description": "Mezzi: aereo. Scali: Istanbul. Residente in: Spagna. Paesi visitati: Israele. Attraversati: Turchia.",
+      "startDate": "2019-01-26",
+      "endDate": "2019-02-08",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Tel Aviv, Israele",
+        "lat": 32.0853,
+        "lng": 34.7818,
+        "country": "Israele"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "ebd13174-c584-45db-840e-c4ba99385263",
+      "title": "Viaggio 95: Barcelona–Paris–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2019-02-26",
+      "endDate": "2019-03-03",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Parigi, Francia",
+        "lat": 48.8566,
+        "lng": 2.3522,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "ee6ceac2-3164-4c77-bdfe-5f356c563116",
+      "title": "Viaggio 96: Barcelona–Paris–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2019-04-14",
+      "endDate": "2019-04-18",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Parigi, Francia",
+        "lat": 48.8566,
+        "lng": 2.3522,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "45cb081c-ed45-4577-ad2b-0e03119c37df",
+      "title": "Viaggio 97: Barcelona–Paris–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2019-06-16",
+      "endDate": "2019-06-21",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Parigi, Francia",
+        "lat": 48.8566,
+        "lng": 2.3522,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "a1481487-4cd5-4384-8ca4-fe5b8f8d4c90",
+      "title": "Sardegna 2",
+      "description": "Viaggio in nave e auto (Ford Focus) con Ubi",
+      "startDate": "2019-07-18",
+      "endDate": "2019-07-26",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Porto Torres, Sassari, Sardinia, 07046, Italy",
+        "lat": 40.8370333,
+        "lng": 8.4013292,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viagginave"
+      ]
+    },
+    {
+      "id": "faff1df4-fcff-4470-aab2-4a861be87d77",
+      "title": "Marrakesh - HP",
+      "description": "Viaggio come traduttore con Andrea Paesante",
+      "startDate": "2019-09-15",
+      "endDate": "2019-09-20",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Marrakesh, Pachalik de Marrakech, Marrakesh Prefecture, Marrakech-Safi, Morocco",
+        "lat": 31.6258257,
+        "lng": -7.9891608,
+        "country": "Marocco"
+      },
+      "categories": [
+        "lavoro",
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "852dffe7-e987-412e-8bd0-1ccf7f4d4710",
+      "title": "Viaggio 100: Barcelona–Bruxelles–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Belgio.",
+      "startDate": "2019-09-23",
+      "endDate": "2019-09-27",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Bruxelles, Belgio",
+        "lat": 50.8503,
+        "lng": 4.3517,
+        "country": "Belgio"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "78f60a58-8e35-4e7a-b222-d303a2243e3a",
+      "title": "Viaggio 101: Barcelona–Paris–Barcelona",
+      "description": "Mezzi: aereo. Altre tappe: Mayenne. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2019-09-29",
+      "endDate": "2019-10-04",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Parigi, Francia",
+        "lat": 48.8566,
+        "lng": 2.3522,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "f0466785-676f-4a88-a2c3-74e6a64b4807",
+      "title": "Viaggio 102: Barcelona–Paris–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2019-11-04",
+      "endDate": "2019-11-07",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Parigi, Francia",
+        "lat": 48.8566,
+        "lng": 2.3522,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "f64300bb-bf66-4804-8148-68469ddd2e62",
+      "title": "Viaggio 103: Barcelona–La Valletta–Barcelona",
+      "description": "Mezzi: aereo. Altre tappe: Gozo. Residente in: Spagna. Paesi visitati: Malta.",
+      "startDate": "2019-12-01",
+      "endDate": "2019-12-04",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "La Valletta, Malta",
+        "lat": 35.8989,
+        "lng": 14.5146,
+        "country": "Malta"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
       "id": "87ea4868-d926-44fb-92df-5aa05abb653a",
       "title": "Vipassana 3",
       "description": "Terzo vipassana di 10gg en el Dhamma Neru, Santa María Palautordera - Barcelona",
@@ -614,11 +3308,710 @@
         "name": "Santa Maria de Palautordera, Vallés Oriental, Barcelona, Catalonia, 08460, Spain",
         "lat": 41.693781,
         "lng": 2.4442321,
-        "country": "Spain"
+        "country": "Spagna"
       },
       "categories": [
         "scuola",
         "altri"
+      ]
+    },
+    {
+      "id": "b539b065-1b12-4ffa-b9a9-780b0895127a",
+      "title": "Viaggio 104: Barcelona–Venezia",
+      "description": "Mezzi: aereo. Altre tappe: Padola. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2020-07-22",
+      "endDate": "2020-07-31",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "f78770d1-d925-4426-b3f8-282fb4663072",
+      "title": "HP Live Expert",
+      "description": "",
+      "startDate": "2020-10-03",
+      "endDate": "2022-05-13",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "lavoro"
+      ]
+    },
+    {
+      "id": "f737d647-2c37-440d-abd8-5179ede31f25",
+      "title": "Viaggio 105: Barcelona–Recife",
+      "description": "Mezzi: aereo. Scali: Lisbona. Residente in: Spagna. Paesi visitati: Brasile. Attraversati: Portogallo.",
+      "startDate": "2021-05-08",
+      "endDate": "2021-05-23",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Recife, Brasile",
+        "lat": -8.0476,
+        "lng": -34.877,
+        "country": "Brasile"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "0d399e63-4f0c-433f-abea-52c5499693b0",
+      "title": "Nascita di Fabio",
+      "description": "Nasce mio figlio alle 3:05 a.m.",
+      "startDate": "2021-09-19",
+      "endDate": "2021-09-19",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Esplugues de Llobregat, Bajo Llobregat, Barcelona, Catalonia, 08950, Spain",
+        "lat": 41.3778094,
+        "lng": 2.0886257,
+        "country": "Spagna"
+      },
+      "categories": [
+        "cambiavita",
+        "vittorie"
+      ]
+    },
+    {
+      "id": "1dd048ae-9b8c-47ba-8df7-4c9dbc1d8865",
+      "title": "Viaggio 106: Barcelona–Venezia",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2022-02-04",
+      "endDate": "2022-02-09",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "fb4b5a80-5482-4545-a286-2c6f278d5722",
+      "title": "Viaggio 107: Barcelona–Venezia",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2022-05-18",
+      "endDate": "2022-05-26",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "6cf4bc2c-a051-44fb-8fa6-07407cfc3033",
+      "title": "HP Training Center",
+      "description": "Formatore della tecnologia HP Indigo",
+      "startDate": "2022-06-20",
+      "endDate": null,
+      "ongoing": true,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "lavoro"
+      ]
+    },
+    {
+      "id": "160e2f9e-948f-42d0-87d2-2198468e4c02",
+      "title": "Viaggio 108: Barcelona–Venezia",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2022-09-17",
+      "endDate": "2022-09-24",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "0c1bf8d3-1935-4969-8dfc-6eee807f98cf",
+      "title": "Viaggio 109: Barcelona–Marsiglia",
+      "description": "Mezzi: auto. Altre tappe: Chateau De Salses. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2022-12-17",
+      "endDate": "2022-12-18",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Marsiglia, Francia",
+        "lat": 43.2965,
+        "lng": 5.3698,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "95894ad2-706b-4e0b-be5c-fbd6cce92886",
+      "title": "Viaggio 109: Marsiglia–Venezia",
+      "description": "Mezzi: auto. Altre tappe: Varazzo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2022-12-18",
+      "endDate": "2022-12-19",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "bd1d0568-40a0-43bb-a608-e29e4e66de07",
+      "title": "Viaggio 109: Venezia–Marsiglia",
+      "description": "Mezzi: auto. Altre tappe: Bossano. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2022-12-27",
+      "endDate": "2022-12-28",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Marsiglia, Francia",
+        "lat": 43.2965,
+        "lng": 5.3698,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "c6edf83c-5f9e-40cb-9456-b7950a6e85a3",
+      "title": "Viaggio 109: Marsiglia–Barcelona",
+      "description": "Mezzi: auto. Altre tappe: Arles, Beziers. Residente in: Spagna.",
+      "startDate": "2022-12-30",
+      "endDate": "2022-12-30",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "a5accd6e-e9f4-4061-a888-9ebb4a3cb397",
+      "title": "Viaggio 110: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2023-05-10",
+      "endDate": "2023-05-20",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "2074063c-a60c-409e-a303-036880247c83",
+      "title": "Viaggio 111: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2023-08-12",
+      "endDate": "2023-08-19",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "9fcbb197-636e-4d77-a2db-6a8c87d08785",
+      "title": "Viaggio 112: Barcelona–Dobrecen",
+      "description": "Mezzi: aereo, auto. Altre tappe: Egen. Residente in: Spagna. Paesi visitati: Ungheria.",
+      "startDate": "2024-02-14",
+      "endDate": "2024-02-18",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Debrecen, Ungheria",
+        "lat": 47.5316,
+        "lng": 21.6273,
+        "country": "Ungheria"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "6ba1ac7c-b6ae-4822-a1b1-fbf223788230",
+      "title": "Viaggio 112: Dobrecen–Oradea",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Romania.",
+      "startDate": "2024-02-18",
+      "endDate": "2024-02-18",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Oradea, Romania",
+        "lat": 47.0465,
+        "lng": 21.9189,
+        "country": "Romania"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "b84ed8b6-eeaf-4db9-a125-49606c3ad396",
+      "title": "Viaggio 112: Oradea–Dobrecen",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Ungheria.",
+      "startDate": "2024-02-18",
+      "endDate": "2024-02-23",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Debrecen, Ungheria",
+        "lat": 47.5316,
+        "lng": 21.6273,
+        "country": "Ungheria"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "16023291-7dbb-4c16-a15a-a83fd9f73459",
+      "title": "Viaggio 112: Budapest–Barcelona",
+      "description": "Mezzi: aereo. Altre tappe: Budapest. Residente in: Spagna.",
+      "startDate": "2024-02-23",
+      "endDate": "2024-02-23",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "7d722c54-db20-4ffe-b773-d00aa899a9ab",
+      "title": "Viaggio 113: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2024-05-11",
+      "endDate": "2024-05-19",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "560013e7-a536-43e4-a0bd-0116236a1b1a",
+      "title": "Viaggio 114: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2024-08-20",
+      "endDate": "2024-08-31",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "f05e40b0-d49c-4be6-9e88-268ae8862185",
+      "title": "Viaggio 115: Barcelona–Espéraza–Barcelona",
+      "description": "Mezzi: auto. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2024-12-05",
+      "endDate": "2024-12-06",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Espéraza, Francia",
+        "lat": 42.9333,
+        "lng": 2.2167,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "40043a3b-b27f-4ace-bd53-be6ee87a4224",
+      "title": "Viaggio 116: Barcelona–Perpignan–Barcelona",
+      "description": "Mezzi: auto. Altre tappe: Eus, Collioure, Castelnou. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2024-12-14",
+      "endDate": "2024-12-16",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Perpignano, Francia",
+        "lat": 42.6887,
+        "lng": 2.8948,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "43c8f192-9cd4-46cd-b270-025be3f33a72",
+      "title": "Viaggio 117: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2024-12-20",
+      "endDate": "2024-12-31",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "ae952164-750c-41d3-b094-82e0512390d9",
+      "title": "Viaggio 118: Barcelona–Zwolle–Barcelona",
+      "description": "Mezzi: aereo, auto. Altre tappe: Utrecht, Delfsen. Scali: Amsterdam. Residente in: Spagna. Paesi visitati: Paesi Bassi.",
+      "startDate": "2025-04-21",
+      "endDate": "2025-04-25",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Zwolle, Paesi Bassi",
+        "lat": 52.5168,
+        "lng": 6.083,
+        "country": "Paesi Bassi"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "2ba6e9a3-db8a-4c28-8649-72d3f44d9aaa",
+      "title": "Viaggio 119: Barcelona–Espéraza–Barcelona",
+      "description": "Mezzi: auto. Altre tappe: Quillan, Limoux. Residente in: Spagna. Paesi visitati: Francia.",
+      "startDate": "2025-05-04",
+      "endDate": "2025-05-07",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Espéraza, Francia",
+        "lat": 42.9333,
+        "lng": 2.2167,
+        "country": "Francia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "7a532504-d0de-40d9-b361-d6c5c6c4abe4",
+      "title": "Pantelleria",
+      "description": "Incredibile Viaggio offerto da Matteo Antonello - volo bcn-palermo-panrelleria",
+      "startDate": "2025-05-17",
+      "endDate": "2025-05-22",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Pantelleria, Trapani, Sicily, 91017, Italy",
+        "lat": 36.8314576,
+        "lng": 11.9450395,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "1bfeb7ab-9cf4-4672-b326-800457ac1683",
+      "title": "Viaggio 121: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2025-08-08",
+      "endDate": "2025-08-14",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "59a6462b-ccb0-4d3f-8494-4995187c39b2",
+      "title": "Viaggio 122: Barcelona–Oporto–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Portogallo.",
+      "startDate": "2025-09-07",
+      "endDate": "2025-09-11",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Porto, Portogallo",
+        "lat": 41.1579,
+        "lng": -8.6291,
+        "country": "Portogallo"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "17b3eb29-0635-4a8b-a290-92e260f5d344",
+      "title": "Viaggio 123: Barcelona–Oporto–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Portogallo.",
+      "startDate": "2026-02-02",
+      "endDate": "2026-02-06",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Porto, Portogallo",
+        "lat": 41.1579,
+        "lng": -8.6291,
+        "country": "Portogallo"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "172a90ff-6336-4003-b5c8-b6b83f4b5785",
+      "title": "Viaggio 124: Barcelona–Gent–Barcelona",
+      "description": "Mezzi: aereo. Scali: Bruxelles. Residente in: Spagna. Paesi visitati: Belgio.",
+      "startDate": "2026-02-08",
+      "endDate": "2026-02-13",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Gand, Belgio",
+        "lat": 51.0543,
+        "lng": 3.7174,
+        "country": "Belgio"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "d9943a90-7e1d-47e8-adbd-d238ef9ddfd9",
+      "title": "Viaggio 125: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2026-02-14",
+      "endDate": "2026-02-21",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "e7fb7cd0-5ae6-480f-b3db-f95f24e4f46e",
+      "title": "Viaggio 126: Barcelona–Recife–Barcelona",
+      "description": "Mezzi: aereo. Altre tappe: Olinda. Residente in: Spagna. Paesi visitati: Brasile.",
+      "startDate": "2026-03-21",
+      "endDate": "2026-04-12",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Recife, Brasile",
+        "lat": -8.0476,
+        "lng": -34.877,
+        "country": "Brasile"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "4a2001b0-6f6d-444c-bf84-019feea4e8c6",
+      "title": "Viaggio 127: Barcelona–Kaunas",
+      "description": "Mezzi: aereo, auto. Residente in: Spagna. Paesi visitati: Lituania.",
+      "startDate": "2026-05-04",
+      "endDate": "2026-05-09",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Kaunas, Lituania",
+        "lat": 54.8985,
+        "lng": 23.9036,
+        "country": "Lituania"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "2d655320-acf8-40ee-b22f-e863384d1869",
+      "title": "Viaggio 127: Kaunas–Riga",
+      "description": "Mezzi: auto. Altre tappe: Jelgava, Krysiu Kalnas, Kedainiai. Residente in: Spagna. Paesi visitati: Lettonia.",
+      "startDate": "2026-05-09",
+      "endDate": "2026-05-10",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Riga, Lettonia",
+        "lat": 56.9496,
+        "lng": 24.1052,
+        "country": "Lettonia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "55a16024-24fd-49b6-b2ce-c2ab869d0f34",
+      "title": "Viaggio 127: Riga–Kaunas",
+      "description": "Mezzi: auto. Altre tappe: Bauskas, Vilnius, Trakai, Uzapis. Residente in: Spagna. Paesi visitati: Lituania.",
+      "startDate": "2026-05-10",
+      "endDate": "2026-05-13",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Kaunas, Lituania",
+        "lat": 54.8985,
+        "lng": 23.9036,
+        "country": "Lituania"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "b59f2ee3-aea6-4beb-8191-b6906f4f136f",
+      "title": "Viaggio 127: Vilnius–Barcelona",
+      "description": "Mezzi: aereo, auto. Residente in: Spagna.",
+      "startDate": "2026-05-13",
+      "endDate": "2026-05-13",
+      "ongoing": false,
+      "locked": false,
+      "location": null,
+      "categories": [
+        "viaggi",
+        "viaggiaereo",
+        "viaggiauto"
+      ]
+    },
+    {
+      "id": "c2cbd593-9c87-43a9-bf82-29b602adc6b5",
+      "title": "Viaggio 128: Barcelona–Venezia–Barcelona",
+      "description": "Mezzi: aereo. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2026-06-20",
+      "endDate": "2026-06-26",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Italia",
+        "lat": 45.4408,
+        "lng": 12.3155,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
+      ]
+    },
+    {
+      "id": "5a93e39b-40c5-46b1-8c07-7051573f791c",
+      "title": "Viaggio 129: Barcelona–Milano–Barcelona",
+      "description": "Mezzi: aereo. Altre tappe: Borggomanero. Residente in: Spagna. Paesi visitati: Italia.",
+      "startDate": "2026-07-27",
+      "endDate": "2026-07-30",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Milano, Italia",
+        "lat": 45.4642,
+        "lng": 9.19,
+        "country": "Italia"
+      },
+      "categories": [
+        "viaggi",
+        "viaggiaereo"
       ]
     }
   ],
@@ -640,17 +4033,13 @@
       "categories": [
         "periodi",
         "lavoro",
-        "viaggi",
-        "viaggiaereo"
+        "viaggi"
       ],
       "_deletedAt": "2026-09-26T14:27:27.955Z"
     }
   ],
+  "privateBlob": null,
   "privateCountHint": 0,
-  "exportedAt": "2026-10-02T16:41:28.221Z",
-  "formatVersion": 3,
-  "privateBlob": {
-    "events": [],
-    "trash": []
-  }
+  "exportedAt": "2026-10-05T16:10:33.000Z",
+  "formatVersion": 3
 }
