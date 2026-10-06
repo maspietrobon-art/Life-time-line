@@ -175,7 +175,8 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
 .gantt-summary-head strong{font-family:'Fraunces';font-size:1rem;}
 .gantt-summary-actions{display:flex;gap:6px;flex-shrink:0;}
 .gantt-summary-text{font-size:.85rem;line-height:1.55;white-space:pre-wrap;color:var(--ink);}
-.gantt-playhead{position:absolute;top:0;bottom:0;border-left:2px solid var(--teal-deep);z-index:4;pointer-events:none;}
+#ganttLanes{position:relative;z-index:0;isolation:isolate;} /* own stacking context: events can be layered freely without covering the header */
+.gantt-playhead{position:absolute;top:0;bottom:0;border-left:2px solid var(--teal-deep);z-index:2;pointer-events:none;}
 .gantt-band{position:absolute;top:0;background:rgba(37,72,66,.14);border-left:1px solid var(--teal-deep);border-right:1px solid var(--teal-deep);z-index:0;pointer-events:none;}
 .gantt-bar.gantt-active{outline:2px solid var(--teal-deep);outline-offset:-1px;}
 .gantt-point.gantt-active .gantt-point-dot{outline:2px solid var(--teal-deep);outline-offset:1px;}
@@ -186,20 +187,20 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
   display:flex;align-items:center;padding-left:12px;font-size:.72rem;color:var(--ink-soft);font-weight:600;border-right:1px solid var(--line);}
 .gantt-yeartick{position:absolute;top:0;height:30px;border-left:1px solid var(--line);padding-left:5px;font-size:.72rem;color:var(--ink-soft);display:flex;align-items:center;white-space:nowrap;}
 .gantt-monthtick{position:absolute;top:30px;height:16px;border-left:1px solid rgba(0,0,0,.08);padding-left:3px;font-size:.6rem;color:var(--grey);display:flex;align-items:center;white-space:nowrap;}
-.gantt-todayline{position:absolute;top:0;bottom:0;border-left:2px solid var(--gold);z-index:2;}
+.gantt-todayline{position:absolute;top:0;bottom:0;border-left:2px solid var(--gold);z-index:1;pointer-events:none;}
 .gantt-row{position:relative;height:36px;border-bottom:1px solid var(--line);}
 .gantt-row:nth-child(odd){background:rgba(0,0,0,.02);}
-.gantt-rowlabel{position:sticky;left:0;width:150px;height:36px;background:var(--card);z-index:3;
+.gantt-rowlabel{position:sticky;left:0;width:150px;height:36px;background:var(--card);z-index:20;
   display:flex;align-items:center;gap:6px;padding-left:12px;font-size:.78rem;border-right:1px solid var(--line);}
 .gantt-yearline{position:absolute;top:0;bottom:0;border-left:1px dashed rgba(0,0,0,.07);}
 .gantt-bar{position:absolute;top:7px;height:22px;border-radius:4px;cursor:pointer;display:flex;align-items:center;
-  padding:0 7px;font-size:.72rem;color:#fff;white-space:nowrap;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.2);z-index:1;}
+  padding:0 7px;font-size:.72rem;color:#fff;white-space:nowrap;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.2);z-index:4;}
 .gantt-bar:hover{filter:brightness(1.12);}
 .gantt-point{position:absolute;top:7px;height:22px;display:flex;align-items:center;gap:5px;cursor:pointer;
-  white-space:nowrap;z-index:2;}
-.gantt-point-dot{width:14px;height:14px;border-radius:50%;border:2px solid #fff;flex-shrink:0;
+  white-space:nowrap;} /* no z-index here: dot and label are layered separately */
+.gantt-point-dot{position:relative;z-index:5;width:14px;height:14px;border-radius:50%;border:2px solid #fff;flex-shrink:0;
   box-shadow:0 1px 3px rgba(0,0,0,.4);}
-.gantt-point-label{font-size:.72rem;color:var(--ink);background:var(--card);padding:1px 7px;border-radius:10px;
+.gantt-point-label{position:relative;z-index:3;font-size:.72rem;color:var(--ink);background:var(--card);padding:1px 7px;border-radius:10px;
   box-shadow:0 1px 3px rgba(0,0,0,.2);border:1px solid var(--line);}
 .gantt-point:hover .gantt-point-label{background:var(--paper);}
 
@@ -1263,7 +1264,7 @@ function renderDiagram(){
   if(state.ganttDayIndex > totalDays) state.ganttDayIndex = totalDays;
   playSlider.value = state.ganttDayIndex;
   populateGanttSearchSelects();
-  updateGanttPlayheadAt(state.ganttDayIndex);
+  updateGanttPlayheadAt(state.ganttDayIndex, state.ganttPlaying);
 }
 
 function openEventInfo(id){
@@ -1699,12 +1700,21 @@ function renderGanttSummary(headerText, evsArr){
   outText.textContent = sorted.map(ev => `• ${ev.title}${ev.locked ? ' 🔒' : ''} — ${eventDateLine(ev)}`).join('\n');
 }
 
-function updateGanttPlayheadAt(dayIndex){
+// Scrolls the diagram so the playhead sits in the middle of the visible track area
+// (the sticky category column on the left is excluded from the "visible" width).
+function centerGanttOn(x){
+  const outer = document.getElementById('ganttOuter');
+  const visible = outer.clientWidth - GANTT_LABEL_W;
+  outer.scrollLeft = Math.max(0, x - GANTT_LABEL_W - visible / 2);
+}
+
+function updateGanttPlayheadAt(dayIndex, center){
   const d = dateFromBirthOffset(dayIndex);
   const iso = dateObjToISO(d);
   const headerText = `${FULL_MONTHS_IT[d.getMonth()]} ${d.getFullYear()}`;
   document.getElementById('ganttPlayLabel').textContent = headerText;
   const matchIds = showGanttIndicator(iso, iso);
+  if(center) centerGanttOn(ganttDateToX(d));
   const evs = visibleEvents().filter(e => matchIds.has(e.id));
   renderGanttSummary(headerText, evs);
 }
@@ -1722,7 +1732,7 @@ function toggleGanttPlay(){
   if(parseInt(slider.value, 10) >= maxDay){
     slider.value = 0;
     state.ganttDayIndex = 0;
-    updateGanttPlayheadAt(0);
+    updateGanttPlayheadAt(0, true);
   }
   state.ganttPlaying = true;
   btn.textContent = '⏸';
@@ -1733,7 +1743,7 @@ function toggleGanttPlay(){
       d = maxDay;
       slider.value = d;
       state.ganttDayIndex = d;
-      updateGanttPlayheadAt(d);
+      updateGanttPlayheadAt(d, true);
       clearInterval(state.ganttPlayTimer);
       state.ganttPlaying = false;
       document.getElementById('ganttPlayBtn').textContent = '▶';
@@ -1741,7 +1751,7 @@ function toggleGanttPlay(){
     }
     slider.value = d;
     state.ganttDayIndex = d;
-    updateGanttPlayheadAt(d);
+    updateGanttPlayheadAt(d, true);
   }, preset.ms);
 }
 
