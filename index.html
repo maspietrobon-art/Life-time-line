@@ -572,6 +572,8 @@ const LS = {
   snapAt: 'bio_snapshot_applied_at_v1',   // exportedAt of the snapshot this device last applied/exported
   snapSkip: 'bio_snapshot_skipped_v1',   // newer online snapshot the user chose not to apply
   seenDefaults: 'bio_seen_default_cats_v1',
+  catsCustom: 'bio_cats_customized_v1',     // '1' = this device edited its categories: a published snapshot must not overwrite them
+  seenSnapCats: 'bio_seen_snapshot_cats_v1',
   dirty: 'bio_local_dirty_v1'            // '1' = edits made here since that snapshot
 };
 
@@ -645,7 +647,7 @@ state.categories.forEach(c => state.visibleCats.add(c.id));
 
 let trackDirty = false; // becomes true once startup (bootstrap + migrations) is done
 function markDirty(){ if(trackDirty) localStorage.setItem(LS.dirty, '1'); }
-function persistCategories(){ saveJSON(LS.categories, state.categories); markDirty(); }
+function persistCategories(){ saveJSON(LS.categories, state.categories); markDirty(); if(trackDirty) localStorage.setItem(LS.catsCustom, '1'); }
 function persistSettings(){ saveJSON(LS.settings, state.settings); }
 function persistPublicEvents(){ saveJSON(LS.events, state.publicEvents); markDirty(); }
 function persistPublicTrash(){ saveJSON(LS.trashPublic, state.publicTrash); markDirty(); }
@@ -2358,8 +2360,29 @@ function buildSnapshotData(){
 
 // Applies a snapshot object (from export, import, or the published data.json) to the live state.
 // Shared by manual import and by the automatic first-visit bootstrap below.
-function applySnapshotData(data){
-  state.categories = data.categories || DEFAULT_CATEGORIES;
+function applySnapshotData(data, keepLocalCats){
+  const snapCats = data.categories || DEFAULT_CATEGORIES;
+  if(keepLocalCats && localStorage.getItem(LS.catsCustom) === '1' && state.categories.length){
+    // This device customised its categories (renamed / deleted / recoloured): keep them.
+    // From the snapshot take only categories this device has never seen before.
+    const seenArr = loadJSON(LS.seenSnapCats, null);
+    const seen = new Set(Array.isArray(seenArr) ? seenArr : snapCats.map(c=>c.id));
+    snapCats.forEach(c => {
+      if(!seen.has(c.id) && !state.categories.some(x => x.id === c.id)) state.categories.push({id:c.id, label:c.label, color:c.color});
+    });
+    saveJSON(LS.seenSnapCats, [...new Set([...seen, ...snapCats.map(c=>c.id)])]);
+    const keep = new Set(state.categories.map(c=>c.id));
+    const fallback = keep.has('altri') ? 'altri' : null;
+    const clean = list => (list||[]).forEach(ev => {
+      ev.categories = (ev.categories||[]).filter(x => keep.has(x));
+      if(!ev.categories.length && fallback) ev.categories = [fallback];
+    });
+    clean(data.publicEvents); clean(data.publicTrash);
+  } else {
+    state.categories = snapCats;
+    saveJSON(LS.seenSnapCats, snapCats.map(c=>c.id));
+    localStorage.removeItem(LS.catsCustom);
+  }
   state.settings = Object.assign({}, DEFAULT_SETTINGS, data.settings || {});
   state.publicEvents = data.publicEvents || [];
   state.publicTrash = data.publicTrash || [];
@@ -2370,7 +2393,7 @@ function applySnapshotData(data){
   const blob = data.privateBlob || data.privateData || null;
   if(blob) saveJSON(LS.privateBlob, blob);
   if(data.privateCountHint !== undefined) localStorage.setItem(LS.privateBlob+'_count', String(data.privateCountHint));
-  saveJSON(LS.seenDefaults, DEFAULT_CATEGORIES.map(d=>d.id));   // the snapshot's category list is authoritative
+  saveJSON(LS.seenDefaults, DEFAULT_CATEGORIES.map(d=>d.id));
   migratePublicData();
   migrateMissingDefaultCategories();
 }
@@ -2456,7 +2479,7 @@ async function bootstrapData(){
       }
     }
     if(apply){
-      applySnapshotData(snap);
+      applySnapshotData(snap, true);
       localStorage.setItem(LS.snapAt, snap.exportedAt);
       localStorage.setItem(LS.dirty, '0');
       localStorage.removeItem(LS.snapSkip);
@@ -2478,17 +2501,23 @@ bootstrapData().then(() => { trackDirty = true; renderAll(); });
 if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(()=>{}); });
 }
+try{ if(navigator.storage && navigator.storage.persist) navigator.storage.persist(); }catch(e){}
 let deferredInstall = null;
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault(); deferredInstall = e;
-  document.getElementById('installBtn').style.display = '';
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+const installBtnEl = document.getElementById('installBtn');
+if(!isStandalone && /^https?:$/.test(location.protocol)) installBtnEl.style.display = '';   // always offer help unless already installed
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredInstall = e; });
+installBtnEl.addEventListener('click', async () => {
+  if(deferredInstall){
+    deferredInstall.prompt(); await deferredInstall.userChoice.catch(()=>{});
+    deferredInstall = null; return;
+  }
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  alert(ios
+    ? 'Su iPhone/iPad:\n1) apri questa pagina con Safari\n2) tocca il pulsante Condividi (quadrato con la freccia)\n3) scegli "Aggiungi a Home"'
+    : 'Su Android (Chrome):\n1) tocca il menu ⋮ in alto a destra\n2) scegli "Installa app" (o "Aggiungi a schermata Home")\n\nSe la voce non compare: apri l\'indirizzo della pagina su GitHub Pages (non il file scaricato), attendi qualche secondo e riprova.');
 });
-document.getElementById('installBtn').addEventListener('click', async () => {
-  if(!deferredInstall) return;
-  deferredInstall.prompt(); await deferredInstall.userChoice.catch(()=>{});
-  deferredInstall = null; document.getElementById('installBtn').style.display = 'none';
-});
-window.addEventListener('appinstalled', () => { document.getElementById('installBtn').style.display = 'none'; });
+window.addEventListener('appinstalled', () => { installBtnEl.style.display = 'none'; });
 
 // Every time the app comes back to the foreground (or the connection returns) look for a newer
 // data.json on GitHub. Same rules as at startup: no local edits -> silent update; local edits -> ask once.
