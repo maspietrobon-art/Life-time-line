@@ -316,27 +316,6 @@
       ]
     },
     {
-      "id": "9800de48-4fbe-45b0-91e5-be3d045c087e",
-      "title": "MAROCCO",
-      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
-      "startDate": "2003-11-02",
-      "endDate": "2004-01-31",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
-        "lat": 33.5945144,
-        "lng": -7.6200284,
-        "country": "Marocco"
-      },
-      "categories": [
-        "lavoro",
-        "viaggi",
-        "cambiavita",
-        "minori"
-      ]
-    },
-    {
       "id": "feff4d45-076e-47f8-9ebe-2fc4376ec64d",
       "title": "MAROCCO",
       "description": "L'incredibile avventura marocchina dei Ma.I.+Architects nella Ville de Merde",
@@ -388,25 +367,6 @@
       ]
     },
     {
-      "id": "930fadfa-95bc-4c11-8c62-2fe89a7f30d3",
-      "title": "MAROCCO",
-      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
-      "startDate": "2004-02-02",
-      "endDate": "2004-02-23",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
-        "lat": 33.5945144,
-        "lng": -7.6200284,
-        "country": "Marocco"
-      },
-      "categories": [
-        "lavoro",
-        "viaggi"
-      ]
-    },
-    {
       "id": "68429578-940c-4895-ad09-383eb25b30f1",
       "title": "Monastier",
       "description": "Ritorno a casa nel periodo marocchino - volo via Bruxelles",
@@ -425,24 +385,6 @@
       ]
     },
     {
-      "id": "fb577b56-6459-4f23-a972-bcecd1361427",
-      "title": "MAROCCO",
-      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
-      "startDate": "2004-03-05",
-      "endDate": "2004-06-01",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
-        "lat": 33.5945144,
-        "lng": -7.6200284,
-        "country": "Marocco"
-      },
-      "categories": [
-        "viaggi"
-      ]
-    },
-    {
       "id": "3e030322-3ddb-412c-8f72-95238116fd1e",
       "title": "Ceuta",
       "description": "Viaggio in auto per rinnovo visto",
@@ -455,24 +397,6 @@
         "lat": 35.888361,
         "lng": -5.304138,
         "country": "Spagna"
-      },
-      "categories": [
-        "viaggi"
-      ]
-    },
-    {
-      "id": "b20806d3-d1ec-4fa6-8628-35b40f676b51",
-      "title": "MAROCCO",
-      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
-      "startDate": "2004-06-01",
-      "endDate": "2004-07-15",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
-        "lat": 33.5945144,
-        "lng": -7.6200284,
-        "country": "Marocco"
       },
       "categories": [
         "viaggi"
@@ -3885,6 +3809,150 @@
       "categories": [
         "loveaffairs"
       ]
+    },
+    {
+      "id": "dfe5ed8b-424f-48db-a0a0-7d9fd7901a95",
+      "title": "Diabete di Davide",
+      "description": "Diagnostico di diabete per Davide",
+      "startDate": "2001-07-05",
+      "endDate": "2001-07-05",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Vallio, Roncade, Treviso, Veneto, 31056, Italia",
+        "lat": 45.6385124,
+        "lng": 12.4139648,
+        "country": "Italia"
+      },
+      "categories": [
+        "eventiesterni"
+      ]
+    },
+    {
+      "id": "002c79b9-2e00-4277-865e-a89d889e5df0",
+      "title": "Via Fornaci 10, Vallio di Roncade",
+      "description": "",
+      "startDate": "1977-10-07",
+      "endDate": "1991-10-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Vallio, Roncade, Treviso, Veneto, 31056, Italia",
+        "lat": 45.6385124,
+        "lng": 12.4139648,
+        "country": "Italia"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "6cdc0b07-cb60-473e-b325-8936cf2292bd",
+      "title": "Via Fornaci 3, Vallio di Roncade",
+      "description": "",
+      "startDate": "1991-10-01",
+      "endDate": "1999-09-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Vallio, Roncade, Treviso, Veneto, 31056, Italia",
+        "lat": 45.6385124,
+        "lng": 12.4139648,
+        "country": "Italia"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "137941a2-d6cd-4009-bb1d-965634415d3b",
+      "title": "Calle Jounqueras",
+      "description": "Barcelona",
+      "startDate": "1999-09-10",
+      "endDate": "1999-10-10",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Barcelonès, Barcelona, Catalogna, Spagna",
+        "lat": 41.3825802,
+        "lng": 2.177073,
+        "country": "Spagna"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "f6a924a0-81fb-4672-8c6d-d35add964b97",
+      "title": "Calle Nàpols",
+      "description": "Barcelona",
+      "startDate": "1999-10-10",
+      "endDate": "2000-07-15",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Barcelonès, Barcelona, Catalogna, Spagna",
+        "lat": 41.3825802,
+        "lng": 2.177073,
+        "country": "Spagna"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "28fd32ff-4059-4a28-ab4d-0a1b284e25a5",
+      "title": "Morte Nonno Coco",
+      "description": "",
+      "startDate": "2000-07-02",
+      "endDate": "2000-07-02",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Monastier di Treviso, Treviso, Veneto, 31050, Italia",
+        "lat": 45.6634742,
+        "lng": 12.4333902,
+        "country": "Italia"
+      },
+      "categories": [
+        "eventiesterni"
+      ]
+    },
+    {
+      "id": "4a77a0bd-ba05-4b6d-adc6-dff06ee4089e",
+      "title": "Via Fornaci 3, Vallio di Roncade",
+      "description": "",
+      "startDate": "2000-07-15",
+      "endDate": "2003-10-21",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Vallio, Roncade, Treviso, Veneto, 31056, Italia",
+        "lat": 45.6385124,
+        "lng": 12.4139648,
+        "country": "Italia"
+      },
+      "categories": [
+        "residenza"
+      ]
+    },
+    {
+      "id": "77a7b678-167e-4c01-8510-1c967b818b6d",
+      "title": "Rue de Peronne",
+      "description": "Casablanca",
+      "startDate": "2003-11-02",
+      "endDate": "2004-06-15",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Préfecture de Casablanca عمالة الدار البيضاء, Casablanca-Settat ⵜⴰⴷⴷⴰⵔⵜ ⵜⵓⵎⵍⵉⵍⵜ-ⵙⵟⵟⴰⵜ الدار البيضاء-سطات, Marocco",
+        "lat": 33.5945144,
+        "lng": -7.6200284,
+        "country": "Marocco"
+      },
+      "categories": [
+        "residenza"
+      ]
     }
   ],
   "publicTrash": [
@@ -3908,10 +3976,90 @@
         "viaggi"
       ],
       "_deletedAt": "2026-09-26T14:27:27.955Z"
+    },
+    {
+      "id": "9800de48-4fbe-45b0-91e5-be3d045c087e",
+      "title": "MAROCCO",
+      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
+      "startDate": "2003-11-02",
+      "endDate": "2004-01-31",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
+        "lat": 33.5945144,
+        "lng": -7.6200284,
+        "country": "Marocco"
+      },
+      "categories": [
+        "lavoro",
+        "viaggi",
+        "cambiavita",
+        "minori"
+      ],
+      "_deletedAt": "2026-10-20T13:32:22.063Z"
+    },
+    {
+      "id": "930fadfa-95bc-4c11-8c62-2fe89a7f30d3",
+      "title": "MAROCCO",
+      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
+      "startDate": "2004-02-02",
+      "endDate": "2004-02-23",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
+        "lat": 33.5945144,
+        "lng": -7.6200284,
+        "country": "Marocco"
+      },
+      "categories": [
+        "lavoro",
+        "viaggi"
+      ],
+      "_deletedAt": "2026-10-20T13:33:05.416Z"
+    },
+    {
+      "id": "fb577b56-6459-4f23-a972-bcecd1361427",
+      "title": "MAROCCO",
+      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
+      "startDate": "2004-03-05",
+      "endDate": "2004-06-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
+        "lat": 33.5945144,
+        "lng": -7.6200284,
+        "country": "Marocco"
+      },
+      "categories": [
+        "viaggi"
+      ],
+      "_deletedAt": "2026-10-20T13:33:12.499Z"
+    },
+    {
+      "id": "b20806d3-d1ec-4fa6-8628-35b40f676b51",
+      "title": "MAROCCO",
+      "description": "1° viaggio in Marocco, a Casablanca. Con Ivan Mattaliano, inizialmente con Fabiola Bazzo e infine con Marc MC Caul",
+      "startDate": "2004-06-01",
+      "endDate": "2004-07-15",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Casablanca, Pachalik de Casablanca باشوية الدار البيضاء, Prefecture of Casablanca, Casablanca-Settat, Morocco",
+        "lat": 33.5945144,
+        "lng": -7.6200284,
+        "country": "Marocco"
+      },
+      "categories": [
+        "viaggi"
+      ],
+      "_deletedAt": "2026-10-20T13:33:19.049Z"
     }
   ],
   "privateBlob": null,
   "privateCountHint": 0,
-  "exportedAt": "2026-10-19T15:03:25.109Z",
+  "exportedAt": "2026-10-20T13:33:33.917Z",
   "formatVersion": 3
 }
