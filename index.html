@@ -10,8 +10,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Life Time Line">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" href="icon-192.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
@@ -1102,13 +1102,22 @@ function renderTimeline(){
     return;
   }
   let html = '';
+  // group events by the age at which they start; the header shows the age span the group's events cover (e.g. "13-21 anni")
+  const groupSpan = {};
+  evs.forEach(ev => {
+    const a0 = ageAt(new Date(ev.startDate)).years;
+    const a1 = ageAt(new Date(effectiveEndDate(ev))).years;
+    const g = groupSpan[a0] || (groupSpan[a0] = {min:a0, max:a0});
+    if(a1 > g.max) g.max = a1;
+  });
   let lastAgeYear = null;
   evs.forEach(ev => {
     const ageYear = ageAt(new Date(ev.startDate)).years;
     if(ageYear !== lastAgeYear){
       lastAgeYear = ageYear;
-      const bounds = ageYearBounds(ageYear);
-      html += `<div class="tl-year"><span class="yr">${yearsLabel(ageYear)}</span><span class="yr-age">${shortDate(bounds.start)} – ${shortDate(bounds.end)}</span><hr></div>`;
+      const g = groupSpan[ageYear];
+      const label = g.max === g.min ? yearsLabel(g.min) : `${g.min}-${g.max} anni`;
+      html += `<div class="tl-year"><span class="yr">${label}</span><hr></div>`;
     }
     const primaryCat = categoryById(visibleCatsOf(ev)[0] || ev.categories[0]) || {color:'#999'};
     const dateStr = eventDateLine(ev);
