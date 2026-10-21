@@ -130,6 +130,7 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
 .tl-year{display:flex;align-items:baseline;gap:14px;margin:26px 0 10px;}
 .tl-year:first-child{margin-top:4px;}
 .tl-year .yr{font-family:'Fraunces';font-size:1.6rem;font-weight:600;color:var(--teal-deep);}
+.tl-year .yr-cal{color:var(--gold);}
 .tl-year .yr-age{font-size:.78rem;color:var(--ink-soft);}
 .tl-year hr{flex:1;border:none;border-top:1px solid var(--line);}
 
@@ -185,6 +186,9 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
 .gantt-summary-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap;}
 .gantt-summary-head strong{font-family:'Fraunces';font-size:1rem;}
 .gantt-summary-actions{display:flex;gap:6px;flex-shrink:0;}
+.gs-item{display:block;width:100%;text-align:left;background:none;border:none;border-radius:var(--radius);padding:4px 6px;margin:0 0 2px;font:inherit;color:var(--ink);cursor:pointer;line-height:1.45;white-space:normal;}
+.gs-item:hover,.gs-item:focus{background:rgba(51,98,91,.12);outline:none;}
+.gs-item:active{background:rgba(51,98,91,.22);}
 .gantt-summary-text{font-size:.85rem;line-height:1.55;white-space:pre-wrap;color:var(--ink);}
 #ganttLanes{position:relative;z-index:0;isolation:isolate;} /* own stacking context: events can be layered freely without covering the header */
 .gantt-playhead{position:absolute;top:0;bottom:0;border-left:2px solid var(--teal-deep);z-index:2;pointer-events:none;}
@@ -1107,8 +1111,11 @@ function renderTimeline(){
   evs.forEach(ev => {
     const a0 = ageAt(new Date(ev.startDate)).years;
     const a1 = ageAt(new Date(effectiveEndDate(ev))).years;
-    const g = groupSpan[a0] || (groupSpan[a0] = {min:a0, max:a0});
+    const y0 = parseInt(ev.startDate.slice(0,4),10), y1 = parseInt(effectiveEndDate(ev).slice(0,4),10);
+    const g = groupSpan[a0] || (groupSpan[a0] = {min:a0, max:a0, y0:y0, y1:y1});
     if(a1 > g.max) g.max = a1;
+    if(y0 < g.y0) g.y0 = y0;
+    if(y1 > g.y1) g.y1 = y1;
   });
   let lastAgeYear = null;
   evs.forEach(ev => {
@@ -1117,7 +1124,8 @@ function renderTimeline(){
       lastAgeYear = ageYear;
       const g = groupSpan[ageYear];
       const label = g.max === g.min ? yearsLabel(g.min) : `${g.min}-${g.max} anni`;
-      html += `<div class="tl-year"><span class="yr">${label}</span><hr></div>`;
+      const yl = g.y0 === g.y1 ? `${g.y0}` : `${g.y0}-${g.y1}`;
+      html += `<div class="tl-year"><span class="yr">${label}</span><span class="yr yr-cal">${yl}</span><hr></div>`;
     }
     const primaryCat = categoryById(visibleCatsOf(ev)[0] || ev.categories[0]) || {color:'#999'};
     const dateStr = eventDateLine(ev);
@@ -1733,12 +1741,25 @@ function renderGanttSummary(headerText, evsArr){
   document.getElementById('gs_outTitle').textContent = headerText;
   const outText = document.getElementById('gs_outText');
   if(!evsArr || evsArr.length === 0){
-    outText.textContent = '(nessun evento in questo periodo)';
+    state.ganttSummaryPlain = '(nessun evento in questo periodo)';
+    if(outText.dataset.key !== 'empty'){ outText.dataset.key = 'empty'; outText.textContent = state.ganttSummaryPlain; }
     return;
   }
   const sorted = evsArr.slice().sort((a,b) => a.startDate.localeCompare(b.startDate));
-  outText.textContent = sorted.map(ev => `• ${ev.title}${ev.locked ? ' 🔒' : ''} — ${eventDateLine(ev)}`).join('\n');
+  const lines = sorted.map(ev => `• ${ev.title}${ev.locked ? ' 🔒' : ''} — ${eventDateLine(ev)}`);
+  state.ganttSummaryPlain = lines.join('\n');
+  const key = sorted.map(e => e.id).join(',');
+  if(outText.dataset.key === key) return;          // same events as a moment ago: don't rebuild (keeps scroll position while playing)
+  outText.dataset.key = key;
+  outText.innerHTML = sorted.map((ev, i) =>
+    `<button type="button" class="gs-item" data-id="${ev.id}" title="Apri la scheda">${escapeHtml(lines[i])}</button>`).join('');
 }
+document.getElementById('gs_outText').addEventListener('click', e => {
+  const btn = e.target.closest('.gs-item');
+  if(!btn) return;
+  if(state.ganttPlaying) toggleGanttPlay();      // stop the animation so the window stays on the chosen event
+  openEventInfo(btn.dataset.id);
+});
 
 // The black bar is fixed in the middle of the visible track area; the diagram scrolls beneath it.
 function positionGanttCenterBar(){
@@ -1888,7 +1909,7 @@ document.getElementById('gs_goBtn').addEventListener('click', () => {
 
 /* ---- copy / export the current summary text ---- */
 function currentGanttSummaryText(){
-  return `${document.getElementById('gs_outTitle').textContent}\n\n${document.getElementById('gs_outText').textContent}`;
+  return `${document.getElementById('gs_outTitle').textContent}\n\n${state.ganttSummaryPlain || document.getElementById('gs_outText').textContent}`;
 }
 document.getElementById('gs_copyBtn').addEventListener('click', async () => {
   const text = currentGanttSummaryText();

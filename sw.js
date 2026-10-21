@@ -3,7 +3,7 @@
    - icone, Leaflet, font: cache con aggiornamento in background
    - tessere mappa OpenStreetMap: cache a parte (max ~400), per rivedere le zone già visitate offline
    Cambia VERSION per forzare un aggiornamento dell'app. */
-const VERSION = 'v4';
+const VERSION = 'v5';
 const CORE = 'ltl-core-' + VERSION;
 const TILES = 'ltl-tiles-' + VERSION;
 const CORE_FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
