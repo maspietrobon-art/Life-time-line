@@ -3829,78 +3829,6 @@
       ]
     },
     {
-      "id": "002c79b9-2e00-4277-865e-a89d889e5df0",
-      "title": "Via Fornaci 10, Vallio di Roncade",
-      "description": "",
-      "startDate": "1977-10-07",
-      "endDate": "1991-10-01",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Vallio, Roncade, Treviso, Veneto, 31056, Italia",
-        "lat": 45.6385124,
-        "lng": 12.4139648,
-        "country": "Italia"
-      },
-      "categories": [
-        "residenza"
-      ]
-    },
-    {
-      "id": "6cdc0b07-cb60-473e-b325-8936cf2292bd",
-      "title": "Via Fornaci 3, Vallio di Roncade",
-      "description": "",
-      "startDate": "1991-10-01",
-      "endDate": "1999-09-01",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Vallio, Roncade, Treviso, Veneto, 31056, Italia",
-        "lat": 45.6385124,
-        "lng": 12.4139648,
-        "country": "Italia"
-      },
-      "categories": [
-        "residenza"
-      ]
-    },
-    {
-      "id": "137941a2-d6cd-4009-bb1d-965634415d3b",
-      "title": "Calle Jounqueras",
-      "description": "Barcelona",
-      "startDate": "1999-09-10",
-      "endDate": "1999-10-10",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Barcellona, Barcelonès, Barcelona, Catalogna, Spagna",
-        "lat": 41.3825802,
-        "lng": 2.177073,
-        "country": "Spagna"
-      },
-      "categories": [
-        "residenza"
-      ]
-    },
-    {
-      "id": "f6a924a0-81fb-4672-8c6d-d35add964b97",
-      "title": "Calle Nàpols",
-      "description": "Barcelona",
-      "startDate": "1999-10-10",
-      "endDate": "2000-07-15",
-      "ongoing": false,
-      "locked": false,
-      "location": {
-        "name": "Barcellona, Barcelonès, Barcelona, Catalogna, Spagna",
-        "lat": 41.3825802,
-        "lng": 2.177073,
-        "country": "Spagna"
-      },
-      "categories": [
-        "residenza"
-      ]
-    },
-    {
       "id": "28fd32ff-4059-4a28-ab4d-0a1b284e25a5",
       "title": "Morte Nonno Coco",
       "description": "",
@@ -3919,6 +3847,132 @@
       ]
     },
     {
+      "id": "14851024-329f-4c27-9935-e347e83369c8",
+      "title": "Piena del Meolo",
+      "description": "Esondazione del Meolo e giro per l'argine con Papà e Luca",
+      "startDate": "1986-01-31",
+      "endDate": "1986-01-31",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Monastier di Treviso, Treviso, Veneto, 31050, Italia",
+        "lat": 45.6634742,
+        "lng": 12.4333902,
+        "country": "Italia"
+      },
+      "categories": [
+        "eventiesterni"
+      ]
+    },
+    {
+      "id": "09cfbd67-2eda-4ec3-9edf-140cb3375e30",
+      "title": "Morte di Nonna Emma",
+      "description": "Morte della Bisnonna Emma",
+      "startDate": "1986-11-30",
+      "endDate": "1986-11-30",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Monastier di Treviso, Treviso, Veneto, 31050, Italia",
+        "lat": 45.6634742,
+        "lng": 12.4333902,
+        "country": "Italia"
+      },
+      "categories": [
+        "altri"
+      ]
+    },
+    {
+      "id": "4245da18-a9b5-42ee-8cd9-fab09c06be4a",
+      "title": "Basket",
+      "description": "Polisportiva Monastier 88",
+      "startDate": "1989-01-01",
+      "endDate": "1993-07-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Monastier di Treviso, Treviso, Veneto, 31050, Italia",
+        "lat": 45.6634742,
+        "lng": 12.4333902,
+        "country": "Italia"
+      },
+      "categories": [
+        "minori"
+      ]
+    },
+    {
+      "id": "002c79b9-2e00-4277-865e-a89d889e5df0",
+      "title": "Via Fornaci 10, Vallio di Roncade",
+      "description": "",
+      "startDate": "1977-10-07",
+      "endDate": "1991-10-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Vallio, Roncade, Treviso, Veneto, 31056, Italia",
+        "lat": 45.6385124,
+        "lng": 12.4139648,
+        "country": "Italia"
+      },
+      "categories": [
+        "case"
+      ]
+    },
+    {
+      "id": "6cdc0b07-cb60-473e-b325-8936cf2292bd",
+      "title": "Via Fornaci 3, Vallio di Roncade",
+      "description": "",
+      "startDate": "1991-10-01",
+      "endDate": "1999-09-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Vallio, Roncade, Treviso, Veneto, 31056, Italia",
+        "lat": 45.6385124,
+        "lng": 12.4139648,
+        "country": "Italia"
+      },
+      "categories": [
+        "case"
+      ]
+    },
+    {
+      "id": "137941a2-d6cd-4009-bb1d-965634415d3b",
+      "title": "Calle Jounqueras",
+      "description": "Barcelona",
+      "startDate": "1999-09-10",
+      "endDate": "1999-10-10",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Barcelonès, Barcelona, Catalogna, Spagna",
+        "lat": 41.3825802,
+        "lng": 2.177073,
+        "country": "Spagna"
+      },
+      "categories": [
+        "case"
+      ]
+    },
+    {
+      "id": "f6a924a0-81fb-4672-8c6d-d35add964b97",
+      "title": "Calle Nàpols",
+      "description": "Barcelona",
+      "startDate": "1999-10-10",
+      "endDate": "2000-07-15",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Barcelonès, Barcelona, Catalogna, Spagna",
+        "lat": 41.3825802,
+        "lng": 2.177073,
+        "country": "Spagna"
+      },
+      "categories": [
+        "case"
+      ]
+    },
+    {
       "id": "4a77a0bd-ba05-4b6d-adc6-dff06ee4089e",
       "title": "Via Fornaci 3, Vallio di Roncade",
       "description": "",
@@ -3933,7 +3987,7 @@
         "country": "Italia"
       },
       "categories": [
-        "residenza"
+        "case"
       ]
     },
     {
@@ -3951,7 +4005,277 @@
         "country": "Marocco"
       },
       "categories": [
-        "residenza"
+        "case"
+      ]
+    },
+    {
+      "id": "4e28d7f7-8bd4-4388-9da9-23b7e0af9e77",
+      "title": "Via Fornaci 3, Vallio di Roncade",
+      "description": "Monastier di Treviso",
+      "startDate": "2004-07-15",
+      "endDate": "2004-12-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Vallio, Roncade, Treviso, Veneto, 31056, Italia",
+        "lat": 45.6385124,
+        "lng": 12.4139648,
+        "country": "Italia"
+      },
+      "categories": [
+        "case"
+      ]
+    },
+    {
+      "id": "fecb87d9-84f4-4b88-a88d-1c910dc0714d",
+      "title": "Carrer de Bertrellans 5b 1-1",
+      "description": "Barcerlona",
+      "startDate": "2004-12-10",
+      "endDate": "2005-09-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Barcelonès, Barcelona, Catalogna, Spagna",
+        "lat": 41.3825802,
+        "lng": 2.177073,
+        "country": "Spagna"
+      },
+      "categories": [
+        "case"
+      ]
+    },
+    {
+      "id": "3599844d-54ec-427e-9286-6d6a60b6909c",
+      "title": "Scout",
+      "description": "Squadriglia Falki",
+      "startDate": "1989-03-01",
+      "endDate": "1994-10-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Monastier di Treviso, Treviso, Veneto, 31050, Italia",
+        "lat": 45.6634742,
+        "lng": 12.4333902,
+        "country": "Italia"
+      },
+      "categories": [
+        "minori"
+      ]
+    },
+    {
+      "id": "5db02716-215b-41f5-a76e-3264c0a91604",
+      "title": "Davide Pietrobon",
+      "description": "Nasce Davide",
+      "startDate": "1994-10-31",
+      "endDate": "1994-10-31",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Treviso, Veneto, Italia",
+        "lat": 45.8066913,
+        "lng": 12.2063158,
+        "country": "Italia"
+      },
+      "categories": [
+        "eventiesterni"
+      ]
+    },
+    {
+      "id": "c3929565-718c-4d68-8c92-e95e3a4bd880",
+      "title": "Gloria Pietrobon",
+      "description": "nasce Gloria",
+      "startDate": "1993-01-03",
+      "endDate": "1993-01-03",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Treviso, Veneto, Italia",
+        "lat": 45.8066913,
+        "lng": 12.2063158,
+        "country": "Italia"
+      },
+      "categories": [
+        "eventiesterni"
+      ]
+    },
+    {
+      "id": "7355ac43-81c0-4353-ba98-364f50725128",
+      "title": "IUAV",
+      "description": "Istituto Universitario di Architettura di Venezia",
+      "startDate": "1996-09-16",
+      "endDate": "2002-10-25",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Veneto, 30121-30176, Italia",
+        "lat": 45.4371908,
+        "lng": 12.3345898,
+        "country": "Italia"
+      },
+      "categories": [
+        "scuola"
+      ]
+    },
+    {
+      "id": "3e25d274-06d2-40b1-8361-ddba0862403f",
+      "title": "ETSAB",
+      "description": "Escuela Técnica Superior de Arquitectura de Barcelona",
+      "startDate": "1999-09-01",
+      "endDate": "2000-07-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Barcelonès, Barcelona, Catalogna, Spagna",
+        "lat": 41.3825802,
+        "lng": 2.177073,
+        "country": "Spagna"
+      },
+      "categories": [
+        "scuola"
+      ]
+    },
+    {
+      "id": "84301568-08ee-43db-b044-db4b7603bdf6",
+      "title": "Morte Ricky",
+      "description": "Morte di Riccardo Gilli",
+      "startDate": "2002-09-03",
+      "endDate": "2002-09-03",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "C.N.S.A.S. Serv.Reg.Emilia Romagna, Via Fornacione, Ramusano, Felina, Castelnovo ne' Monti, Appennino Reggiano, Reggio Emilia, Emilia-Romagna, 42030, Italia",
+        "lat": 44.4523422,
+        "lng": 10.4673205,
+        "country": "Italia"
+      },
+      "categories": [
+        "eventiesterni"
+      ]
+    },
+    {
+      "id": "eff3305e-8800-4036-8ba2-97b03bcb170f",
+      "title": "Morte Nonno Genio",
+      "description": "Morte di Nonno Genio",
+      "startDate": "2002-08-21",
+      "endDate": "2002-08-21",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Monastier di Treviso, Treviso, Veneto, 31050, Italia",
+        "lat": 45.6634742,
+        "lng": 12.4333902,
+        "country": "Italia"
+      },
+      "categories": [
+        "eventiesterni"
+      ]
+    },
+    {
+      "id": "2161b20d-11ba-45a9-905e-1bfbf346f366",
+      "title": "Laurea in Architettura",
+      "description": "108/110 - Con Doron Hazan",
+      "startDate": "2002-10-25",
+      "endDate": "2002-10-25",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Venezia, Veneto, 30121-30176, Italia",
+        "lat": 45.4371908,
+        "lng": 12.3345898,
+        "country": "Italia"
+      },
+      "categories": [
+        "scuola"
+      ]
+    },
+    {
+      "id": "7b1ab0c1-c546-41cd-8a5e-d9b2ebfec692",
+      "title": "MAGDA",
+      "description": "(primo amore) - Maria Magdalena Gaià i Vidal (1)",
+      "startDate": "2000-06-01",
+      "endDate": "2001-03-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Barcelonès, Barcelona, Catalogna, Spagna",
+        "lat": 41.3825802,
+        "lng": 2.177073,
+        "country": "Spagna"
+      },
+      "categories": [
+        "loveaffairs"
+      ]
+    },
+    {
+      "id": "94e0efca-f0ae-4cd2-8519-d06d662b7cfa",
+      "title": "CESCA",
+      "description": "Francesca Messina (2)",
+      "startDate": "2002-10-01",
+      "endDate": "2002-10-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Ca' Savio, Cavallino-Treporti, Venezia, Veneto, 30013, Italia",
+        "lat": 45.4536295,
+        "lng": 12.457815,
+        "country": "Italia"
+      },
+      "categories": [
+        "loveaffairs"
+      ]
+    },
+    {
+      "id": "89d83697-2b7f-4273-a632-bb9188e44853",
+      "title": "Calle Hospital 131 3-2",
+      "description": "Barcelona (Rawal)",
+      "startDate": "2005-09-01",
+      "endDate": "2007-06-21",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Barcelonès, Barcelona, Catalogna, Spagna",
+        "lat": null,
+        "lng": null,
+        "country": null
+      },
+      "categories": [
+        "case"
+      ]
+    },
+    {
+      "id": "cde956d3-2314-46a9-b0d2-ab0720c26a10",
+      "title": "Calle Magallanes",
+      "description": "Barcelona (Poble Sex)",
+      "startDate": "2007-06-21",
+      "endDate": "2008-04-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Barcelonès, Barcelona, Catalogna, Spagna",
+        "lat": 41.3825802,
+        "lng": 2.177073,
+        "country": "Spagna"
+      },
+      "categories": [
+        "case"
+      ]
+    },
+    {
+      "id": "5327fd0b-4dea-4fee-a230-0a8402575153",
+      "title": "NAIRA - 1",
+      "description": "Naira Potes (4)",
+      "startDate": "2005-07-20",
+      "endDate": "2006-02-01",
+      "ongoing": false,
+      "locked": false,
+      "location": {
+        "name": "Barcellona, Barcelonès, Barcelona, Catalogna, Spagna",
+        "lat": 41.3825802,
+        "lng": 2.177073,
+        "country": "Spagna"
+      },
+      "categories": [
+        "loveaffairs"
       ]
     }
   ],
@@ -4058,8 +4382,11 @@
       "_deletedAt": "2026-10-20T13:33:19.049Z"
     }
   ],
-  "privateBlob": null,
-  "privateCountHint": 0,
-  "exportedAt": "2026-10-20T13:33:33.917Z",
+  "privateBlob": {
+    "iv": "toV8x3rMVsF3LseP",
+    "ct": "x5UN7Po6PvfK+Ty9GYWjcB4wETFRaVQYBZCvKUgWzT5XjxcWsC98CC1iC7sFrZP09Bz6M+4aYndaUltBx5DN4WC6mt+vMj0zk2zSMYewPZl2/q6+M1YHD8DlQLNvgtN4tpgIEs8RZYbHMRPg5HBqg9KUb40BymKk60kRgXaI9TS6acaK+2VNQ3OlCaHOKJsWauVvJwCFa3rL7K1x1BHeBMArmdnu9a5puuicIm3xyEGLD/CPk6FQXLazqprpdgbEV+sXwt6AkezABOfog7pGxyetoLZ9TzKvgG6XhDJfNzU7j406U+2MHoYjrewtw1KX9heCvg8TF1/yMIWXtudl0mup4PqJ45OQ49bmxJnSoushoU/CQa8DtGkpkIYsfsPmlVn04OsgQMiSBom3XyObq1KtBBpr/s/b6e9hVhrnsclRK1nlvR21vxrZTuaJQRaKhQF3YIxkWvgTyYY7Fv3M0jNJUf7BAkMxP889/POw/rowv2OYnEQrmBMY8WLEhtIF9T6ajclwzzrYvnYwDozsKHDXkyTzvw3LDDfXJVaLlETg70+yq8Td4SEJmtsJA5lIzLU0Wr0UzFLGwm4d67u07p/j96dszTwB6TWskVG//+CtaZYTjyTV9toyFXTcbJLvEWIDWfy+6eER29j3JM2q8mRzqiOqz11zY46UCmlZA3KfXnFZTMhwq6n2YQ7MvBBY+XIovLmjQ54vmwmdVesmGAt8NJcAQqWf2yZn4vlCZhtsr4DWaR1+5aGx69PBgv2+u05I6s7NneHxUEVLFHrZoVa6HdMuAKfO7iyjB/zVwySTdhhWJKrorVsxAU44By2wc0v3JNdX3e4ERgPE7ZRlc26oTzEUZkWYvaxUkd+hoCcTVtRFKT4JPNqVFS5PTkJMS1KCz1Vl3nKGDkkPzrHnU/SCnIspVCg5x5jgoC1R8IfRSxbCu5UKV3pINj5QaiBo9+lZBD0wZoRJchf11YeIah2mEXA8pxmJa3etsi+7GhiJa1LSYL10S/xgoiMjEv6HKT6OU/oXkF6242pagSJilmiZe61CQZmfe0G1rz9VnvjcYV+pG7Uo4EsrUg2mP/hGjQ3cF6nG16BJMwRuQGrlvDt19dTNhvisJ4//Y0CvcwyM3/VAKsxQVfpb8ZW53q/a86mfVu8t05GYXUqJuOIDFx+p06tNkDcXBVZ5nKDrcdDO0HQLqXggOVWr6Ts79Akw4anhJ0hHQML07tN9aQWRDwGY9YvxoMEheU4Eeu8i+NvfiIP5HMuDZq5v4gN7P0JQfFwqNB/Q0zljQRfs/vXZ+xU6G4jeY05eYK6vnayPQQFLdHQWThd8WuMfZ7FKjgyHdxLyvIL/ai06gcXw+3DcFEmdR4keO57eFtcbS2yFXmcZrgl3/lRhGhT1FTEmayWS/IpWwfjL9nvqA/4ammsmhtQoK9c6OcO+043G9d2RZrV9e48FH+5qHKYAZhjOiaQ28GGp7oTUxON/WmaovpB6ywuUMe6CGqv3808STkPIHuYUBkVNm+Ibqt8vZwJK3o4h7bz3yiIh0s35eZmN4xX4oDzf9fCl+dxhkiGRF+Gja6VovhnnGfxzf7vg7cWYzWvLuKMVQ98WJfQZ6piXuyKut8Q8koU/+Pi/jUPxvOCr3YZhSqL30kxcy2PIpp8GXIkIU3oj/UYfWWC/PXHKR+TeDVNrAVS8i4WLljisVUdf2kbKGdvMd9Iodnq3Zo4EpMknc48RxwzB9ep0y65fnMCr4bku5+PdtU2voeWedxAqcImJcxS2kxeWZ31XYg+kH4WIdOG+u8QQeYD6s+wU/XibkgJCUg4SARvJC43mvziRR+XYh1QurIx46SOuDLoGQqkb6BVIYKxPLJNYzgZZqHF/+tGE/D2HDnZXCaEck1pCuCRbpGcDgEtyf0X5wMiCzjWlOgfthk8Eym0LulxeCF33CUm6SLXbAlAWrwcGn6OwvkREKO5Aav9iI9kYwYnxosmU1L8NA64/RbxoKRmMz4CmNkXJjgdTQLyzCRUHiLspCBGyPNhdBIho6H/vlothUD81tGXm8NN+b+JOB/j7DW7piLiO5OPv6X2Rbo5xXmrPEdRy5wNjAqUuU9pGQ4doBX4dHD/K/nSgn4q39wzn+PKNr+kvV41A1sB/5lQghHjZ2skvBuLxcnCV+BRu+KPe77UgYunohX00EJml5n/N/yTgIXacepqJ3EHsB7To8kfRbZCvR8vLruN3cSOy3aoiEBclaZsxxM1KeLZS8FgRv209iDJ0ZQ8uyDySemQML3TtM8ue0vIcnyUEFPIAbuajtc/OuYzvbSvS4yeYE8IRKVRV04YZXhT9JLg/mqIqkSP9XCX6l0LmOSbrBT9CIx5TYO0YispyhJ45d8QjQUIls/ucjaZIdeaQwg5qMpBCGC2LK1S1B052jMYJ81ZCJGKJAPlLSnGmAmvp7D2crsP2jgJvGB4V3iJCZJyHsx4Qk2U+HT9LS4XSjVyzhcEo1FyfNfFi8GaTR+DL5w7ZKlscjHjddAbZipbLz5l4H9MJ1/oWoR4Bk1iYC2Si7CKNE8qTZ/hFTUs67bnTybr0Mrp55ezIPs7fWzBq3M5AmqBxOdZeMdmuDL0bUNtA2Qi+6b+c2YYNmhvJDIP/zqXcd9frstv6mvCA+4bfNz6hovJOVzApiUvL+7/xQBjidT4UQXdTV6ruFmHNnDsPyl2YoVWZCkEt1xRvNpTe1B9Q2F25krlguUhsmAeiibJ+qFdDfRzbHKx3GQ23mVVN8IPBkYN5YJvy21TFXgXaSVXwwE3DVg7BoTLZbCn+eAYOZ+IbhulUhTofCwTN9pBpxsRrt7qTmTPrG9h8ueFBVjwjqTz90pslTYFFGxL79lopMwopjqedPurOEyaztdCC0X1HPhduqfM6BPc78GbCLaIJF0zPQAHh2dCGMREJXfPRougChbdeXL2/A8Q5C6C1XMstGetxyjnu4AR9y+giPazsxez1pIbfCKE111DSKELQI/2TqYE3psn44nHJaf0cho6+y3Ec3o0TavntlaN7/OsMrHoExJnbVP/WGdHOaNxhmeM1h+k/em9Y5CUDY5rrLgBheCZYqZjiGEAF0p8EM3sANpZwxzWqBV8ycW/noMdAX5UB1bTa474oIAsLuZgbbdhUtZ0U/xd/CXBFbvDGCqXEzMr04NNTw7XpMXzec79D4klRo8Q0Tv9zsduOeTO6KKXHvrvFtZVX73gmYHvwg6CNwPMYlBGA3P5fBJ0mnKgHtsueQE+xbJ4ayTm76zgXb1ZcZU5Ejtt1h8a/HpcEWh9NjzYKAe4o+zDQfCAtxn/3yudtPvE3Jw6nAsK5Xr8/EhXciSpmh77KGrDHqpLyULCtxB9McFMLAOFQ8XttIOPKOAKqLxrOX3awoJnAlM2m7e+2n9Vx0uO6lRDt9fRi+qbmE6WEixTzdqQLxH9r8iZILRhL2JEI+mO3LU6EwLBRR8l5lwpWo+BmfbVWVaJ7wLQCYivGZWgXdAl2034Mh8KnDV2RXaw6imV5i+yt3LA722YzOYNwf5uIumrKoYNIZC6JZiGKNxo9lKqQl8yezoD1VR/RvoOkvFfM0bSLng7UIdewQj6ZdEVWKUpMfIVVuwBEHCCCyrz/wTAEmh0DpZnbTWUPJPYrbtzbard7QCUvMoY70AE6TiE71yDVkb9Qph23FpEk8SBBsRtTwIhkCU01UVYoQ/Ht/VPgTyqN8iY+JgjkVGILHpNQAC4M1swDxb6p0eFirXdgQBy41o2zH4M3bejqVJIYdprPf7aucRTIoOViyDSBeYYAJFYaVnwdYN45Bw8l6/KEpWUbFtZu7oeiF4qBRDfN+wHznGLzkEyorQYxA0GjbSPbBhuTDI+BwSzNuw9MNSMYZB2cJBR7w3jbPCN2x5NERv5RTC9+FEnaV0EJJcPxzdnSJaNgVw276tCZDRcuoire5zWqnw9xG6zOmKRuZrKurkEU8qCMEOKLTFdMziGKnKg/M1qtYwo3iQpFTPeQZVBe+Fd5cvJHr52yHHnjcH2ubT0cbM1y6QrztfDA5eMN5meYGxbGoJbo2tLAky8SuKNmvt9yQqpSoDJC1gkk65xjteHMiCU9Cy7eAvM1FfYuQifFHojz+EY6X/F1wPLLlSjds/4jUbBnuN0+Odp+aRdzrCIEcCeWr7aDRJJAo9ynRgDKXixDwnLav5fr3WXGq7vu9I1scdsUr9fY+2PW10wN02+crHyvJWVCL2R57R5yfjeN2M8oT8l19Fpjv8lNIyJ85fNNeklmVMBKic2++7auLl/hIoxLfROj1uMCI94LtWMGbRXGmn2M/F9+wM1YBRPYPQ2UTNG1nPSfQYuqB+E3Zxgt8wG4A0B2zjRnZWvoy0amuilzswm83HC3hYbn36BV7MNL20IU0RRO3F/HrbxjeTFePN+ISumercPcvdU38rK6zw3b3GhEztE1LMN3Ge2KVoGGqSJlY6uy+m7oJ16FoI9aIo9NuhTMBdrJOT/INdKzwAazMN0JIPRMEuDY2ujpy7ejwiVZaQ/50dj12RgSteVTN5vLDj5du4zWq8rA218dOGBrJ+IfqJwm1H5tvE2xVOperHBrmKBwQPE1LQm+2mjEiI0b0GBxUoFWfAZpzD2GM9QDYaUeLTUfzZv4V5m/wNNYRJj5Nn4tamL5kGAQSi+2GfmNrKtrOyI/zCw32bc7UG+Ud54YUQmlFMU18YotiRUwoCOB1xtW5fhoh72MlWdXli7pnq8bnnkijPqfcICkvJhj7WmMD4zB72HR4RH24SD+Apt/CBISyR+rqXn9w1oxQRCPnJerQ/dEm2J2oLAKQl4B0+ESnij+bSX2f2a3/WAvZ+81gdXiIBWIueEhQTSGffHB2HN+9cm/p0bK+X1kAs97Z94Ds49ktH/alDjkMvOR85WO1boQHZla4R3gFzLTmzy1XFtBwoP1y0xqygtz2kSzy2XLQEzzS5GtScibP/lnxlJFjG5Z6nLjblzGrH2I/HcviT+3VkdEdM1jolFDzgylclbCaDTYiqfXQxi+Bzgsr51LSiYE5fCHqxuvjc6xx7l6ZMI+WjVMSQ=="
+  },
+  "privateCountHint": 11,
+  "exportedAt": "2026-10-21T15:19:05.703Z",
   "formatVersion": 3
 }
