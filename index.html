@@ -493,6 +493,7 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
   <div class="modal">
     <h2>Categorie</h2>
     <div class="catlist-settings" id="catManageList"></div>
+    <p style="font-size:.7rem;opacity:.55;margin:.6rem 0 0;">Versione app: 23/11/2026 · le categorie eliminate restano eliminate</p>
     <div class="field" style="margin-top:14px;">
       <label>Nuova categoria</label>
       <div style="display:flex;gap:8px;">
@@ -576,6 +577,7 @@ const LS = {
   snapAt: 'bio_snapshot_applied_at_v1',   // exportedAt of the snapshot this device last applied/exported
   snapSkip: 'bio_snapshot_skipped_v1',   // newer online snapshot the user chose not to apply
   seenDefaults: 'bio_seen_default_cats_v1',
+  deletedCats: 'bio_deleted_cats_v1',      // ids of categories the user deleted on purpose: they never come back
   catsCustom: 'bio_cats_customized_v1',     // '1' = this device edited its categories: a published snapshot must not overwrite them
   seenSnapCats: 'bio_seen_snapshot_cats_v1',
   dirty: 'bio_local_dirty_v1'            // '1' = edits made here since that snapshot
@@ -646,6 +648,12 @@ let state = {
   mapMarkersLayer: null,
 };
 
+// categories the user deleted on purpose (tombstones) – honoured everywhere: startup, migrations, published snapshot
+function deletedCatIds(){ const a = loadJSON(LS.deletedCats, []); return new Set(Array.isArray(a) ? a : []); }
+function addDeletedCats(ids){ const s = deletedCatIds(); ids.forEach(i => s.add(i)); saveJSON(LS.deletedCats, [...s]); }
+function dropDeletedCats(){ const del = deletedCatIds(); if(del.size) state.categories = state.categories.filter(c => !del.has(c.id)); }
+dropDeletedCats();
+
 // init visible categories = all
 state.categories.forEach(c => state.visibleCats.add(c.id));
 
@@ -701,7 +709,7 @@ function migrateMissingDefaultCategories(){
     DEFAULT_CATEGORIES.forEach(dc => {
       if(!seen.includes(dc.id)){
         seen.push(dc.id);
-        if(!state.categories.some(c => c.id === dc.id)){
+        if(!state.categories.some(c => c.id === dc.id) && !deletedCatIds().has(dc.id)){
           state.categories.push({id: dc.id, label: dc.label, color: dc.color});
           state.visibleCats.add(dc.id); changed = true;
         }
@@ -2253,6 +2261,7 @@ function renderCatManageList(){
     row.querySelector('[data-role=del]').addEventListener('click', ()=>{
       const inUse = allEventsForDisplay().some(ev => ev.categories.includes(cid));
       if(inUse && !confirm('Alcuni eventi usano questa categoria: verrà rimossa da quegli eventi. Continuare?')) return;
+      addDeletedCats([cid]);
       state.categories = state.categories.filter(c=>c.id!==cid);
       state.visibleCats.delete(cid);
       [state.publicEvents, state.privateEvents, state.publicTrash, state.privateTrash].forEach(list=>{
@@ -2378,6 +2387,7 @@ document.getElementById('pwInput1').addEventListener('keydown', e=>{ if(e.key===
 function buildSnapshotData(){
   return {
     categories: state.categories,
+    deletedCategories: [...deletedCatIds()],
     settings: state.settings,
     publicEvents: state.publicEvents,
     publicTrash: state.publicTrash,
@@ -2412,6 +2422,16 @@ function applySnapshotData(data, keepLocalCats){
     state.categories = snapCats;
     saveJSON(LS.seenSnapCats, snapCats.map(c=>c.id));
     localStorage.removeItem(LS.catsCustom);
+  }
+  if(Array.isArray(data.deletedCategories)) addDeletedCats(data.deletedCategories);
+  dropDeletedCats();
+  {
+    const keepIds = new Set(state.categories.map(c=>c.id));
+    const fb = keepIds.has('altri') ? 'altri' : null;
+    [data.publicEvents, data.publicTrash].forEach(list => (list||[]).forEach(ev => {
+      ev.categories = (ev.categories||[]).filter(x => keepIds.has(x));
+      if(!ev.categories.length && fb) ev.categories = [fb];
+    }));
   }
   state.settings = Object.assign({}, DEFAULT_SETTINGS, data.settings || {});
   state.publicEvents = data.publicEvents || [];

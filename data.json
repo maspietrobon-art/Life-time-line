@@ -12339,5 +12339,16 @@
   },
   "privateCountHint": 56,
   "exportedAt": "2026-11-23T12:05:43.000Z",
-  "formatVersion": 3
+  "formatVersion": 3,
+  "deletedCategories": [
+    "invaghimenti",
+    "viaggiaereo",
+    "viaggitreno",
+    "viaggibus",
+    "viagginave",
+    "viaggiauto",
+    "malattie",
+    "sconfitte",
+    "vittorie"
+  ]
 }
