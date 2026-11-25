@@ -493,7 +493,8 @@ button,input,select,textarea{font-family:inherit;font-size:1rem;}
   <div class="modal">
     <h2>Categorie</h2>
     <div class="catlist-settings" id="catManageList"></div>
-    <p style="font-size:.7rem;opacity:.55;margin:.6rem 0 0;">Versione app: 23/11/2026 · le categorie eliminate restano eliminate</p>
+    <p style="font-size:.7rem;opacity:.55;margin:.6rem 0 0;">Versione app: 25/11/2026-b · le categorie eliminate restano eliminate</p>
+    <button class="btn small" id="forceUpdateBtn" style="margin-top:.5rem;">Forza aggiornamento app (non cancella i tuoi dati)</button>
     <div class="field" style="margin-top:14px;">
       <label>Nuova categoria</label>
       <div style="display:flex;gap:8px;">
@@ -2509,6 +2510,12 @@ async function fetchPublishedSnapshot(){
 async function bootstrapData(){
   const hasLocalData = localStorage.getItem(LS.events) !== null;
   const snap = await fetchPublishedSnapshot();
+  if(snap && Array.isArray(snap.deletedCategories) && snap.deletedCategories.length){
+    // le categorie eliminate nello snapshot pubblicato sono eliminate per sempre, anche se questo dispositivo ha dati propri
+    const before = state.categories.length;
+    addDeletedCats(snap.deletedCategories); dropDeletedCats();
+    if(state.categories.length !== before){ saveJSON(LS.categories, state.categories); state.visibleCats = new Set(state.categories.map(c=>c.id)); }
+  }
   if(snap){
     const appliedAt = localStorage.getItem(LS.snapAt);
     const localIsEmpty = state.publicEvents.length === 0 && !localStorage.getItem(LS.privateBlob);
@@ -2540,6 +2547,13 @@ async function bootstrapData(){
   migrateMissingDefaultCategories();
 }
 
+document.getElementById('forceUpdateBtn').addEventListener('click', async ()=>{
+  try{
+    if('serviceWorker' in navigator){ const rs = await navigator.serviceWorker.getRegistrations(); await Promise.all(rs.map(r=>r.unregister())); }
+    if(window.caches){ const ks = await caches.keys(); await Promise.all(ks.map(k=>caches.delete(k))); }
+  }catch(e){}
+  location.reload();
+});
 document.querySelector('.topbar h1').textContent = APP_TITLE;
 document.title = APP_TITLE;
 setInterval(updateAgeDisplay, 60000);
