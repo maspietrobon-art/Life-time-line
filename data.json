@@ -4557,17 +4557,12 @@
     {
       "id": "6a6ef2c9-3140-4811-aca6-36dc2808ddee",
       "title": "Eruzione dell'Eyjafjallajökull (voli cancellati)",
-      "description": "Annotato come \"marzo/maggio\"; i voli Barcellona–Venezia furono cancellati e il viaggio fu fatto in nave. Fonte: quaderno disegnato a mano (cronologia a pagine).",
+      "description": "Annotato come \"marzo/maggio\"; i voli Barcellona–Venezia furono cancellati e il viaggio fu fatto in nave. Fonte: quaderno disegnato a mano (cronologia a pagine). Evento esterno: non è un tuo viaggio in Islanda.",
       "startDate": "2010-03-20",
       "endDate": "2010-05-31",
       "ongoing": false,
       "locked": false,
-      "location": {
-        "name": "Eyjafjallajökull, Islanda",
-        "lat": 63.63,
-        "lng": -19.62,
-        "country": "Islanda"
-      },
+      "location": null,
       "categories": [
         "eventiesterni"
       ]
@@ -10696,9 +10691,9 @@
     {
       "id": "bce1fd0e-5c31-4bcf-a253-0231dd1020d4",
       "title": "Artista invitato nella Label Expo (Bruxelles)",
-      "description": "Date a granularità annuale; i limiti 1 gennaio/31 dicembre servono solo per ordinamento. Solo l'anno è noto (2019). Fonte: CV-ULTIMATE M-Pietrobon.docx.",
-      "startDate": "2019-01-01",
-      "endDate": "2019-12-31",
+      "description": "Date a granularità annuale; i limiti 1 gennaio/31 dicembre servono solo per ordinamento. Solo l'anno è noto (2019). Fonte: CV-ULTIMATE M-Pietrobon.docx. Date corrette (23–26/09/2019, da quaderno).",
+      "startDate": "2019-09-23",
+      "endDate": "2019-09-26",
       "ongoing": false,
       "locked": false,
       "location": {
